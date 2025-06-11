@@ -69,9 +69,11 @@ CREATE TABLE IF NOT EXISTS group_table (
 );
 
 --相互参照のためグループ管理テーブルを定義後に個人情報テーブルにグループIDを追加
---ALTER TABLE profile_table
---ADD COLUMN group_ID INT,
---ADD CONSTRAINT group_ID FOREIGN KEY (group_ID) REFERENCES group_table(group_ID);
+--一度実行した後は「既にgroup_IDという列は存在しています」というエラーが出るので
+--３行ともコメントアウトしてください。
+ALTER TABLE profile_table
+ADD COLUMN group_ID INT,
+ADD CONSTRAINT group_ID FOREIGN KEY (group_ID) REFERENCES group_table(group_ID);
 
 --受講研修テーブル
 CREATE TABLE IF NOT EXISTS traCourse_table(
