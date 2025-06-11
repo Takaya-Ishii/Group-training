@@ -56,22 +56,22 @@ CREATE TABLE IF NOT EXISTS profile_table(
 --グループ管理テーブル
 CREATE TABLE IF NOT EXISTS group_table (
 	--グループID
-	group_ID SERIAL PRIMARY KEY,
+	group_ID SERIAL,
 	--ユーザID(メイン講師)
 	user_ID VARCHAR(30) NOT NULL,
 	FOREIGN KEY (user_ID) REFERENCES profile_table(user_ID),
 	--グループ名: 必須
 	group_name VARCHAR(30) NOT NULL UNIQUE,
 	--概要
-	summary TEXT UNIQUE
+	summary TEXT UNIQUE,
 	--グループIDとユーザIDの組み合わせを主キーに設定
-	--PRIMARY KEY (group_ID, user_ID)
+	PRIMARY KEY (group_ID, user_ID)
 );
 
 --相互参照のためグループ管理テーブルを定義後に個人情報テーブルにグループIDを追加
-ALTER TABLE profile_table
-ADD COLUMN group_ID INT,
-ADD CONSTRAINT group_ID FOREIGN KEY (group_ID) REFERENCES group_table(group_ID);
+--ALTER TABLE profile_table
+--ADD COLUMN group_ID INT,
+--ADD CONSTRAINT group_ID FOREIGN KEY (group_ID) REFERENCES group_table(group_ID);
 
 --受講研修テーブル
 CREATE TABLE IF NOT EXISTS traCourse_table(
