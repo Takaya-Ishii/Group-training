@@ -12,7 +12,7 @@ INSERT INTO status_table VALUES (3, '課題取組中') ON CONFLICT (status_ID) D
 INSERT INTO status_table VALUES (4, 'レビュー中') ON CONFLICT (status_ID) DO NOTHING;
 INSERT INTO status_table VALUES (5, '完了') ON CONFLICT (status_ID) DO NOTHING;
 
-INSERT INTO profile_table VALUES ('hogehoge@example.jp', 'hoge hoge', 'egohegoh', '08012345678', '埼玉県', '男性', 'アプリ', NULL,  1) ON CONFLICT (user_ID) DO NOTHING;
-INSERT INTO profile_table VALUES ('fugafuga@example.jp', 'fuga fuga', 'agufaguf', '08098765432', '埼玉県', '男性', 'アプリ', NULL,  2) ON CONFLICT (user_ID) DO NOTHING;
+INSERT INTO profile_table VALUES ('hogehoge@example.jp', 'hoge hoge', 'egohegoh', '08012345678', '埼玉県', '男性', 'アプリ', NULL,  1) ON CONFLICT (username) DO NOTHING;
+INSERT INTO profile_table VALUES ('fugafuga@example.jp', 'fuga fuga', 'agufaguf', '08098765432', '埼玉県', '男性', 'アプリ', NULL,  2) ON CONFLICT (username) DO NOTHING;
 
-INSERT INTO group_table VALUES (1, 'fugafuga@example.jp', '25卒内定者グループ', '2025年内定者用グループ 配属決定前まで使用 インフラ・アプリ共有') ON CONFLICT (group_ID, user_ID) DO NOTHING;
+INSERT INTO group_table VALUES (1, 'fugafuga@example.jp', '25卒内定者グループ', '2025年内定者用グループ 配属決定前まで使用 インフラ・アプリ共有') ON CONFLICT (group_ID) DO NOTHING;

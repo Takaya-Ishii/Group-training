@@ -1,3 +1,5 @@
+--DROP TABLE IF EXISTS group_table CASCADE;
+
 --研修情報テーブル
 CREATE TABLE IF NOT EXISTS trainfo_table(
 	--研修ID: 主キー
@@ -33,9 +35,9 @@ CREATE TABLE IF NOT EXISTS status_table(
 --個人情報テーブル
 CREATE TABLE IF NOT EXISTS profile_table(
 	--ユーザID: 主キー
-	user_ID VARCHAR(30) PRIMARY KEY,
+	username VARCHAR(30) PRIMARY KEY,
 	--ユーザ名: 必須
-	user_name VARCHAR(20) NOT NULL,
+	account_name VARCHAR(20) NOT NULL,
 	--パスワード: 必須
 	password VARCHAR(20) NOT NULL UNIQUE,
 	--電話番号: 3ケタ-4ケタ-4ケタで11文字固定、必須
@@ -56,16 +58,16 @@ CREATE TABLE IF NOT EXISTS profile_table(
 --グループ管理テーブル
 CREATE TABLE IF NOT EXISTS group_table (
 	--グループID
-	group_ID SERIAL,
+	group_ID SERIAL PRIMARY KEY,
 	--ユーザID(メイン講師)
-	user_ID VARCHAR(30) NOT NULL,
-	FOREIGN KEY (user_ID) REFERENCES profile_table(user_ID),
+	username VARCHAR(30) NOT NULL,
+	FOREIGN KEY (username) REFERENCES profile_table(username),
 	--グループ名: 必須
 	group_name VARCHAR(30) NOT NULL UNIQUE,
 	--概要
-	summary TEXT UNIQUE,
+	summary TEXT UNIQUE
 	--グループIDとユーザIDの組み合わせを主キーに設定
-	PRIMARY KEY (group_ID, user_ID)
+	--PRIMARY KEY (group_ID, username)
 );
 
 --相互参照のためグループ管理テーブルを定義後に個人情報テーブルにグループIDを追加
@@ -83,8 +85,8 @@ CREATE TABLE IF NOT EXISTS traCourse_table(
 	tra_ID CHAR(5) NOT NULL,
 	FOREIGN KEY (tra_ID) REFERENCES trainfo_table(tra_ID),
 	--ユーザID: 必須
-	user_ID VARCHAR(30) NOT NULL,
-	FOREIGN KEY (user_ID) REFERENCES profile_table(user_ID),
+	username VARCHAR(30) NOT NULL,
+	FOREIGN KEY (username) REFERENCES profile_table(username),
 	--受講するかどうか: 必須
 	isTakeCourse BOOLEAN NOT NULL,
 	--最新進捗: 必須、REALは浮動小数点を扱える型
