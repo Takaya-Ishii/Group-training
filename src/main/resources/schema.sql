@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS profile_table(
 	--ユーザ名: 必須
 	account_name VARCHAR(20) NOT NULL,
 	--パスワード: 必須
-	password VARCHAR(20) NOT NULL UNIQUE,
+	password VARCHAR(255) NOT NULL UNIQUE,
 	--電話番号: 3ケタ-4ケタ-4ケタで11文字固定、必須
 	TEL CHAR(11) NOT NULL UNIQUE,
 	--住所
