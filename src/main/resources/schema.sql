@@ -1,4 +1,6 @@
 --DROP TABLE IF EXISTS group_table CASCADE;
+--DROP TABLE IF EXISTS profile_table CASCADE;
+--DROP TABLE IF EXISTS traCourse_table CASCADE;
 
 --研修情報テーブル
 CREATE TABLE IF NOT EXISTS trainfo_table(
