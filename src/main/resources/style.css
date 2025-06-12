@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+#container{
+	display: flex;
+	justify-content: space-between;
+}
+.table-style{
+	border-collapse: collapse;
+}

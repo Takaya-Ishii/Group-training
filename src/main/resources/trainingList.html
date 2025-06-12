@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>研修管理システム</title>
+</head>
+<body>
+	<main>
+		<h1>研修一覧</h1>
+		
+		<form method="get">
+			<label for="get-value">研修名</label>
+			<input type="text" name="val">
+			<button type="submit">検索</button>
+		</form>
+		
+		<table border="1">
+			<thead>
+				<tr>
+					<th>研修ID</th>
+					<th>研修名</th>
+					<th>想定時間</th>
+					<th>詳細</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each=" : ${}">
+					<td th:text="${}"></td>
+					<td></td>
+					<td></td>
+					<td>
+						<a href="#">●</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<button type="submit">新規登録</button>
+	</main>
+</body>
+</html>

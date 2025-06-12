@@ -9,5 +9,9 @@ public class GroupTrainingApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GroupTrainingApplication.class, args);
 	}
-
+	
+	public void exe() {
+		//全件検索
+			
+	}
 }
