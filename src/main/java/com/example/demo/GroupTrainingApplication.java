@@ -3,8 +3,8 @@ package com.example.demo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.webapp.entity.Tra_Manegement;
-import com.example.webapp.repository.TraMapper;
+import com.example.demo.entity.Tra_Manegement;
+import com.example.demo.repository.TraMapper;
 
 import lombok.RequiredArgsConstructor;
 

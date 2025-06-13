@@ -1,11 +1,11 @@
-package com.example.webapp.repository;
+package com.example.demo.repository;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.example.webapp.entity.Tra_Manegement;
+import com.example.demo.entity.Tra_Manegement;
 
 @Mapper
 public interface TraMapper {
