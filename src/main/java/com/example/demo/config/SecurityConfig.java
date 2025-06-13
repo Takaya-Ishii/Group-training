@@ -27,9 +27,9 @@ public class SecurityConfig {
           .authorizeHttpRequests(authz -> authz
           //「/login」へのアクセスは認証を必要としない
           .requestMatchers("/login").permitAll()
-          // 「/admin」がつくURLへはADMINロールしかアクセスできない
+          // 「/admin」がつくURLへは講師ロールしかアクセスできない
           .requestMatchers("/admin/**").hasRole("講師")
-          .requestMatchers("/user/**").hasRole("受講者")
+          .requestMatchers("/participant/**").hasRole("受講者")
           //その他のリクエストは認証が必要
           .anyRequest().authenticated())
           //★フォームベースのログイン設定
