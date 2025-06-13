@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TrainingManegement {
+public class Tra_Manegement {
 	
 	/*研修ID*/
 	private String tra_ID;

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.webapp.repository.TraMapper">
+	<!-- 全件検索 -->
+	<select id="selectAll" resultType="com.example.webapp.entity.Tra_Manegement">
+		SELECT tra_id, tra_name, est_time, text_book, assignment, 
+		description FROM trainfo_table
+	</select>
+	<!-- 1件検索 -->
+	<select id="selectById" resultType="src.main.java.com.example.webapp.repository.TraMapper.java">
+		SELECT tra_id, tra_name, est_time, text_book, aasignment,
+		description FROM trainfo_table
+	</select>
+	<!-- 名前 1件検索 -->
+	<select id="selectByName" resultType="src.main.java.com.example.webapp.repository.TraMapper.java">
+		SELECT tra_id, tra_name, est_time, text_book, aasignment,
+		description FROM trainfo_table
+	</select>
+	<!-- 新規登録 -->
+	<insert id="insert">
+		INSERT INTO trainfo_table(tra_id, tra_name, est_time, text_book, 
+		assignment, description)
+		VALUES
+		(#{tra_id}, #{tra_name}, #{est_time}, #{text_book}, #{assignment}, 
+		#{description})
+	</insert>
+	<!-- 更新 -->
+	<update id="update">
+		UPDATE trainfo_table SET tra_name = #{tra_name}, est_time = #{est_time},
+		text_book = #{text_book}, assignment = #{assignment}, description = #{description}
+	</update>
+	<!-- 削除 -->
+	<delete id="delete">
+		DELETE FROM trainfo_table WHERE tra_id = #{tra_id}
+	</delete>
+</mapper>
