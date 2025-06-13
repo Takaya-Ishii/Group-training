@@ -1,6 +1,10 @@
  package com.example.demo.service.impl;
- import java.util.Collections;
+ import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,14 +30,13 @@ import lombok.RequiredArgsConstructor;
       throws UsernameNotFoundException {
     	
     	 Authentication authentication = authenticationMapper.selectByUsername(username);
-    	
+    	 
     	 // 対象データがあれば、UserDetailsの実装クラスを返す
          if (authentication != null) {
-             // 対象データが存在する
              // UserDetailsの実装クラスを返す
-             return new LoginUser(authentication.getUsername(), 
-                         authentication.getPassword(), 
-                         Collections.emptyList()
+        	 return new LoginUser(authentication.getUsername(), 
+                     authentication.getPassword(), 
+                     getAuthorityList(authentication.getRole_ID())
                      );
          } else {
              // 対象データが存在しない
@@ -41,4 +44,17 @@ import lombok.RequiredArgsConstructor;
                      username + " => 指定しているユーザーIDは存在しません");
          }
     }
- }
+
+	private Collection<GrantedAuthority> getAuthorityList(int role_ID) {
+		// 権限リスト
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        // 全員に受講者ロールを付与
+        authorities.add(new SimpleGrantedAuthority("ROLE_受講者"));
+        // role_IDが2(講師)の場合、講師の権限を付与
+        if (role_ID == 2) {
+        	authorities.add(new SimpleGrantedAuthority("ROLE_講師"));
+        }
+        return authorities;
+    }
+	}
+ 
