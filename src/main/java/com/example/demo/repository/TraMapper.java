@@ -14,7 +14,7 @@ public interface TraMapper {
 	List<Tra_Manegement> selectAll();
 	
 	/*指定された研修IDに対応する研修を取得*/
-	Tra_Manegement selectById(@Param("tra_id") String tra_ID);
+	Tra_Manegement selectById(@Param("tra_id") String tra_id);
 	
 	/*指定された研修名に対応する研修を取得*/
 	Tra_Manegement selectByName(@Param("tra_name") String tra_name);

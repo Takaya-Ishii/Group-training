@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.webapp.repository.TraMapper">
+<mapper namespace="com.example.demo.repository.TraMapper">
 	<!-- 全件検索 -->
-	<select id="selectAll" resultType="com.example.webapp.entity.Tra_Manegement">
+	<select id="selectAll" resultType="com.example.demo.entity.Tra_Manegement">
 		SELECT tra_id, tra_name, est_time, text_book, assignment, 
 		description FROM trainfo_table
 	</select>
 	<!-- 1件検索 -->
-	<select id="selectById" resultType="src.main.java.com.example.webapp.repository.TraMapper.java">
-		SELECT tra_id, tra_name, est_time, text_book, aasignment,
+	<select id="selectById" resultType="com.example.demo.repository.TraMapper">
+		SELECT tra_id, tra_name, est_time, text_book, assignment,
 		description FROM trainfo_table
+		WHERE tra_id = #{tra_id}
 	</select>
 	<!-- 名前 1件検索 -->
-	<select id="selectByName" resultType="src.main.java.com.example.webapp.repository.TraMapper.java">
-		SELECT tra_id, tra_name, est_time, text_book, aasignment,
+	<select id="selectByName" resultType="com.example.demo.repository.TraMapper">
+		SELECT tra_id, tra_name, est_time, text_book, assignment,
 		description FROM trainfo_table
+		WHERE tra_name = #{tra_name}
 	</select>
 	<!-- 新規登録 -->
 	<insert id="insert">

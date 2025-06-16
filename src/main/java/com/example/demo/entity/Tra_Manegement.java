@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class Tra_Manegement {
 	
 	/*研修ID*/
-	private String tra_ID;
+	private String tra_id;
 	/*研修名*/
 	private String tra_name;
 	/*想定時間*/

@@ -37,7 +37,7 @@ public class GroupTrainingApplication {
 		
 		//新規登録
 		Tra_Manegement tra_Manegement = new Tra_Manegement();
-		tra_Manegement.setTra_ID("J0009");
+		tra_Manegement.setTra_id("J0009");
 		tra_Manegement.setTra_name("開発プロセス研修");
 		tra_Manegement.setEst_time(600);
 		tra_Manegement.setText_book("全てわかる開発プロセス");
