@@ -7,10 +7,9 @@ import com.example.demo.entity.Role;
 
 @Mapper
 public interface AuthenticationMapper {
-	/**
-	 * ユーザー名でログイン情報を取得
-	 */
+	
+	  // ユーザー名でログイン情報を取得
 	  Authentication selectByUsername(String username);
-	  
+	  // ロールIDからロール名とロールIDを含んだRole型を取得
 	  Role selectByRoleId(int role_ID);
 }

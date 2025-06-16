@@ -30,6 +30,7 @@ import lombok.RequiredArgsConstructor;
     public UserDetails loadUserByUsername(String username) 
       throws UsernameNotFoundException {
     	
+    	// username(ユーザID)からパスワードとロールIDを取得
     	 Authentication authentication = authenticationMapper.selectByUsername(username);
     	 
     	 // 対象データがあれば、UserDetailsの実装クラスを返す

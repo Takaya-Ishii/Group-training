@@ -12,11 +12,13 @@ import com.example.demo.form.LoginForm;
 @RequestMapping("")
 public class LoginController {
 	
+	// ログイン画面の表示
 	 @GetMapping("/login")
 	    public String displayLogin(@ModelAttribute LoginForm form) {
 	        return "login";
 	 }
 	 
+	 // 所持ロールによって遷移先を判別
 	 @GetMapping("/default")
 	    public String defaultAfterLogin(Authentication authentication) {
 	        if (authentication.getAuthorities().stream()
@@ -29,6 +31,7 @@ public class LoginController {
 	        return "redirect:/";
 	    }
 	 
+	 // 以下テスト用(受講者が講師専用画面に遷移できるか、講師が受講者の画面も表示できるか)
 	 @GetMapping("/admin/User")
 	 public String displayAllUser() {
 		 return "/admin/User";
