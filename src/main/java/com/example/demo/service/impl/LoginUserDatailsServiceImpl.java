@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Authentication;
 import com.example.demo.entity.LoginUser;
+import com.example.demo.entity.Role;
 import com.example.demo.repository.AuthenticationMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -36,7 +37,7 @@ import lombok.RequiredArgsConstructor;
              // UserDetailsの実装クラスを返す
         	 return new LoginUser(authentication.getUsername(), 
                      authentication.getPassword(), 
-                     getAuthorityList(authentication.getRole_ID())
+                     getAuthorityList(authenticationMapper.selectByRoleId(authentication.getRole_ID()))
                      );
          } else {
              // 対象データが存在しない
@@ -45,14 +46,14 @@ import lombok.RequiredArgsConstructor;
          }
     }
 
-	private Collection<GrantedAuthority> getAuthorityList(int role_ID) {
+	private Collection<GrantedAuthority> getAuthorityList(Role role) {
 		// 権限リスト
         List<GrantedAuthority> authorities = new ArrayList<>();
-        // 全員に受講者ロールを付与
-        authorities.add(new SimpleGrantedAuthority("ROLE_受講者"));
-        // role_IDが2(講師)の場合、講師の権限を付与
-        if (role_ID == 2) {
-        	authorities.add(new SimpleGrantedAuthority("ROLE_講師"));
+        // ロール名に対応したロールを付与
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRole_name().trim()));
+        // role_IDが2(講師)の場合、受講者の権限も付与
+        if (role.getRole_ID() == 2) {
+        	authorities.add(new SimpleGrantedAuthority("ROLE_受講者"));
         }
         return authorities;
     }
