@@ -6,4 +6,9 @@
     <select id="selectByUsername" resultType="com.example.demo.entity.Authentication">
         SELECT username, password, role_ID FROM profile_table WHERE username = #{username}
     </select>
+    
+    <!-- 入力されたusernameからロールIDを取得後、一致するロール名を取得 -->
+    <select id="selectByRoleId" resultType="com.example.demo.entity.Role">
+    	SELECT role_name, role_ID FROM role_table WHERE role_ID = #{role_ID}
+    </select>
  </mapper>
