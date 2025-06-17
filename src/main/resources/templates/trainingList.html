@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>研修管理システム</title>
@@ -7,6 +7,7 @@
 <body>
 	<main>
 		<h1>研修一覧</h1>
+		<!-削除したらここにメッセージを表示する-->
 		
 		<form method="get">
 			<label for="get-value">研修名</label>
@@ -24,12 +25,14 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each=" : ${}">
-					<td th:text="${}"></td>
-					<td></td>
-					<td></td>
+				<tr th:each="Tra : ${Training}">
+					<td th:text="${Tra.tra_id}"></td>
+					<td th:text="${Tra.tra_name}"></td>
+					<td th:text="${Tra.est_time}"></td>
 					<td>
-						<a href="#">●</a>
+						<a th:href="@{/Training/{tra_ID}(tra_ID=${Tra.tra_id})}">
+							●
+						</a>
 					</td>
 				</tr>
 			</tbody>

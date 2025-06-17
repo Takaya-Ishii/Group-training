@@ -1,26 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>研修管理機能</title>
 </head>
 <body>
 	<h1>研修編集</h1>
+	
 	<form>
 		<label>研修ID</label>
 		<input type="text" disabled>
+		
 		<label>研修名</label>
-		<input type="text">
+		<input type="text" th:field="*{tra_name}">
+		
+		<!--研修名のバリデーションチェック-->
+		<span th:if="${#fields.hasErrors('tra_name')}"
+			th:errors="*{tra_name}" style="color: red;">
+		</span>
+		
 		<label>想定時間</label>
-		<input type="text">
+		<input type="text" th:field="*{est_time}">
+		
 		<label>使用教材</label>
-		<input type="text">
+		<input type="text" th:field="*{text_book}">
+		
 		<label>説明</label>
-		<input type="text">
+		<input type="text" th:field="*{description}">
+		
 		<label>課題</label>
-		<input type="text">
+		<input type="text" th:field="*{assignment}">
+		
 		<button type="submit">更新</button>
 	</form>
-	<button>研修一覧に戻る</button>
+	<button th:href="@{/Training}">研修一覧に戻る</button>
 </body>
 </html>

@@ -1,32 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>研修管理システム</title>
 </head>
 <body>
 	<h1>研修新規登録</h1>
-	<form>
+	<p th:if="${errorMessage}"
+		th:text="${errorMessage}" style="color: red;">
+		エラーメッセージ
+	</p>
+	
+	<form th:action="${TraForm.isNew} ? @{/Training/save} : {/Training/update}"
+		th:object="${TraForm}" method="post">
 		<label>研修ID  *</label>
-		<input type="text">
+		<input type="text"th:field="*{tra_id}">
+		
+		<span th:if="${#fields.hasErrors('tra_id')}"
+			th:errors="*{tra_id}" style="color: red;">
+		</span>
 		
 		<label>研修名  *</label>
-		<input type="text">
+		<input type="text" th:field="*{tra_name}">
+		
+		<span th:if="${#fields.hasErrors('tra_name')}"
+			th:errors="*{tra_name}" style="color: red;">
+		</span>
 		
 		<label>想定時間</label>
-		<input type="text">
+		<input type="text" th:field="*{est_time}">
 		
 		<label>使用教材</label>
-		<input type="text">
+		<input type="text" th:field="*{text_book}">
 		
 		<label>説明</label>
-		<input type="text">
+		<input type="text" th:field="*{description}">
 		
 		<label>課題</label>
-		<input type="text">
+		<input type="text" th:field="*{assignment}">
 		
 		<button type="submit">登録</button>
 	</form>
-	<button type="submit">研修一覧に戻る</button>
+	<a th:href="@{/Training}"><button type="submit">研修一覧に戻る</button></a>
 </body>
 </html>
