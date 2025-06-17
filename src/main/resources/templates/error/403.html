@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>403</title>
+</head>
+<body>
+	<h2>403エラー アクセス権限がありません</h2>
+	<div>指定のURLにアクセスするための権限がありません。</div>
+	<a sec:authorize="hasAuthority('ROLE_講師')" th:href="@{/admin/User}">ユーザ一覧へ</a>
+	<a sec:authorize="hasAuthority('ROLE_受講者')" th:href="@{/participant/traCourse}">受講研修一覧へ</a>
+	<a th:href="@{/}">ログインページへ</a>
+</body>
+</html>
