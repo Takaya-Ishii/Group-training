@@ -1,4 +1,14 @@
+<<<<<<< fix
+DROP TABLE IF EXISTS group_table CASCADE;
+DROP TABLE IF EXISTS profile_table CASCADE;
+DROP TABLE IF EXISTS trainfo_table CASCADE;
+DROP TABLE IF EXISTS traCourse_table CASCADE;
+DROP TABLE IF EXISTS role_table CASCADE;
+DROP TABLE IF EXISTS status_table CASCADE;
+DROP TABLE IF EXISTS TPM_table CASCADE;
+=======
 --DROP TABLE IF EXISTS group_table CASCADE;
+>>>>>>> master
 
 --研修情報テーブル
 CREATE TABLE IF NOT EXISTS trainfo_table(
@@ -52,7 +62,7 @@ CREATE TABLE IF NOT EXISTS profile_table(
 	departOfOrigin VARCHAR(10),
 	--ロール: 必須
 	role_ID INT NOT NULL,
-	FOREIGN KEY (role_ID) REFERENCES role_table(role_ID)
+	FOREIGN KEY (role_ID) REFERENCES role_table(role_ID) ON DELETE CASCADE
 );
 
 --グループ管理テーブル
@@ -61,7 +71,7 @@ CREATE TABLE IF NOT EXISTS group_table (
 	group_ID SERIAL PRIMARY KEY,
 	--ユーザID(メイン講師)
 	username VARCHAR(30) NOT NULL,
-	FOREIGN KEY (username) REFERENCES profile_table(username),
+	FOREIGN KEY (username) REFERENCES profile_table(username) ON DELETE CASCADE,
 	--グループ名: 必須
 	group_name VARCHAR(30) NOT NULL UNIQUE,
 	--概要
@@ -75,7 +85,7 @@ CREATE TABLE IF NOT EXISTS group_table (
 --３行ともコメントアウトしてください。
 ALTER TABLE profile_table
 ADD COLUMN group_ID INT,
-ADD CONSTRAINT group_ID FOREIGN KEY (group_ID) REFERENCES group_table(group_ID);
+ADD CONSTRAINT group_ID FOREIGN KEY (group_ID) REFERENCES group_table(group_ID) ON DELETE CASCADE;
 
 --受講研修テーブル
 CREATE TABLE IF NOT EXISTS traCourse_table(
@@ -83,17 +93,17 @@ CREATE TABLE IF NOT EXISTS traCourse_table(
 	traCourse_ID serial PRIMARY KEY,
 	--研修ID: 必須
 	tra_ID CHAR(5) NOT NULL,
-	FOREIGN KEY (tra_ID) REFERENCES trainfo_table(tra_ID),
+	FOREIGN KEY (tra_ID) REFERENCES trainfo_table(tra_ID) ON DELETE CASCADE,
 	--ユーザID: 必須
 	username VARCHAR(30) NOT NULL,
-	FOREIGN KEY (username) REFERENCES profile_table(username),
+	FOREIGN KEY (username) REFERENCES profile_table(username) ON DELETE CASCADE,
 	--受講するかどうか: 必須
 	isTakeCourse BOOLEAN NOT NULL,
 	--最新進捗: 必須、REALは浮動小数点を扱える型
 	latestProgress REAL NOT NULL,
 	--ステータスID: 必須
 	status_ID INT NOT NULL,
-	FOREIGN KEY (status_ID) REFERENCES status_table(status_ID),
+	FOREIGN KEY (status_ID) REFERENCES status_table(status_ID) ON DELETE CASCADE,
 	--目標期日: 必須
 	target_date DATE NOT NULL
 );
@@ -104,7 +114,7 @@ CREATE TABLE IF NOT EXISTS TPM_table(
 	stack_No serial,
 	--受講研修ID
 	traCourse_ID INT NOT NULL,
-	FOREIGN KEY (traCourse_ID) REFERENCES traCourse_table(traCourse_ID),
+	FOREIGN KEY (traCourse_ID) REFERENCES traCourse_table(traCourse_ID) ON DELETE CASCADE,
 	--学習した日付: 必須
 	study_day DATE NOT NULL,
 	--メモ
@@ -115,7 +125,7 @@ CREATE TABLE IF NOT EXISTS TPM_table(
 	progress REAL NOT NULL,
 	--ステータスID
 	status_ID INT NOT NULL,
-	FOREIGN KEY (status_ID) REFERENCES status_table(status_ID),
+	FOREIGN KEY (status_ID) REFERENCES status_table(status_ID) ON DELETE CASCADE,
 	--履歴Noと受講研修IDの組み合わせを主キーに設定
 	PRIMARY KEY (stack_No, traCourse_ID)
 );
