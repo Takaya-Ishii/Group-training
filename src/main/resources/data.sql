@@ -16,3 +16,13 @@ INSERT INTO profile_table VALUES ('hogehoge@example.jp', 'hoge hoge', '$2a$10$mY
 INSERT INTO profile_table VALUES ('fugafuga@example.jp', 'fuga fuga', '$2a$10$NREZfIcvCJ9.vpcMnwEF0OzrwYW3X0Jncpfifm/QNCS.Dt9YJzWOu', '08098765432', '埼玉県', '男性', 'アプリ', NULL,  2) ON CONFLICT (username) DO NOTHING;
 
 INSERT INTO group_table VALUES (1, 'fugafuga@example.jp', '25卒内定者グループ', '2025年内定者用グループ 配属決定前まで使用 インフラ・アプリ共有') ON CONFLICT (group_ID) DO NOTHING;
+INSERT INTO group_table VALUES (2, 'fugafuga@example.jp', 'インフラ研修グループ', 'インフラチーム研修用グループ') ON CONFLICT (group_ID) DO NOTHING;
+
+INSERT INTO traCourse_table VALUES (1, 'H0001', 'hogehoge@example.jp', TRUE, 100, 5, '2025-04-01') ON CONFLICT (traCourse_ID) DO NOTHING;
+INSERT INTO traCourse_table VALUES (2, 'J0001', 'hogehoge@example.jp', TRUE, 100, 5, '2025-05-01') ON CONFLICT (traCourse_ID) DO NOTHING;
+INSERT INTO traCourse_table VALUES (3, 'S0001', 'hogehoge@example.jp', TRUE, 62.5, 2, '2025-06-01') ON CONFLICT (traCourse_ID) DO NOTHING;
+INSERT INTO traCourse_table VALUES (4, 'H0001', 'hogehoge@example.jp', FALSE, 0, 1, '2025-04-01') ON CONFLICT (traCourse_ID) DO NOTHING;
+
+INSERT INTO TPM_table VALUES (1, 1, '2025-03-01', 'テキストテキスト', 4.5, 30, 2) ON CONFLICT (stack_No, traCourse_ID) DO NOTHING;
+INSERT INTO TPM_table VALUES (2, 1, '2025-03-10', 'テキストテキスト', 5, 60, 3) ON CONFLICT (stack_No, traCourse_ID) DO NOTHING;
+INSERT INTO TPM_table VALUES (3, 1, '2025-03-20', 'テキストテキスト', 6, 90, 4) ON CONFLICT (stack_No, traCourse_ID) DO NOTHING;
