@@ -27,6 +27,9 @@ public class SecurityConfig {
           .authorizeHttpRequests(authz -> authz
           //「/login」へのアクセスは認証を必要としない
           .requestMatchers("/login").permitAll()
+          // 「/admin」がつくURLへは講師ロールしかアクセスできない
+          .requestMatchers("/admin/**").hasRole("講師")
+          .requestMatchers("/participant/**").hasRole("受講者")
           //その他のリクエストは認証が必要
           .anyRequest().authenticated())
           //★フォームベースのログイン設定
@@ -40,7 +43,7 @@ public class SecurityConfig {
           //パスワードのname属性を指定
           .passwordParameter("passwordInput")
           //ログイン成功時のリダイレクト先を指定
-          .defaultSuccessUrl("/")
+          .defaultSuccessUrl("/default")
           //ログイン失敗時のリダイレクト先を指定
           .failureUrl("/login?error"))
           // ★ログアウト設定
