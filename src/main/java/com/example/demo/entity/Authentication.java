@@ -12,4 +12,6 @@ public class Authentication {
    private String username;
    /** パスワード */
    private String password;
+   /** ロールID*/
+   private int role_ID;
 }
