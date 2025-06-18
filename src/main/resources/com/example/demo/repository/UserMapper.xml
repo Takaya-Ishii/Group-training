@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.example.demo.repository.UserMapper">
+
+<!-- ユーザーIDを全てSELECT -->
+<select id="selectAll" resultType="com.example.demo.entity.User">
+SELECT username, account_name ,role_ID
+FROM profile_table;
+</select>
+
+<!-- 一つのユーザーIDを検索 -->
+<select id="selectById" resultType="com.example.demo.entity.User">
+SELECT username, account_name, role_ID
+FROM profile_table where username = #{username};
+</select>
+
+<!-- ユーザーデータを新規登録する -->
+<insert id="insert">
+INSERT INTO profile_table (username,account_name,password,TEL,address,gender,affiriation,departOfOrigin,
+role_ID)
+VALUES
+(#{username},#{account_name},#{password},#{TEL},#{address},#{gender},#{affriation},#{departOfOrigin},
+#{role_ID});
+</insert>
+
+<!-- ユーザーデータを編集する -->
+<update id="update">
+
+UPDATE profile_table 
+SET account_name = #{account_name},password=#{password},TEL = #{TEL}, address = #{address}, gender = #{gender}, affiriation=#{affriation}, 
+departOfOrigin = #{departOfOrigin}, role_ID = #{role_ID} 
+
+WHERE username = #{username};
+
+</update>
+
+<!-- ユーザーデータを削除する -->
+<delete id="delete">
+DELETE FROM profile_table WHERE username = #{username};
+</delete>
+</mapper>
