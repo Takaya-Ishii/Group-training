@@ -84,7 +84,7 @@ public class TrainingController {
 		
 		Tra_Manegement target = traService.selectByIdTra(tra_id);
 		if(target != null) {
-			TraForm form = TraHelper.convertTra(target);
+			TraForm form = TraHelper.convertTraForm(target);
 			model.addAttribute("TraForm", form);
 			return "Training/form";
 		} else {

@@ -18,4 +18,17 @@ public class TraHelper {
 		form.setIsNew(false);
 		return tra_mane;
 	}
+	
+	public static TraForm convertTraForm(Tra_Manegement tra_mane) {
+		
+		TraForm form = new TraForm();
+		form.setTra_id(tra_mane.getTra_id());
+		form.setTra_name(tra_mane.getTra_name());
+		form.setEst_time(tra_mane.getEst_time());
+		form.setDescription(tra_mane.getDescription());
+		form.setAssignment(tra_mane.getAssignment());
+		
+		form.setIsNew(false);
+		return form;
+	}
 }
