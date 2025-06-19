@@ -29,7 +29,9 @@ public class User {
 	private Integer group_ID; 
 	//ユーザーの出身学部
 	private String departOfOrigin;
-	//ユーザーのロール名
+	//ユーザーのロールID
 	private Integer role_ID;
+	//ユーザーのロール名
+	private String role_name;
 	
 }

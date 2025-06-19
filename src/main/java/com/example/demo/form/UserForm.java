@@ -1,6 +1,14 @@
 package com.example.demo.form;
 
+import java.util.Objects;
+
+import com.example.demo.validation.EditValidation;
+import com.example.demo.validation.InsertValidation;
+
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,32 +19,68 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserForm {
 	//ユーザーのID
-	@NotBlank(message = "ユーザーIDが未入力です。")
+	@NotBlank(message = "ユーザーIDが未入力です。",groups = {InsertValidation.class})
+	@NotBlank(message = "ユーザーIDが未入力です。",groups = {EditValidation.class})
 		private String username;
+	
 		//ユーザーの名前
-	@NotBlank(message = "ユーザー名が未入力です。")
+	@NotBlank(message = "ユーザー名が未入力です。",groups = {InsertValidation.class})
+	@NotBlank(message = "ユーザー名が未入力です。",groups = {EditValidation.class})
+	@Size(min = 1, max = 30,message = "入力されていないもしくは、文字数が多すぎます",groups = {EditValidation.class})
 		private String account_name;
+	
 		//ユーザーのパスワード
-	@NotBlank(message = "性別が選択されていません。")
+	@NotBlank(message ="パスワードが設定されていません",groups = {EditValidation.class})
+	@NotBlank(message ="パスワードが設定されていません",groups = {EditValidation.class})
+	@Size(min = 1, max = 20,message = "入力されていないもしくは、文字数が多すぎます",groups = {EditValidation.class})
 		private String password;
+	
+	//ユーザーのパスワード確認用
+	
+	    private String ConfirmPassword;
+	
 		//ユーザーの電話番号
-	@NotBlank(message = "電話番号が未入力です。")
+	@NotBlank(message = "電話番号が未入力です。",groups = {InsertValidation.class})
+	@NotBlank(message = "電話番号が未入力です",groups = {EditValidation.class})
+	@Pattern(regexp = "^\\d{3}\\d{4}\\d{4}", message = "ハイフンがあるもしくは入力に誤りがあります。",groups = {EditValidation.class})
 		private String TEL;
+	
 		//ユーザーの住所
+	@NotBlank(message = "住所が未入力です" ,groups = {InsertValidation.class})
+	@NotBlank(message = "住所が未入力です",groups = {EditValidation.class} )
+	@Size(min = 1, max = 50,message = "入力されていないもしくは文字数が多すぎます",groups = {EditValidation.class})
 		private String address;
+		
 		//ユーザーの性別
+		@NotBlank(message = "性別が選択されていません。",groups = {InsertValidation.class})
+		@NotBlank(message = "性別が選択されていません。",groups ={EditValidation.class})
 		private String gender;
+		
 		//ユーザーの所属
-	@NotBlank(message = "所属が未入力です。")
+	@NotBlank(message = "所属が未入力です。",groups = {InsertValidation.class})
+	@NotBlank(message = "所属が未入力です",groups ={EditValidation.class})
 		private String affriation;
+	
 		//ユーザーのグループ
+	@NotBlank(message = "グループが登録されていません",groups ={EditValidation.class})
 		private Integer group_ID; 
+		
 		//ユーザーの出身学部
+	@NotBlank(message = "出身学部が登録されていません",groups ={EditValidation.class})
 		private String depart0f0rigin;
-		//ユーザーのロール名
-	@NotBlank(message = "ロールが未入力です。")
+		
+		//ユーザーのロールID
+	@NotBlank(message = "ロールIDが未入力です。",groups = {InsertValidation.class})
+	@NotBlank(message= "ロールIDが未入力です。",groups ={EditValidation.class})
 		private Integer role_ID;
+	
 		//新規判定
 		private Boolean isNew;
+		
+		//パスワードと確認用パスワードが一致するかチェック
+		@AssertTrue(message = "パスワードが一致しません")
+		public boolean isSamePassword() {
+			return Objects.equals(password, ConfirmPassword);
+		}
 }
 

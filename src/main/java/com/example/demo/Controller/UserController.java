@@ -1,5 +1,7 @@
 package com.example.demo.Controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +16,8 @@ import com.example.demo.entity.User;
 import com.example.demo.form.UserForm;
 import com.example.demo.helper.Userhelper;
 import com.example.demo.service.UserService;
+import com.example.demo.validation.EditValidation;
+import com.example.demo.validation.InsertValidation;
 
 import lombok.RequiredArgsConstructor;
 
@@ -42,7 +46,7 @@ public class UserController {
 			return "/User";
 		}else {
 			//対象データがない場合はフラッシュメッセージを設定
-			attributes.addFlashAttribute("errorMesssage","対象データがありません");
+			attributes.addFlashAttribute("errorMesssage","対象のユーザーはいません");
 			//リダイレクト
 			return "redirect/User";
 		}
@@ -50,14 +54,22 @@ public class UserController {
 	
 	/**指定された「ユーザー」の詳細を表示する*/
 	@GetMapping("/{username}")
-	public String displayUserDetail(@PathVariable String username,Model model) {
+	public String displayUserDetail(@PathVariable String username,Model model,RedirectAttributes attributes) {
+		//usernameに対応する詳細なデータを取得(同じusernameがある場合を考慮)
+		List<User> User = userService.displayUserDetail(username);
+		if(User != null) {
 		model.addAttribute("user",userService.displayUserDetail(username));
 		return "User/{username}";
+		}else {
+			//対象のユーザーの詳細がない場合は、メッセージを表示
+			attributes.addFlashAttribute("errorMessage","対象のユーザーの詳細なデータはありません");
+			return "/User";
+		}
 	}
 	
 	/**新たな「ユーザー」を新規登録する*/
 	@PostMapping("/save")
-	public String registrationUser(@Validated UserForm form,BindingResult bindingResult,RedirectAttributes attributes) {
+	public String registrationUser(@Validated ({InsertValidation.class}) UserForm form,BindingResult bindingResult,RedirectAttributes attributes) {
 		//===ここからが、バリデーションチェックです===
 		// 入力に問題があるか ifで検査
 		if(bindingResult.hasErrors()) {
@@ -77,7 +89,7 @@ public class UserController {
 	
 	/**指定されたIDの情報を編集する*/
 	@PostMapping("/edit/{username}")
-	public String updateUser(@Validated UserForm form,BindingResult bindingResult,RedirectAttributes attributes) {
+	public String updateUser(@Validated ({EditValidation.class})UserForm form,BindingResult bindingResult,RedirectAttributes attributes) {
 		//ここからバリデーションチェックです
 		//入力に問題あるか ifで検査
 		if(bindingResult.hasErrors()) {

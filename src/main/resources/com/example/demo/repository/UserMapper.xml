@@ -18,10 +18,12 @@ FROM profile_table where username = #{username};
 <!--一つのユーザーの詳細表示-->
 <select id="selectdetailById" resultType = "com.example.demo.entity.User">
 SELECT P.username, P.account_name, P.TEL, P.gender, P.affiriation, P.address, G.group_name, P.departOfOrigin,
-P.role_ID
+P.role_ID, R.role_name
 from profile_table as P
 Join group_table as G
 ON P.username = G.username
+LEFT Join role_table as R
+ON R.role_ID = P.role_ID
 where G.username = #{username};
 </select>
 <!-- ユーザーデータを新規登録する -->
