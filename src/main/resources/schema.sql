@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS traCourse_table(
 	FOREIGN KEY (username) REFERENCES profile_table(username) ON DELETE CASCADE,
 	--受講するかどうか: 必須
 	isTakeCourse BOOLEAN NOT NULL,
-	--最新進捗: 必須、REALは浮動小数点を扱える型
+	--最新進捗: 必須
 	latestProgress INT NOT NULL,
 	--ステータスID: 必須
 	status_ID INT NOT NULL,
