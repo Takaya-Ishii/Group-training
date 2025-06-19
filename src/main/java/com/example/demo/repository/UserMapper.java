@@ -14,9 +14,13 @@ import com.example.demo.entity.User;
 public interface UserMapper {
 	/**全ての「Id」を取得する*/
 	List<User> selectAll();
-	
-	/**idで指定された情報を取得*/
+		
+	/**idで指定されたid ユーザー名 ロールを取得*/
 	User selectById(@Param("username") String username);
+	
+	/**idで指定された詳細情報を取得
+	 * 複数件返る可能性があるため、Listとしました*/
+	List<User> selectdetailById(@Param("username") String username);
 	
 	/**「ユーザーデータ」を登録する*/
 	void insert(User user);

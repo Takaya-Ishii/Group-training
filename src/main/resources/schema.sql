@@ -1,4 +1,4 @@
-<<<<<<< fix
+--<<<<<<< fix
 DROP TABLE IF EXISTS group_table CASCADE;
 DROP TABLE IF EXISTS profile_table CASCADE;
 DROP TABLE IF EXISTS trainfo_table CASCADE;
@@ -6,11 +6,12 @@ DROP TABLE IF EXISTS traCourse_table CASCADE;
 DROP TABLE IF EXISTS role_table CASCADE;
 DROP TABLE IF EXISTS status_table CASCADE;
 DROP TABLE IF EXISTS TPM_table CASCADE;
-=======
+--=======
 --DROP TABLE IF EXISTS group_table CASCADE;
->>>>>>> master
+-->>>>>>> master
 
 --研修情報テーブル
+
 CREATE TABLE IF NOT EXISTS trainfo_table(
 	--研修ID: 主キー
 	tra_ID CHAR(5) PRIMARY KEY,

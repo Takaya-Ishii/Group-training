@@ -15,6 +15,15 @@ SELECT username, account_name, role_ID
 FROM profile_table where username = #{username};
 </select>
 
+<!--一つのユーザーの詳細表示-->
+<select id="selectdetailById" resultType = "com.example.demo.entity.User">
+SELECT P.username, P.account_name, P.TEL, P.gender, P.affiriation, P.address, G.group_name, P.departOfOrigin,
+P.role_ID
+from profile_table as P
+Join group_table as G
+ON P.username = G.username
+where G.username = #{username};
+</select>
 <!-- ユーザーデータを新規登録する -->
 <insert id="insert">
 INSERT INTO profile_table (username,account_name,password,TEL,address,gender,affiriation,departOfOrigin,

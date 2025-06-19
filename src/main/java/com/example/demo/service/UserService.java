@@ -13,10 +13,13 @@ public interface UserService {
 	/**指定されたidの情報を検索する*/
 	User displaySearchedUser(String username);
 	
+	/**指定されたidの詳細情報を表示する*/
+	List<User> displayUserDetail(String username);
+	
 	/**IDを新規登録する*/
 	void registrationUser(User user);
 	
-	/**指定されたIDの情報を更新する*/
+	/**指定されたIDの情報を編集する*/
 	void updateUser(User user);
 	
 	/**指定されたIDの情報を削除する*/
