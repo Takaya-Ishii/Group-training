@@ -41,35 +41,27 @@ public class LoginUser extends User {
        this.group_ID = group_ID;
    }
 	
-    public String getAccount_name() {
-        return this.account_name;
-    }
+    public String getAccount_name() {return this.account_name;}
+    public void setAccount_name(String account_name) {this.account_name = account_name;}
 
-    public String getTEL() {
-        return this.TEL;
-    }
+    public String getTEL() {return this.TEL;}
+    public void setTEL(String TEL) {this.TEL = TEL;}
 
-    public String getAddress() {
-        return this.address;
-    }
+    public String getAddress() {return this.address;}
+    public void setAddress(String address) {this.address = address;}
 
-    public String getGender() {
-        return this.gender;
-    }
+    public String getGender() {return this.gender;}
+    public void setGender(String gender) {this.gender = gender;}
     
-    public String getAffiriation() {
-    	return this.affiriation;
-    }
+    public String getAffiriation() {return this.affiriation;}
+    public void setAffiriation(String affiriation) {this.affiriation = affiriation;}
     
-    public String getDepartOfOrigin() {
-    	return this.departOfOrigin;
-    }
+    public String getDepartOfOrigin() {return this.departOfOrigin;}
+    public void setDepartOfOrigin(String departOfOrigin) {this.departOfOrigin = departOfOrigin;}
     
-    public int getRole_ID() {
-    	return this.role_ID;
-    }
+    public int getRole_ID() {return this.role_ID;}
+    public void setRole_ID(int role_ID) {this.role_ID = role_ID;}
     
-    public int getGroup_ID() {
-    	return this.group_ID;
-    }
+    public int getGroup_ID() {return this.group_ID;}
+    public void setGroup_ID(int group_ID) {this.group_ID = group_ID;}
 }
