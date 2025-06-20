@@ -6,5 +6,15 @@
 </head>
 <body>
 あなたは管理者です。これはユーザー一覧画面の予定です。
+<div sec:authentication="principal.username">ユーザーID</div>
+<div sec:authentication="principal.account_name">ユーザー名</div>
+<div sec:authentication="principal.password">パスワード</div>
+<div sec:authentication="principal.TEL">電話番号</div>
+<div sec:authentication="principal.address">住所</div>
+<div sec:authentication="principal.gender">性別</div>
+<div sec:authentication="principal.affiriation">所属</div>
+<div sec:authentication="principal.departOfOrigin">出身学部</div>
+<div sec:authentication="principal.role_ID">ロールID</div>
+<div sec:authentication="principal.group_ID">グループID</div>
 </body>
 </html>
