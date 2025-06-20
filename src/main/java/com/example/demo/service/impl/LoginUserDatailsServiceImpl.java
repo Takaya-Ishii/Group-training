@@ -38,7 +38,15 @@ import lombok.RequiredArgsConstructor;
              // UserDetailsの実装クラスを返す
         	 return new LoginUser(authentication.getUsername(), 
                      authentication.getPassword(), 
-                     getAuthorityList(authenticationMapper.selectByRoleId(authentication.getRole_ID()))
+                     getAuthorityList(authenticationMapper.selectByRoleId(authentication.getRole_ID())),
+                     authentication.getAccount_name(),
+                     authentication.getAddress(),
+                     authentication.getGender(),
+                     authentication.getTEL(),
+                     authentication.getAffiriation(),
+                     authentication.getDepartOfOrigin(),
+                     authentication.getRole_ID(),
+                     authentication.getGroup_ID()
                      );
          } else {
              // 対象データが存在しない
