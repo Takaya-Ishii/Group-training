@@ -14,10 +14,10 @@ public class Authentication {
    private String account_name;
    /** パスワード */
    private String password;
-   /** 住所 */
-   private String address;
    /** 電話番号 */
    private String TEL;
+   /** 住所 */
+   private String address;
    /** 性別 */
    private String gender;
    /** 所属 */
