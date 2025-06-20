@@ -20,8 +20,8 @@ INSERT INTO profile_table VALUES ('hogahoga@example.jp', 'hoga hoga', '$2a$10$xv
 INSERT INTO profile_table VALUES ('hogehoge@example.jp', 'hoge hoge', '$2a$10$N9IHSVK46JKGQpB0C5miyeK/pXOJo/PUiQb.6em7Ljdx61OI9U/CC', '08012345678', '埼玉県', '男性', 'アプリ', NULL,  1) ON CONFLICT (username) DO NOTHING;
 INSERT INTO profile_table VALUES ('fugafuga@example.jp', 'fuga fuga', '$2a$10$52gZqN8qwP3anJXG4nSOOueFpPDm/PfxBH9RMl2TultQ0I2eLVTUy', '08098765432', '埼玉県', '男性', 'アプリ', NULL,  2) ON CONFLICT (username) DO NOTHING;
 
-INSERT INTO group_table (username, group_name, summary) VALUES ('fugafuga@example.jp', '25卒内定者グループ', '2025年内定者用グループ 配属決定前まで使用 インフラ・アプリ共有') ON CONFLICT (group_ID, username) DO NOTHING;
-INSERT INTO group_table (username, group_name, summary) VALUES ('fugafuga@example.jp', 'インフラ研修グループ', 'インフラチーム研修用グループ') ON CONFLICT (group_ID, username) DO NOTHING;
+INSERT INTO group_table (username, group_name, summary) VALUES ('fugafuga@example.jp', '25卒内定者グループ', '2025年内定者用グループ 配属決定前まで使用 インフラ・アプリ共有') ON CONFLICT (group_ID) DO NOTHING;
+INSERT INTO group_table (username, group_name, summary) VALUES ('fugafuga@example.jp', 'インフラ研修グループ', 'インフラチーム研修用グループ') ON CONFLICT (group_ID) DO NOTHING;
 
 INSERT INTO traCourse_table (tra_ID, username, isTakeCourse, latestProgress, status_ID, target_date) VALUES ('H0001', 'hogehoge@example.jp', TRUE, 100, 5, '2025-04-01') ON CONFLICT (traCourse_ID) DO NOTHING;
 INSERT INTO traCourse_table (tra_ID, username, isTakeCourse, latestProgress, status_ID, target_date) VALUES ('J0001', 'hogehoge@example.jp', TRUE, 100, 5, '2025-05-01') ON CONFLICT (traCourse_ID) DO NOTHING;
