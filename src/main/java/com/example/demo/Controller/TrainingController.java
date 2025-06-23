@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Tra_Manegement;
@@ -22,7 +23,7 @@ import lombok.RequiredArgsConstructor;
  * 研修管理：コントローラー
  * */
 @Controller
-@RequestMapping("/Training")
+@RequestMapping("/")//←を変えるときは最初に出力するページの設定を変える
 @RequiredArgsConstructor
 
 public class TrainingController {
@@ -32,88 +33,99 @@ public class TrainingController {
 	/**
 	 * 一覧を表示させる
 	 */
-	@GetMapping
+	@GetMapping("/") // 実装時は/Trainingに変更
 	public String TrainingList(Model model) {
 		model.addAttribute("tra_list", traService.selectAllTra());
-		return "tra_Manegement/list";
+		return "trainingList";
 		
 	}
+	
 	/**
-	 * 指定された名前の研修詳細を表示する
+	 *  研修名から研修の一覧を検索する
+	 */
+	@GetMapping("/Serch")
+	public String TrainingSerch(@RequestParam(value = "tra_name", required = false) String tra_name, Model model,
+			RedirectAttributes attributes) {
+		
+		if(tra_name != null && !tra_name.isEmpty()) {
+			if(!tra_name.isEmpty()) {
+				model.addAttribute("tra_list", traService.selectByNameTra(tra_name));
+			} else {
+				model.addAttribute("Message", "データがありません");
+			}
+		}
+		return "trainingList";
+	}
+	 
+	/**
+	 * 指定されたIDの研修詳細を表示する
 	 */
 	@GetMapping("/{tra_ID}")
-	public String TrainingDetail(@PathVariable String tra_id, Model model,
-			RedirectAttributes attributes) {
-		Tra_Manegement tra = traService.selectByIdTra("tra_id");
-		if(tra != null) {
-			model.addAttribute("tra", traService.selectByNameTra(tra_id));
-			return "Training/{tra_ID}";
-		} else {
-			attributes.addFlashAttribute("errorMessage", "データがありません");
-			return "redirect:/Training";
-		}
+	public String TrainingDetail(@PathVariable("tra_ID") String tra_id, Model model) {
+
+		//model.addAttribute("tra", traService.selectByIdTra("{tra_ID}"));
+		return "trainingDetail";
 	}
 	
 	//新規登録画面の表示
-	@GetMapping("/Training/save")
-	public String NewTra(@ModelAttribute TraForm form) {
+	@GetMapping("/Save")
+	public String NewTra(@ModelAttribute("form") TraForm form, Model model) {
+		
 		form.setIsNew(true);
-		return "Training/form";
+		return "trainingNew";
 	}
 	
 	//新規登録の処理
-	@PostMapping("/Save")
-	public String create(@Validated TraForm form, 
-			BindingResult bindingResult, RedirectAttributes attributes) {
+	@PostMapping("/Create")
+	public String create(@Validated @ModelAttribute("form") TraForm form,
+			BindingResult bindingResult, Model model,
+			RedirectAttributes attributes) {
 		
 		//バリデーションチェック
-		if(bindingResult.hasErrors()) {
-			form.setIsNew(true);
-			return "Training/form";
-		}
+			if(bindingResult.hasErrors()) {
+				attributes.addFlashAttribute("form", form);
+				model.addAttribute("errorMessage", "入力項目に誤りがあります。メッセージを確認し、再度入力をしてください。");
+				return "trainingNew";
+			}
 		
 		Tra_Manegement tra_mane = TraHelper.convertTra(form);
 		traService.insertTra(tra_mane);
-		attributes.addFlashAttribute("message", "tra_maneが追加されました。");
-		return "redirect:/Training";
+		attributes.addFlashAttribute("Message", "tra_maneが追加されました。");
+		return "redirect:/";
 	}
 	
 	//編集画面の表示
-	@GetMapping("/Training/Edit/{tra_ID}")
-	public  String Edit(@PathVariable String tra_id, Model model, RedirectAttributes attributes) {
+	@GetMapping("/Edit={tra_ID}")
+	public  String TrainingEdit(@ModelAttribute TraForm form, Model model,
+			@PathVariable("tra_ID") String tra_id) {
 		
-		Tra_Manegement target = traService.selectByIdTra(tra_id);
-		if(target != null) {
-			TraForm form = TraHelper.convertTraForm(target);
-			model.addAttribute("TraForm", form);
-			return "Training/form";
-		} else {
-			return "redirect:/Training";
-		}
+		model.addAttribute("traFrom", form);
+		//model.addAttribute("traUpdate", traService.selectByIdTra(tra_id));
+		return "trainingEdit";
 	}
 	
 	//編集画面の更新処理
-	@PostMapping("/Edit/{tra_ID}")
+	@PostMapping("/Update")
 	public String Update(@Validated TraForm form, 
 			BindingResult bindingResult,
 			RedirectAttributes attributes) {
 		
 		if(bindingResult.hasErrors()) {
 			form.setIsNew(false);
-			return "Training/form";
+			return "redirect:/Update";
 		}
 		
 		Tra_Manegement tra_mane = TraHelper.convertTra(form);
 		traService.updateTra(tra_mane);
 		attributes.addFlashAttribute("message", "研修を更新しました");
-		return "redirect:/Training";
+		return "redirect:/";
 	}
 	
 	//削除処理
-	@PostMapping("/delete/{tra_ID}")
+	@PostMapping("/Delete")
 	public String Delete(@PathVariable String tra_id, RedirectAttributes attributes) {
 		traService.deleteTra(tra_id);
-		attributes.addFlashAttribute("message", "tra_nameを削除しました");
-		return "redirect:/Training";
+		attributes.addFlashAttribute("Message", "tra_nameを削除しました");
+		return "redirect:/";
 	}
 }

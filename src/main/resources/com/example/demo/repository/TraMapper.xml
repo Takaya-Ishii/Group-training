@@ -7,10 +7,10 @@
 		description FROM trainfo_table
 	</select>
 	<!-- 1件検索 -->
-	<select id="selectById" resultType="com.example.demo.entity.Tra_Manegement">
-		SELECT tra_id, tra_name, est_time, text_book, assignment,
-		description FROM trainfo_table
-		WHERE tra_id = #{tra_id}
+	<select id="selectById" parameterType="String" resultType="com.example.demo.entity.Tra_Manegement">
+		SELECT tra_id, tra_name, est_time, text_book, assignment, description 
+		FROM trainfo_table
+		WHERE tra_id = '#{tra_id}'
 	</select>
 	<!-- 名前 1件検索 -->
 	<select id="selectByName" resultType="com.example.demo.entity.Tra_Manegement">

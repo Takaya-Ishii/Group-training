@@ -1,46 +1,70 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
 <meta charset="UTF-8">
 <title>研修管理システム</title>
 </head>
 <body>
-	<h1>研修新規登録</h1>
+	<h1 th:if("${TraForm.isNew}")>研修新規登録</h1>
 	<p th:if="${errorMessage}"
-		th:text="${errorMessage}" style="color: red;">
+		th:text="${errorMessage}" style="background-color: red;">
 		エラーメッセージ
 	</p>
 	
-	<form th:action="${TraForm.isNew} ? @{/Training/save} : {/Training/update}"
-		th:object="${TraForm}" method="post">
-		<label>研修ID  *</label>
-		<input type="text"th:field="*{tra_id}">
-		
-		<span th:if="${#fields.hasErrors('tra_id')}"
-			th:errors="*{tra_id}" style="color: red;">
-		</span>
-		
-		<label>研修名  *</label>
-		<input type="text" th:field="*{tra_name}">
-		
-		<span th:if="${#fields.hasErrors('tra_name')}"
-			th:errors="*{tra_name}" style="color: red;">
-		</span>
-		
-		<label>想定時間</label>
-		<input type="text" th:field="*{est_time}">
-		
-		<label>使用教材</label>
-		<input type="text" th:field="*{text_book}">
-		
-		<label>説明</label>
-		<input type="text" th:field="*{description}">
-		
-		<label>課題</label>
-		<input type="text" th:field="*{assignment}">
-		
-		<button type="submit">登録</button>
+	<form th:action="@{/Create}"
+		th:object="${form}" method="post">
+		<table>
+			<tr>
+				<td>
+					<label>研修ID  *</label>
+					<input type="text" th:field="*{tra_id}">
+					
+					<p th:if="${#fields.hasErrors('tra_id')}"
+						th:errors="*{tra_id}" style="color: red;">
+						エラーがあれば表示
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>研修名  *</label>
+					<input type="text" th:field="*{tra_name}">
+					
+					<p th:if="${#fields.hasErrors('tra_name')}"
+						th:errors="*{tra_name}" style="color: red;">
+						エラーがあれば表示
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>想定時間</label>
+					<input type="text" th:field="*{est_time}">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>使用教材</label>
+					<input type="text" th:field="*{text_book}">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>説明</label>
+					<input type="text" th:field="*{description}">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>課題</label>
+					<input type="text" th:field="*{assignment}">
+				</td>
+			</tr>
+		</table>
+		<input th:if("${TraForm.isNew}") type="submit" value="登録">
 	</form>
-	<a th:href="@{/Training}"><button type="submit">研修一覧に戻る</button></a>
+	
+	<a th:href="@{/}" type="button">研修一覧に戻る</a>
 </body>
 </html>

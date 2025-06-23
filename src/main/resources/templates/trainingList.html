@@ -8,10 +8,14 @@
 	<main>
 		<h1>研修一覧</h1>
 		<!-削除したらここにメッセージを表示する-->
+		<p th:if="${Message}"
+			th:text="${Message}" style="color: red;">
+			エラーメッセージ
+		</p>
 		
-		<form method="get">
+		<form action="/Serch" method="get">
 			<label for="get-value">研修名</label>
-			<input type="text" name="val">
+			<input type="text" name="tra_name">
 			<button type="submit">検索</button>
 		</form>
 		
@@ -24,21 +28,20 @@
 					<th>詳細</th>
 				</tr>
 			</thead>
+
 			<tbody>
-				<tr th:each="Tra : ${Training}">
+				<tr th:each="Tra : ${tra_list}">
 					<td th:text="${Tra.tra_id}"></td>
 					<td th:text="${Tra.tra_name}"></td>
 					<td th:text="${Tra.est_time}"></td>
 					<td>
-						<a th:href="@{/Training/{tra_ID}(tra_ID=${Tra.tra_id})}">
+						<a th:href="@{/{tra_ID}(tra_ID=${Tra.tra_id})}">
 							●
 						</a>
 					</td>
 				</tr>
 			</tbody>
-		</table>
-		
-		<button type="submit">新規登録</button>
+			<a th:href="@{/Save}">新規登録</a>
 	</main>
 </body>
 </html>

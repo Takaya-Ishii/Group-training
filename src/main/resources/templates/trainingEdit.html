@@ -7,7 +7,9 @@
 <body>
 	<h1>研修編集</h1>
 	
-	<form>
+	<form th:action="@{/Update}"
+		th:object="${traForm}" method="post">
+		
 		<label>研修ID</label>
 		<input type="text" disabled>
 		
@@ -31,8 +33,8 @@
 		<label>課題</label>
 		<input type="text" th:field="*{assignment}">
 		
-		<button type="submit">更新</button>
+		<input type="submit" value="更新">
 	</form>
-	<button th:href="@{/Training}">研修一覧に戻る</button>
+	<a th:href="@{/}">研修一覧に戻る</a>
 </body>
 </html>

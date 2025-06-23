@@ -11,6 +11,14 @@ public class GroupTrainingApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GroupTrainingApplication.class, args);
+		//.getBean(GroupTrainingApplication.class).exe();
 		
 	}
+	/*
+	private final TraService service;
+	
+	public void exe() {
+		System.out.println("=======1件検索======");
+		System.out.println(service.selectByIdTra("H0001"));
+	}*/
 }

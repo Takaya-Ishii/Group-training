@@ -9,41 +9,41 @@
 	<main>
 		<h1>研修詳細</h1>
 		<div id="container">
-			<table border="1" class="table-style">
+			<table border="1">
 				<tr>
 					<th>研修ID</th>
-					<td th:text="${Tra.tra_id}"></td>
+					<td ></td>
 				</tr>
 				<tr>
 					<th>研修名</th>
-					<td th:text="${Tra.tra_name}"></td>
+					<td ></td>
 				</tr>
 				<tr>
 					<th>想定時間</th>
-					<td th:text="${Tra.est_time}">時間</td>
+					<td ></td>
 				</tr>
 				<tr>
 					<th>使用教材</th>
-					<td th:text="${Tra.text_book}"></td>
+					<td ></td>
 				</tr>
 				<tr>
 					<th>説明</th>
-					<td th:text="${Tra.description}"></td>
+					<td ></td>
 				</tr>
 				<tr>
 					<th>課題</th>
-					<td th:text="${Tra.assignment}"></td>
+					<td ></td>
 				</tr>
 			</table>
 		</div>
-		<form>
 			<button type="button" data-toggle="modal" data-backdrop="false">削除</button>
-			<button th:href="@{/Training/Edit/{tra_ID}}">修正</button>
+		<form th:action="@{/Edit={tra_ID}}" method="get">
+			<button type="submit">修正</button>
 		</form>
-		<button th:href="@{/Training}">研修一覧に戻る</button>
+		<a th:href="@{/}" type="button">研修一覧に戻る</a>
 	</main>
 	
-	<!--モーダルのレイアウト-->
+	<!--モーダルのレイアウト
 	<div class="modal" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
 		<div class="modal-body">
 			<label>本当に削除してよろしいですか？</label>
@@ -55,5 +55,6 @@
 			</form>
 		</div>
 	</div>
+	-->
 </body>
 </html>
