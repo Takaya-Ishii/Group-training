@@ -6,9 +6,6 @@ DROP TABLE IF EXISTS role_table CASCADE;
 DROP TABLE IF EXISTS status_table CASCADE;
 DROP TABLE IF EXISTS TPM_table CASCADE;
 
---DROP TABLE IF EXISTS group_table CASCADE;
-
-
 --研修情報テーブル
 CREATE TABLE IF NOT EXISTS trainfo_table(
 	--研修ID: 主キー
@@ -99,8 +96,8 @@ CREATE TABLE IF NOT EXISTS traCourse_table(
 	FOREIGN KEY (username) REFERENCES profile_table(username) ON DELETE CASCADE,
 	--受講するかどうか: 必須
 	isTakeCourse BOOLEAN NOT NULL,
-	--最新進捗: 必須、REALは浮動小数点を扱える型
-	latestProgress REAL NOT NULL,
+	--最新進捗: 必須
+	latestProgress INT NOT NULL,
 	--ステータスID: 必須
 	status_ID INT NOT NULL,
 	FOREIGN KEY (status_ID) REFERENCES status_table(status_ID) ON DELETE CASCADE,
@@ -122,10 +119,17 @@ CREATE TABLE IF NOT EXISTS TPM_table(
 	--学習時間
 	study_time REAL,
 	--進捗: 必須
-	progress REAL NOT NULL,
+	progress INT NOT NULL,
 	--ステータスID
 	status_ID INT NOT NULL,
 	FOREIGN KEY (status_ID) REFERENCES status_table(status_ID) ON DELETE CASCADE,
 	--履歴Noと受講研修IDの組み合わせを主キーに設定
 	PRIMARY KEY (stack_No, traCourse_ID)
 );
+
+--data.sqlのダミーデータの登録方法を変更したためそれに伴う追記
+ALTER SEQUENCE role_table_role_ID_seq RESTART WITH 1;
+ALTER SEQUENCE status_table_status_ID_seq RESTART WITH 1;
+ALTER SEQUENCE group_table_group_ID_seq RESTART WITH 1;
+ALTER SEQUENCE traCourse_table_traCourse_ID_seq RESTART WITH 1;
+ALTER SEQUENCE TPM_table_stack_No_seq RESTART WITH 1;
