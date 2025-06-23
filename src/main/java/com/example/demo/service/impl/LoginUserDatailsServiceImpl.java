@@ -45,8 +45,7 @@ import lombok.RequiredArgsConstructor;
                      authentication.getTEL(),
                      authentication.getAffiriation(),
                      authentication.getDepartOfOrigin(),
-                     authentication.getRole_ID(),
-                     authentication.getGroup_ID()
+                     authentication.getRole_ID()
                      );
          } else {
              // 対象データが存在しない

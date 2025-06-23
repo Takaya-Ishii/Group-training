@@ -26,6 +26,4 @@ public class Authentication {
    private String departOfOrigin;
    /** ロールID */
    private int role_ID;
-   /** グループID */
-   private int group_ID;
 }

@@ -15,7 +15,6 @@ public class LoginUser extends User {
    private String affiriation;
    private String departOfOrigin;
    private int role_ID;
-   private int group_ID;
 
 /** ユーザーの情報を保持したUser
     *  実装クラスUserを作成する */
@@ -28,8 +27,7 @@ public class LoginUser extends User {
      String TEL,
      String affiriation,
      String departOfOrigin,
-     int role_ID,
-     int group_ID) {
+     int role_ID) {
        super(username, password, authorities);
        this.account_name = account_name;
        this.address = address;
@@ -38,7 +36,6 @@ public class LoginUser extends User {
        this.affiriation = affiriation;
        this.departOfOrigin = departOfOrigin;
        this.role_ID = role_ID;
-       this.group_ID = group_ID;
    }
 	
     public String getAccount_name() {return this.account_name;}
@@ -61,7 +58,4 @@ public class LoginUser extends User {
     
     public int getRole_ID() {return this.role_ID;}
     public void setRole_ID(int role_ID) {this.role_ID = role_ID;}
-    
-    public int getGroup_ID() {return this.group_ID;}
-    public void setGroup_ID(int group_ID) {this.group_ID = group_ID;}
 }
