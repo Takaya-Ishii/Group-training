@@ -37,7 +37,7 @@ public class LoginUser extends User {
        this.departOfOrigin = departOfOrigin;
        this.role_ID = role_ID;
    }
-	
+   
     public String getAccount_name() {return this.account_name;}
     public void setAccount_name(String account_name) {this.account_name = account_name;}
 
