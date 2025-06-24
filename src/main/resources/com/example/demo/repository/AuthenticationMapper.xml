@@ -4,7 +4,7 @@
  <mapper namespace="com.example.demo.repository.AuthenticationMapper">
     <!-- ユーザーIDで認証情報を検索 -->
     <select id="selectByUsername" resultType="com.example.demo.entity.Authentication">
-        SELECT username, password, role_ID FROM profile_table WHERE username = #{username}
+        SELECT * FROM profile_table WHERE username = #{username}
     </select>
     
     <!-- 入力されたusernameからロールIDを取得後、一致するロール名を取得 -->
