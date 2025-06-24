@@ -11,4 +11,9 @@
     <select id="selectByRoleId" resultType="com.example.demo.entity.Role">
     	SELECT role_name, role_ID FROM role_table WHERE role_ID = #{role_ID}
     </select>
+    
+    <!-- usernameに合致するユーザーのパスワードを変更する -->
+    <update id="updatePassword" parameterType="com.example.demo.entity.Authentication">
+    	UPDATE profile_table SET password = #{password} WHERE username=#{username}
+    </update>
  </mapper>
