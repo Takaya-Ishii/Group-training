@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
-<meta charset="UTF-8">
-<title>研修管理システム</title>
+	<meta charset="UTF-8">
+	<title>研修管理システム</title>
 </head>
 <body>
 	<h1 th:if("${TraForm.isNew}")>研修新規登録</h1>
-	<p th:if="${errorMessage}"
-		th:text="${errorMessage}" style="background-color: red;">
+	<p th:if="${message}"
+		th:text="${message}" style="background-color: rgb(255, 128, 128);">
 		エラーメッセージ
 	</p>
 	
@@ -65,6 +65,8 @@
 		<input th:if("${TraForm.isNew}") type="submit" value="登録">
 	</form>
 	
-	<a th:href="@{/}" type="button">研修一覧に戻る</a>
+	<form th:action="@{/}">
+		<button>研修一覧に戻る</button>
+	</form>
 </body>
 </html>

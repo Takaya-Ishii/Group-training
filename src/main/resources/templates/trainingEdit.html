@@ -1,40 +1,67 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>研修管理機能</title>
+	<meta charset="UTF-8">
+	<title>研修管理機能</title>
 </head>
 <body>
 	<h1>研修編集</h1>
+	<p th:if="${message}"
+		th:text="${message}" style="background-color: red;">
+		エラーメッセージ
+	</p>
 	
 	<form th:action="@{/Update}"
-		th:object="${traForm}" method="post">
-		
-		<label>研修ID</label>
-		<input type="text" disabled>
-		
-		<label>研修名</label>
-		<input type="text" th:field="*{tra_name}">
-		
-		<!--研修名のバリデーションチェック-->
-		<span th:if="${#fields.hasErrors('tra_name')}"
-			th:errors="*{tra_name}" style="color: red;">
-		</span>
-		
-		<label>想定時間</label>
-		<input type="text" th:field="*{est_time}">
-		
-		<label>使用教材</label>
-		<input type="text" th:field="*{text_book}">
-		
-		<label>説明</label>
-		<input type="text" th:field="*{description}">
-		
-		<label>課題</label>
-		<input type="text" th:field="*{assignment}">
-		
+		 th:object="${tra_edit}" method="post">
+
+		<table>
+			<tr>
+				<td>
+					<label>研修ID</label>
+					<input type="text" th:field="*{tra_id}"  readonly
+					 style="background-color: lightgray;">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="name">研修名</label>
+					<input type="text" th:field="*{tra_name}">
+					<!--研修名のバリデーションチェック-->
+					<p th:if="${#fields.hasErrors('tra_name')}"
+						th:errors="*{tra_name}" style="color: red;">
+						エラーがあれば表示
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>想定時間</label>
+					<input type="text" th:field="*{est_time}">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>使用教材</label>
+					<input type="text" th:field="*{text_book}">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>説明</label>
+					<input type="text" th:field="*{description}">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>課題</label>
+					<input type="text" th:field="*{assignment}">
+				</td>
+			</tr>
+		</table>
 		<input type="submit" value="更新">
 	</form>
-	<a th:href="@{/}">研修一覧に戻る</a>
+	<form th:action="@{/}">
+		<button>研修一覧に戻る</button>
+	</form>
 </body>
 </html>

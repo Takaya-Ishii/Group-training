@@ -1,60 +1,77 @@
 <!DOCTYPE html>
 <html xmlns:th="http://wwww.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<link href="style.css" rel="stylesheet">
-<title>研修管理システム</title>
+	<meta charset="UTF-8">
+	<!-- Bootstrap CSS-->
+    
+	<title>研修管理システム</title>
 </head>
 <body>
 	<main>
 		<h1>研修詳細</h1>
-		<div id="container">
-			<table border="1">
+		<div>
+			<table border="1" th:object="${tra_detail}">
 				<tr>
 					<th>研修ID</th>
-					<td ></td>
+					<td th:text="*{tra_id}"></td>
 				</tr>
 				<tr>
 					<th>研修名</th>
-					<td ></td>
+					<td th:text="*{tra_name}"></td>
 				</tr>
 				<tr>
 					<th>想定時間</th>
-					<td ></td>
+					<td th:text="*{est_time}"></td>
 				</tr>
 				<tr>
 					<th>使用教材</th>
-					<td ></td>
+					<td th:text="*{text_book}"></td>
 				</tr>
 				<tr>
 					<th>説明</th>
-					<td ></td>
+					<td th:text="*{description}"></td>
 				</tr>
 				<tr>
 					<th>課題</th>
-					<td ></td>
+					<td th:text="*{assignment}"></td>
 				</tr>
 			</table>
 		</div>
-			<button type="button" data-toggle="modal" data-backdrop="false">削除</button>
-		<form th:action="@{/Edit={tra_ID}}" method="get">
-			<button type="submit">修正</button>
+		
+		<!--モーダル呼び出し-->
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-backdrop="false" data-target="#deleteModal">削除</button>
+		
+		<form th:action="@{/Edit/{tra_id}(tra_id=${tra_id})}" method="get">
+			<button>修正</button>
 		</form>
-		<a th:href="@{/}" type="button">研修一覧に戻る</a>
+		<form th:action="@{/}" method="get">
+			<button>研修一覧に戻る</button>
+		</form>
 	</main>
 	
 	<!--モーダルのレイアウト
-	<div class="modal" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-		<div class="modal-body">
-			<label>本当に削除してよろしいですか？</label>
-		</div>
-		<div class="modal-footer">
-			<button data-dismiss="modal">キャンセル</button>
-			<form th:action="@{/Training/delete/{tra_ID}(id=${})}" method="post">
-				<button>削除</butto>
-			</form>
+	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+		<div class="modal-dailog">
+			<div class="modal-content">
+				<div class="modal-header">
+					
+				</div>
+				
+				<!--モーダルのボディ
+				<div class="modal-body">
+					<label>本当に削除してよろしいですか？</label>
+				</div>
+				-->
+				<!--フッター
+				<div class="modal-footer">
+					<button  class="btn btn-default" data-dismiss="modal">キャンセル</button>
+					<form th:action="@{/delete/{tra_id}(tra_id=${tra_id})}" method="post">
+						<button type="submit" class="btn btn-primary">削除</butto>
+					</form>
+				</div>
+			</div>
 		</div>
 	</div>
-	-->
+    -->
 </body>
 </html>

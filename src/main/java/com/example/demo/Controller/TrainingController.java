@@ -34,7 +34,7 @@ public class TrainingController {
 	 * 一覧を表示させる
 	 */
 	@GetMapping("/") // 実装時は/Trainingに変更
-	public String TrainingList(Model model) {
+	public String trainingList(Model model) {
 		model.addAttribute("tra_list", traService.selectAllTra());
 		return "trainingList";
 		
@@ -44,88 +44,91 @@ public class TrainingController {
 	 *  研修名から研修の一覧を検索する
 	 */
 	@GetMapping("/Serch")
-	public String TrainingSerch(@RequestParam(value = "tra_name", required = false) String tra_name, Model model,
+	public String trainingSerch(@RequestParam(value = "tra_name", required = false) String tra_name, Model model,
 			RedirectAttributes attributes) {
 		
 		if(tra_name != null && !tra_name.isEmpty()) {
 			if(!tra_name.isEmpty()) {
 				model.addAttribute("tra_list", traService.selectByNameTra(tra_name));
-			} else {
-				model.addAttribute("Message", "データがありません");
+			} 
+		}else {
+			model.addAttribute("tra_list", traService.selectAllTra());
 			}
-		}
+		
 		return "trainingList";
 	}
 	 
 	/**
 	 * 指定されたIDの研修詳細を表示する
 	 */
-	@GetMapping("/{tra_ID}")
-	public String TrainingDetail(@PathVariable("tra_ID") String tra_id, Model model) {
+	@GetMapping("/{tra_id}")
+	public String trainingDetail(@PathVariable("tra_id") String tra_id, Model model) {
 
-		//model.addAttribute("tra", traService.selectByIdTra("{tra_ID}"));
+		model.addAttribute("tra_detail", traService.selectByIdTra(tra_id));
 		return "trainingDetail";
 	}
 	
 	//新規登録画面の表示
 	@GetMapping("/Save")
-	public String NewTra(@ModelAttribute("form") TraForm form, Model model) {
+	public String trainingNew(@ModelAttribute("form") TraForm form, Model model) {
 		
-		form.setIsNew(true);
 		return "trainingNew";
 	}
 	
 	//新規登録の処理
 	@PostMapping("/Create")
-	public String create(@Validated @ModelAttribute("form") TraForm form,
+	public String trainingCreate(@Validated @ModelAttribute("form") TraForm form,
 			BindingResult bindingResult, Model model,
 			RedirectAttributes attributes) {
 		
 		//バリデーションチェック
 			if(bindingResult.hasErrors()) {
 				attributes.addFlashAttribute("form", form);
-				model.addAttribute("errorMessage", "入力項目に誤りがあります。メッセージを確認し、再度入力をしてください。");
+				model.addAttribute("message", "入力項目に誤りがあります。メッセージを確認し、再度入力をしてください。");
 				return "trainingNew";
 			}
 		
 		Tra_Manegement tra_mane = TraHelper.convertTra(form);
 		traService.insertTra(tra_mane);
-		attributes.addFlashAttribute("Message", "tra_maneが追加されました。");
+		attributes.addFlashAttribute("message", form.getTra_name() + "が追加されました。");
 		return "redirect:/";
 	}
 	
 	//編集画面の表示
-	@GetMapping("/Edit={tra_ID}")
-	public  String TrainingEdit(@ModelAttribute TraForm form, Model model,
-			@PathVariable("tra_ID") String tra_id) {
+	@GetMapping("/Edit/{tra_id}")
+	public  String trainingEdit(@PathVariable String tra_id, Model model,
+			@ModelAttribute TraForm form, BindingResult bindingResult) {
 		
-		model.addAttribute("traFrom", form);
-		//model.addAttribute("traUpdate", traService.selectByIdTra(tra_id));
+		model.addAttribute("tra_edit", traService.selectByIdTra(tra_id));
 		return "trainingEdit";
 	}
 	
 	//編集画面の更新処理
 	@PostMapping("/Update")
-	public String Update(@Validated TraForm form, 
-			BindingResult bindingResult,
+	public String trainingUpdate(@Validated @ModelAttribute("form") TraForm form,
+			BindingResult bindingResult, Model model,
 			RedirectAttributes attributes) {
 		
+		//バリデーションチェック
 		if(bindingResult.hasErrors()) {
-			form.setIsNew(false);
-			return "redirect:/Update";
+			model.addAttribute("tra_edit", form);
+			model.addAttribute("message", "入力項目に誤りがあります。メッセージを確認し、再度入力をしてください。");
+			return "trainingEdit";
 		}
-		
+
 		Tra_Manegement tra_mane = TraHelper.convertTra(form);
 		traService.updateTra(tra_mane);
-		attributes.addFlashAttribute("message", "研修を更新しました");
+		attributes.addFlashAttribute("message", form.getTra_id() +  "を更新しました");
 		return "redirect:/";
 	}
 	
 	//削除処理
-	@PostMapping("/Delete")
-	public String Delete(@PathVariable String tra_id, RedirectAttributes attributes) {
+	@PostMapping("/delete/{tra_id}")
+	public String trainingDelete(@PathVariable String tra_id, 
+			TraForm form, RedirectAttributes attributes) {
+		
 		traService.deleteTra(tra_id);
-		attributes.addFlashAttribute("Message", "tra_nameを削除しました");
+		attributes.addFlashAttribute("message", form.getTra_name() + "を削除しました");
 		return "redirect:/";
 	}
 }
