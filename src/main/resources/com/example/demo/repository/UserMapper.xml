@@ -3,35 +3,109 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "com.example.demo.repository.UserMapper">
 
+<resultMap id = "Userdetialselect" type = "com.example.demo.entity.User">
+<id property = "username" column = "username"/>
+<result property = "account_name" column = "account_name"/>
+<result property = "TEL" column ="TEL"/>
+<result property = "gender" column ="gender"/>
+<result property = " affiriation" column =" affiriation"/>
+<result property = "address " column =" address"/>
+<result property = "departOfOrigin" column ="departOfOrigin"/>
+<result property = "role_ID" column ="role_ID"/>
+<association property = "role" javaType="com.example.demo.entity.Role.Role">
+<id property ="role_ID" column = "role_ID"/>
+<result property = "role_name" column = "role_name"/>
+</association>
+
+<collection property = "group" ofType ="com.example.demo.entity.Group.Group">
+<id property = "group_ID" column = "group_ID"/>
+<result property = "username" column = "username"/>
+<result property = "group_name" column = "group_name"/>
+<result property = "summary" column ="summary"/>
+</collection>
+</resultMap>
+
+<resultMap id = "UserAllselect" type = "com.example.demo.entity.User">
+<id property = "username" column = "username"/>
+<result property = "account_name" column = "account_name"/>
+<result property = "TEL" column ="TEL"/>
+<result property = "gender" column ="gender"/>
+<result property = " affiriation" column =" affiriation"/>
+<result property = "address " column =" address"/>
+<result property = "departOfOrigin" column ="departOfOrigin"/>
+<result property = "role_ID" column ="role_ID"/>
+
+<association property = "role" javaType="com.example.demo.entity.Role.Role">
+<id property ="role" column = "role_ID"/>
+<result property = "role_name" column = "role_name"/>
+</association>
+</resultMap>
+
 <!-- ユーザーIDを全てSELECT -->
-<select id="selectAll" resultType="com.example.demo.entity.User">
-SELECT username, account_name ,role_ID
-FROM profile_table;
+<select id="selectAll" resultMap="UserAllselect">
+SELECT P.username, P.account_name ,R.role_name
+FROM profile_table as P
+LEFT JOIN role_table as R
+ON R.role_ID = P.role_ID
 </select>
 
-<!-- 一つのユーザーIDを検索 -->
-<select id="selectById" resultType="com.example.demo.entity.User">
-SELECT username, account_name, role_ID
-FROM profile_table where username = #{username};
+<!-- ユーザーを検索ボックスで情報を検索 -->
+<select id = "selectByBox" resultMap="UserAllselect">
+SELECT P.username, P.account_name, R.role_name
+FROM profile_table as P
+LEFT Join role_table as R
+ON R.role_ID = P.role_ID 
+    	<where>
+    	<trim prefixOverrides="AND">
+    		<if test="username != null and username != ''">
+    			AND username like '%'|| #{username} || '%'
+    		</if>
+    		<if test="account_name != null and account_name != ''">
+    			AND account_name like '%' || #{account_name} || '%'
+    		</if>
+    		</trim>
+    	</where>
 </select>
+
+<!-- 一人のユーザーをユーザー名で検索 -->
+<select id = "selectByrole" resultType="com.example.demo.entity.User">
+ SELECT P.username, P.account_name, R.rselectdetailByIdole_name
+FROM profile_table as P
+LEFT Join role_table as R
+ON R.role_ID = P.role_ID
+WHERE account_name = #{account_name}
+</select>
+
 
 <!--一つのユーザーの詳細表示-->
-<select id="selectdetailById" resultType = "com.example.demo.entity.User">
-SELECT P.username, P.account_name, P.TEL, P.gender, P.affiriation, P.address, G.group_name, P.departOfOrigin,
-P.role_ID, R.role_name
+<select id="selectdetailById" resultMap = "Userdetialselect">
+SELECT 
+	P.username, 
+	P.account_name, 
+	P.TEL,  
+	P.address,
+	P.gender,
+	P.affiriation,
+	P.departOfOrigin,
+	R.role_ID, 
+	R.role_name,
+	G.group_ID,
+	G.username,
+	G.group_name,
+	G.summary
 from profile_table as P
 Join group_table as G
 ON P.username = G.username
 LEFT Join role_table as R
 ON R.role_ID = P.role_ID
-where G.username = #{username};
+where P.username = #{username};
 </select>
 <!-- ユーザーデータを新規登録する -->
 <insert id="insert">
 INSERT INTO profile_table (username,account_name,password,TEL,address,gender,affiriation,departOfOrigin,
 role_ID)
 VALUES
-(#{username},#{account_name},#{password},#{TEL},#{address},#{gender},#{affriation},#{departOfOrigin},
+(#{username},#{account_name},#{password},#{TEL},#{address},#{gender},#{affiriation},#{departOfOrigin},
 #{role_ID});
 </insert>
 
@@ -39,7 +113,7 @@ VALUES
 <update id="update">
 
 UPDATE profile_table 
-SET account_name = #{account_name},password=#{password},TEL = #{TEL}, address = #{address}, gender = #{gender}, affiriation=#{affriation}, 
+SET account_name = #{account_name},password=#{password},TEL = #{TEL}, address = #{address}, gender = #{gender}, affiriation=#{affiriation}, 
 departOfOrigin = #{departOfOrigin}, role_ID = #{role_ID} 
 
 WHERE username = #{username};

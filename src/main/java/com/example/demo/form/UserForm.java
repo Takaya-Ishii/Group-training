@@ -1,12 +1,16 @@
 package com.example.demo.form;
 
+import java.util.List;
 import java.util.Objects;
 
+import com.example.demo.entity.Group.Group;
+import com.example.demo.entity.Role.Role;
 import com.example.demo.validation.EditValidation;
 import com.example.demo.validation.InsertValidation;
 
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -59,7 +63,7 @@ public class UserForm {
 		//ユーザーの所属
 	@NotBlank(message = "所属が未入力です。",groups = {InsertValidation.class})
 	@NotBlank(message = "所属が未入力です",groups ={EditValidation.class})
-		private String affriation;
+		private String affiriation;
 	
 		//ユーザーのグループ
 	@NotBlank(message = "グループが登録されていません",groups ={EditValidation.class})
@@ -70,8 +74,8 @@ public class UserForm {
 		private String depart0f0rigin;
 		
 		//ユーザーのロールID
-	@NotBlank(message = "ロールIDが未入力です。",groups = {InsertValidation.class})
-	@NotBlank(message= "ロールIDが未入力です。",groups ={EditValidation.class})
+	@NotNull(message = "ロールIDが未入力です。",groups = {InsertValidation.class})
+	@NotNull(message= "ロールIDが未入力です。",groups ={EditValidation.class})
 		private Integer role_ID;
 	
 		//新規判定
@@ -82,5 +86,10 @@ public class UserForm {
 		public boolean isSamePassword() {
 			return Objects.equals(password, ConfirmPassword);
 		}
+		//ユーザーとグループの一対多の関係
+		private List<Group> group; 
+		
+		//ユーザーとロールの一対一の関係
+		private Role role;
 }
 

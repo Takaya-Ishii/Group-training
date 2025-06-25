@@ -21,9 +21,10 @@ public class Userhelper {
 		user.setTEL(form.getTEL());
 		user.setAddress(form.getAddress());
 		user.setGender(form.getGender());
-		user.setAffriation(form.getAffriation());
-		user.setGroup_ID(form.getGroup_ID());
+		user.setAffiriation(form.getAffiriation());
 		user.setDepartOfOrigin(form.getDepart0f0rigin());
+		user.setGroup(form.getGroup());
+		user.setRole(form.getRole());
 		user.setRole_ID(form.getRole_ID());
 		return user;
 	}
@@ -34,16 +35,17 @@ public class Userhelper {
 	
 	public static UserForm convertUserForm(User user) {
 		UserForm form = new UserForm();
-		form.setUsername(form.getUsername());
-		form.setAccount_name(form.getAccount_name());
-		form.setPassword(form.getPassword());
-		form.setTEL(form.getTEL());
-		form.setAddress(form.getAddress());
-		form.setGender(form.getGender());
-		form.setAffriation(form.getAffriation());
-		form.setGroup_ID(form.getGroup_ID());
-		form.setDepart0f0rigin(form.getDepart0f0rigin());
-		form.setRole_ID(form.getRole_ID());
+		form.setUsername(user.getUsername());
+		form.setAccount_name(user.getAccount_name());
+		form.setPassword(user.getPassword());
+		form.setTEL(user.getTEL());
+		form.setAddress(user.getAddress());
+		form.setGender(user.getGender());
+		form.setAffiriation(user.getAffiriation());
+		form.setDepart0f0rigin(user.getDepartOfOrigin());
+		form.setGroup(user.getGroup());
+		form.setRole(user.getRole());
+		form.setRole_ID(user.getRole_ID());
 		return form;
 	}
 }

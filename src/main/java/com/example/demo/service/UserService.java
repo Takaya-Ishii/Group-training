@@ -10,11 +10,12 @@ public interface UserService {
 	/**全てのIDを検索します(リポジトリで取得と書いたのは、SQL上の話だから)*/
 	List<User> displayAllUser();
 	
-	/**指定されたidの情報を検索する*/
-	User displaySearchedUser(String username);
+	/**検索結果を表示する*/
+	List<User>  displaySearchedUser(String username,String account_name);
 	
-	/**指定されたidの詳細情報を表示する*/
-	List<User> displayUserDetail(String username);
+	/**指定されたidの詳細情報を表示する
+	 * @return */
+	User displayUserDetail(String username);
 	
 	/**IDを新規登録する*/
 	void registrationUser(User user);

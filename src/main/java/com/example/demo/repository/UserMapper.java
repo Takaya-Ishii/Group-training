@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.example.demo.entity.User;
+import com.example.demo.entity.Group.Group;
 
 
 /**User リポジトリ*/
@@ -15,12 +16,13 @@ public interface UserMapper {
 	/**全ての「Id」を取得する*/
 	List<User> selectAll();
 		
-	/**idで指定されたid ユーザー名 ロールを取得*/
-	User selectById(@Param("username") String username);
+	/**検索ボックスで検索したid ユーザー名 ロールを取得
+	 * @param account_name */
+	List<User> selectByBox(@Param("username")String username,@Param("account_name")String account_name);
 	
-	/**idで指定された詳細情報を取得
-	 * 複数件返る可能性があるため、Listとしました*/
-	List<User> selectdetailById(@Param("username") String username);
+	/**詳細表示
+	 * @return */
+	User selectdetailById(@Param("username") String username);
 	
 	/**「ユーザーデータ」を登録する*/
 	void insert(User user);
@@ -30,5 +32,10 @@ public interface UserMapper {
 	
 	/**id指定された情報を削除*/
 	void delete(@Param("username") String username);
+	
+	//グループ情報を取得
+	public List<Group> findAllGroup();
+	
+	
 }
 

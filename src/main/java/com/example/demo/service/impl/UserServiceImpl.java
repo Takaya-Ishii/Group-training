@@ -27,13 +27,14 @@ public class UserServiceImpl implements UserService {
 	}
 	/**指定されたidの情報を検索する*/
 	@Override
-	public User displaySearchedUser(String username) {
+	public List<User> displaySearchedUser(String username,String account_name) {
 		 //TODO 自動生成されたメソッド・スタブ
-		return userMapper.selectById(username);
+		return userMapper.selectByBox(username,account_name);
 	}
-	/**ユーザーの詳細表示*/
+	/**ユーザーの詳細表示
+	 * @return */
 	@Override
-	public List<User> displayUserDetail(String username) {
+	public User displayUserDetail(String username) {
 		return userMapper.selectdetailById(username);
 	}
 	/**IDを新規登録する*/
