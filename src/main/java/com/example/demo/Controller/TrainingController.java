@@ -99,7 +99,7 @@ public class TrainingController {
 	public  String trainingEdit(@PathVariable String tra_id, Model model,
 			@ModelAttribute TraForm form, BindingResult bindingResult) {
 		
-		model.addAttribute("tra_edit", traService.selectByIdTra(tra_id));
+		model.addAttribute("form", traService.selectByIdTra(tra_id));
 		return "trainingEdit";
 	}
 	
@@ -111,7 +111,8 @@ public class TrainingController {
 		
 		//バリデーションチェック
 		if(bindingResult.hasErrors()) {
-			model.addAttribute("tra_edit", form);
+			
+			model.addAttribute("form", form);
 			model.addAttribute("message", "入力項目に誤りがあります。メッセージを確認し、再度入力をしてください。");
 			return "trainingEdit";
 		}
@@ -126,6 +127,7 @@ public class TrainingController {
 	@PostMapping("/delete/{tra_id}")
 	public String trainingDelete(@PathVariable String tra_id, 
 			TraForm form, RedirectAttributes attributes) {
+		
 		
 		traService.deleteTra(tra_id);
 		attributes.addFlashAttribute("message", form.getTra_name() + "を削除しました");

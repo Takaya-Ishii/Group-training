@@ -13,7 +13,7 @@ public interface TraService {
 	
 	Tra_Manegement selectByIdTra(String tra_id);
 	
-	Tra_Manegement selectByNameTra(String tra_name);
+	List<Tra_Manegement> selectByNameTra(String tra_name);
 	
 	void insertTra(Tra_Manegement tra_Manegement);
 	

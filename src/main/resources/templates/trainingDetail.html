@@ -2,8 +2,7 @@
 <html xmlns:th="http://wwww.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<!-- Bootstrap CSS-->
-    
+	<link th:href="@{/style/modalStyle.css}" rel="stylesheet">
 	<title>研修管理システム</title>
 </head>
 <body>
@@ -21,7 +20,7 @@
 				</tr>
 				<tr>
 					<th>想定時間</th>
-					<td th:text="*{est_time}"></td>
+					<td th:text="*{est_time} + 時間"></td>
 				</tr>
 				<tr>
 					<th>使用教材</th>
@@ -39,7 +38,7 @@
 		</div>
 		
 		<!--モーダル呼び出し-->
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-backdrop="false" data-target="#deleteModal">削除</button>
+		<button id="open">削除</button>
 		
 		<form th:action="@{/Edit/{tra_id}(tra_id=${tra_id})}" method="get">
 			<button>修正</button>
@@ -49,29 +48,26 @@
 		</form>
 	</main>
 	
-	<!--モーダルのレイアウト
-	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-		<div class="modal-dailog">
-			<div class="modal-content">
-				<div class="modal-header">
-					
-				</div>
-				
-				<!--モーダルのボディ
-				<div class="modal-body">
-					<label>本当に削除してよろしいですか？</label>
-				</div>
-				-->
-				<!--フッター
-				<div class="modal-footer">
-					<button  class="btn btn-default" data-dismiss="modal">キャンセル</button>
-					<form th:action="@{/delete/{tra_id}(tra_id=${tra_id})}" method="post">
-						<button type="submit" class="btn btn-primary">削除</butto>
-					</form>
-				</div>
+	<!--モーダルのレイアウト-->
+	<div id="mask" class="hidden"></div>
+	<section id="modal" class="hidden">
+		<div id="modal-content">
+			
+			<!--モーダルのボディ-->
+			<div id="modal-body">
+				<label>本当に削除してよろしいですか？</label>
+			</div>
+			
+			<!--フッター-->
+			<div class="modal-footer">
+				<button id="close" onclick="deleteModal">キャンセル</button>
+				<form th:action="@{/delete/{tra_id}(tra_id=${tra_id})}" method="post">
+					<button type="submit">削除</butto>
+				</form>
 			</div>
 		</div>
-	</div>
-    -->
+	</section>
+	
+	<script th:src="@{/js/modal.js}"></script>
 </body>
 </html>

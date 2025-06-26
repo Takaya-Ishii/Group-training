@@ -17,7 +17,7 @@ public interface TraMapper {
 	Tra_Manegement selectById(@Param("tra_id") String tra_id);
 	
 	/*指定された研修名に対応する研修を取得*/
-	Tra_Manegement selectByName(@Param("tra_name") String tra_name);
+	List<Tra_Manegement> selectByName(@Param("tra_name") String tra_name);
 	
 	/*研修を登録する*/
 	void insert(Tra_Manegement tra_Manegement);

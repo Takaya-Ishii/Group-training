@@ -31,7 +31,7 @@ public class TraServiceImpl implements TraService{
 	}
 
 	@Override
-	public Tra_Manegement selectByNameTra(String tra_name) {
+	public List<Tra_Manegement> selectByNameTra(String tra_name) {
 		// TODO 自動生成されたメソッド・スタブ
 		return traMapper.selectByName(tra_name);
 	}

@@ -33,7 +33,7 @@
 				<tr th:each="Tra : ${tra_list}">
 					<td th:text="${Tra.tra_id}"></td>
 					<td th:text="${Tra.tra_name}"></td>
-					<td th:text="${Tra.est_time}"></td>
+					<td th:text="${Tra.est_time} + 時間"></td>
 					<td>
 						<a th:href="@{/{tra_id}(tra_id=${Tra.tra_id})}">
 							●
