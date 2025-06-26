@@ -3,6 +3,7 @@ package com.example.demo.form;
 import java.util.Date;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -32,6 +33,7 @@ public class StackForm {
 	//学習した日付
 	@NotNull (message = "学習した日付を入力してください")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@PastOrPresent (message = "日付が不正です")
 	private Date studyDay;
 	
 	//学習時間
