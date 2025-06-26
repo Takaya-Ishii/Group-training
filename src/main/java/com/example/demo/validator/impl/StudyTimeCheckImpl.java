@@ -14,11 +14,14 @@ public class StudyTimeCheckImpl implements ConstraintValidator<StudyTimeCheck, D
 
 	@Override
 	public boolean isValid (Double value, ConstraintValidatorContext context) {
-		if(value != null) {
-			if(value % 0.5 == 0.0) {
+		if(value == null) {
+			return true;
+			
+		} else if(value % 0.5 == 0.0) {
 				return true;
+				
 			}
-		}
+		
 		return false;
 
 	}
