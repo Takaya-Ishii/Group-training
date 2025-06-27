@@ -4,8 +4,8 @@ import java.util.Date;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
-import jakarta.validation.constraints.PositiveOrZero;
 
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.example.demo.validator.StudyTimeCheck;
@@ -43,7 +43,7 @@ public class StackForm {
 	
 	//進捗
 	@NotNull (message = "進捗率を入力してください")
-	@PositiveOrZero (message = "時間が不正です")
+	@Range(min = 0, max = 100, message = "0～100までの数値を入力してください")
 	private Integer progress;
 	
 	//メモ
