@@ -4,6 +4,7 @@ import java.util.Date;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.PositiveOrZero;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -42,6 +43,7 @@ public class StackForm {
 	
 	//進捗
 	@NotNull (message = "進捗率を入力してください")
+	@PositiveOrZero (message = "時間が不正です")
 	private Integer progress;
 	
 	//メモ
