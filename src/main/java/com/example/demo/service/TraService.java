@@ -20,4 +20,6 @@ public interface TraService {
 	void updateTra(Tra_Manegement tra_Manegement);
 	
 	void deleteTra(String tra_id);
+	
+	List<Tra_Manegement> selectTraName(String tra_id);
 }

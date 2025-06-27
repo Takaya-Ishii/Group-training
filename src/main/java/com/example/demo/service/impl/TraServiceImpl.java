@@ -53,4 +53,9 @@ public class TraServiceImpl implements TraService{
 		// TODO 自動生成されたメソッド・スタブ
 		traMapper.delete(tra_id);
 	}
+	
+	@Override
+	public List<Tra_Manegement> selectTraName(String tra_id) {
+		return traMapper.selectTraName(tra_id);
+	}
 }

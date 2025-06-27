@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="grouptraining.css">
+	<title>研修一覧</title>
+</head>
+<body>
+	<main>
+		<h2>研修一覧</h2>
+		
+		<p th:if="${message}"
+			th:text="${message}">
+			エラーメッセージ
+		</p>
+		
+		<div class="serchcont">
+			<form action="/Serch" method="get">
+				<label for="get-value">研修名</label>
+				<input type="text" name="tra_name">
+				<button type="submit" class="serchbtn">検索</button>
+			</form>
+		</div>
+		
+		<div class="maincont">
+			<table class="table" border="1">
+				<thead>
+					<tr>
+						<th>研修ID</th>
+						<th class="研修名">研修名</th>
+						<th>想定時間</th>
+						<th>詳細</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="Tra : ${tra_list}">
+						<td th:text="${Tra.tra_id}"></td th:text="${Tra.tra_id}">
+						<td th:text="${Tra.tra_name}"></td>
+						<td th:text="${Tra.est_time} + 時間"></td>
+						<td>
+							<a class="maru" th:href="@{/{tra_id}(tra_id=${Tra.tra_id})}">●</a>
+						</td>
+					</tr>
+					
+				</tbody>
+			</table>
+		
+			<form class="tablebtnR" th:action="@{/Save}">
+				<button class="NewRegisterbtn" type="submit">新規登録</button>
+			</form>
+		</div>	
+		
+		
+	</main>
+</body>
+</html>
