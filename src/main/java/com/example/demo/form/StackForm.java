@@ -4,6 +4,7 @@ import java.util.Date;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -47,6 +48,7 @@ public class StackForm {
 	private Integer progress;
 	
 	//メモ
+	@Size(max = 200, message = "200文字以内で入力してください")
 	private String memo;
 	
 	//ステータスID

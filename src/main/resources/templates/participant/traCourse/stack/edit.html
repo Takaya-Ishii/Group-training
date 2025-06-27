@@ -58,6 +58,10 @@
 					<td>
 						<textarea rows="7" cols="50" th:field="*{memo}">
 						</textarea>
+						<span th:if="${#fields.hasErrors('memo')}"
+							  th:errors="*{memo}" style="color: red;">
+						 エラーがあれば表示
+						 </span>
 					</td>
 				</tr>
 			</table>
