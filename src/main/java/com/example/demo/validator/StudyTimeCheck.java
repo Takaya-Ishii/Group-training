@@ -18,7 +18,7 @@ import com.example.demo.validator.impl.StudyTimeCheckImpl;
 
 public @interface StudyTimeCheck {
 	
-	String message() default "学習した時間を0.5時間単位で入力してください";
+	String message() default "学習した時間を24時間以内、0.5時間単位で入力してください";
 
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};
