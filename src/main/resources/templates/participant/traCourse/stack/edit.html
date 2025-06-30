@@ -65,10 +65,10 @@
 					</td>
 				</tr>
 			</table>
-			<input type="submit" value="修正">
+			<button type="submit">修正</button>
 		</form>
 		<form th:action="@{/participant/traCourse/stack/delete/{id}/{no}(id=${stackForm.traCourseID}, no=${stackForm.stackNo})}" method="post">
-			<input type="submit" value="削除">
+			<button type="submit">削除</button>
 		</form>
 		<a th:href="@{/participant/traCourse/{id}(id=${stackForm.traCourseID})}">
 			<button type="button">受講研修詳細に戻る</button>
