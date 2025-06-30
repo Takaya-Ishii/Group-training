@@ -16,7 +16,7 @@ margin-top: 0;
 }
 
 header ul h1{
-padding-right: 25%;
+padding-right: 20%;
 padding-left: 10px;
 }
 
@@ -58,6 +58,13 @@ header ul li img{
 	font-size: medium;
 	color: rgb(0, 64, 128);
 	line-height: 75px;
+}
+
+.ellipsis{
+	width: 200px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 #logout{
