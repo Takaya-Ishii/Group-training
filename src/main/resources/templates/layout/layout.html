@@ -38,7 +38,9 @@
 					
 
 					<li sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')">
-						<a th:href="@{/participant/Group/member}"></a></li>
+						<a th:href="@{/participant/Group/member}">
+							<span th:text="${group_name}"></span>
+						</a></li>
 						
 					
 
