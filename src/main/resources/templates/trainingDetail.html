@@ -3,13 +3,14 @@
 <head>
 	<meta charset="UTF-8">
 	<link th:href="@{/css/modalStyle.css}" rel="stylesheet">
+	<link th:href="@{/css/gruoptraining.css}" rel="stylesheet">
 	<title>研修管理システム</title>
 </head>
 <body>
 	<main>
-		<h1>研修詳細</h1>
-		<div>
-			<table border="1" th:object="${tra_detail}">
+		<h2>研修詳細</h2>
+		<div class="vercontainer">
+			<table class="vertable" border="1" th:object="${tra_detail}">
 				<tr>
 					<th>研修ID</th>
 					<td th:text="*{tra_id}"></td>
@@ -27,24 +28,25 @@
 					<td th:text="*{text_book}"></td>
 				</tr>
 				<tr>
-					<th>説明</th>
+					<th class="vtableheight2">説明</th>
 					<td th:text="*{description}"></td>
 				</tr>
 				<tr>
-					<th>課題</th>
+					<th class="vtableheight2">課題</th>
 					<td th:text="*{assignment}"></td>
 				</tr>
 			</table>
 		</div>
 		
 		<!--モーダル呼び出し-->
-		<button id="open">削除</button>
-		
-		<form th:action="@{/Edit/{tra_id}(tra_id=${tra_id})}" method="get">
-			<button>修正</button>
-		</form>
+		<div class="tablebtnR2">
+			<button class="deletebtn" type="submit" id="open">削除</butto>
+			<form th:action="@{/Edit/{tra_id}(tra_id=${tra_id})}" method="get">
+				<button class="revisionbtn">修正</button>
+			</form>
+		</div>
 		<form th:action="@{/}" method="get">
-			<button>研修一覧に戻る</button>
+			<button class="returnbtn" type="submit">研修一覧に戻る</button>
 		</form>
 	</main>
 	

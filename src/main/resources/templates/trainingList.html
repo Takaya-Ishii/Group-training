@@ -1,50 +1,58 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>研修管理システム</title>
+	<meta charset="UTF-8">
+	<link th:href="@{/css/gruoptraining.css}" rel="stylesheet">
+	<title>研修管理システム</title>
 </head>
 <body>
 	<main>
-		<h1>研修一覧</h1>
+		<h2>研修一覧</h2>
 		<!-削除したらここにメッセージを表示する-->
-		<p th:if="${message}"
+		<p class="message" th:if="${message}"
 			th:text="${message}">
 			エラーメッセージ
 		</p>
 		
-		<form action="/Serch" method="get">
-			<label for="get-value">研修名</label>
-			<input type="text" name="tra_name">
-			<button type="submit">検索</button>
-		</form>
+		<div class="serchcont">
+			<form action="/Serch" method="get">
+				<label for="get-value">研修名</label>
+				
+				<!--検索したキーワードを残しておく-->
+				<input type="text" name="tra_name">
+				<button type="submit" class="serchbtn">検索</button>
+			</form>
+		</div>
 		
-		<table border="1">
-			<thead>
-				<tr>
-					<th>研修ID</th>
-					<th>研修名</th>
-					<th>想定時間</th>
-					<th>詳細</th>
-				</tr>
-			</thead>
-
-			<tbody>
-				<tr th:each="Tra : ${tra_list}">
-					<td th:text="${Tra.tra_id}"></td>
-					<td th:text="${Tra.tra_name}"></td>
-					<td th:text="${Tra.est_time} + 時間"></td>
-					<td>
-						<a th:href="@{/{tra_id}(tra_id=${Tra.tra_id})}">
-							●
-						</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<form th:action="@{/Save}">
-			<button>新規登録</button>
-		</form>
+		<div class="maincont">
+			<table class="table" border="1">
+				<thead>
+					<tr>
+						<th>研修ID</th>
+						<th class="研修名">研修名</th>
+						<th>想定時間</th>
+						<th>詳細</th>
+					</tr>
+				</thead>
+	
+				<tbody>
+					<tr th:each="Tra : ${tra_list}">
+						<td th:text="${Tra.tra_id}"></td>
+						<td th:text="${Tra.tra_name}"></td>
+						<td th:text="${Tra.est_time} + 時間"></td>
+						<td>
+							<a class="maru" th:href="@{/{tra_id}(tra_id=${Tra.tra_id})}">
+								●
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<form class="tablebtnR" th:action="@{/Save}">
+				<button class="NewRegisterbtn" type="submit">新規登録</button>
+			</form>
+		</div>
 	</main>
 </body>
 </html>

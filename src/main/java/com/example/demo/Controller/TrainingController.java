@@ -139,8 +139,8 @@ public class TrainingController {
 			@ModelAttribute("form") TraForm form, Model model,
 			RedirectAttributes attributes) {
 		
-		traService.selectByIdTra(tra_id);
-		String name = form.getTra_name();
+		Tra_Manegement tra_mane = traService.selectByIdTra(tra_id);
+		String name = tra_mane.getTra_name();
 		traService.deleteTra(tra_id);
 		attributes.addFlashAttribute("message", "研修「" + name + "」を削除しました");
 		return "redirect:/";

@@ -2,65 +2,67 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
+	<link th:href="@{/css/gruoptraining.css}" rel="stylesheet">
 	<title>研修管理機能</title>
 </head>
 <body>
-	<h1>研修編集</h1>
-	<p th:if="${message}"
-		th:text="${message}" style="background-color: red;">
-		エラーメッセージ
-	</p>
-	
-	<form th:action="@{/Update}"
-		 th:object="${form}" method="post">
-		<table>
-			<tr>
-				<td>
-					<label>研修ID</label>
-					<input type="text" th:field="*{tra_id}"  readonly
+	<div class="container">
+		<h2>研修編集</h2>
+		
+		<p class="message" th:if="${message}"
+			th:text="${message}" style="background-color: rgb(255, 212, 212);">
+			エラーメッセージ
+		</p>
+		
+		<div>
+			<form class="logcenter" th:action="@{/Update}"
+				 th:object="${form}" method="post">
+				 
+				<div class="centerform">
+					<label class="labelname">研修ID</label>
+					<input type="text" class="Msizeinput" th:field="*{tra_id}"  readonly
 					 style="background-color: lightgray;">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label for="name">研修名</label>
-					<input type="text" th:field="*{tra_name}">
+				</div>
+				
+				<div class="centerform">
+					<label class="labelname">研修名</label>
+					<input type="text" class="Msizeinput" th:field="*{tra_name}">
 					<!--研修名のバリデーションチェック-->
-					<p th:if="${#fields.hasErrors('tra_name')}"
+					<p class="errormessage" th:if="${#fields.hasErrors('tra_name')}"
 						th:errors="*{tra_name}" style="color: red;">
 						エラーがあれば表示
 					</p>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label>想定時間</label>
-					<input type="text" th:field="*{est_time}">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label>使用教材</label>
-					<input type="text" th:field="*{text_book}">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label>説明</label>
-					<input type="text" th:field="*{description}">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label>課題</label>
-					<input type="text" th:field="*{assignment}">
-				</td>
-			</tr>
-		</table>
-		<input type="submit" value="更新">
-	</form>
-	<form th:action="@{/}">
-		<button>研修一覧に戻る</button>
+				</div>
+				
+				<div class="centerform">
+					<label class="labelname">想定時間</label>
+					<input type="text" class="Msizeinput" th:field="*{est_time}">
+				</div>
+				
+				<div class="centerform">
+					<label class="labelname">使用教材</label>
+					<input type="text" class="Msizeinput" th:field="*{text_book}">
+				</div>
+				
+				<div class="centerform">
+					<label class="labelname">説明</label>
+					<input type="text" class="descinput" rows="5" cols="30" th:field="*{description}">
+				</div>
+				
+				<div class="centerform">
+					<label class="labelname">課題</label>
+					<input type="text" class="issueinput" rows="5" cols="30" th:field="*{assignment}">
+				</div>
+				
+				<div class="inputbtnR">
+					<button class="updatebtn" type="submit">更新</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<form class="returnbtnL" th:action="@{/}">
+		<button class="returnbtn">研修一覧に戻る</button>
 	</form>
 </body>
 </html>
