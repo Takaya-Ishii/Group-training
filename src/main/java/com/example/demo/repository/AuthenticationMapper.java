@@ -12,4 +12,6 @@ public interface AuthenticationMapper {
 	  Authentication selectByUsername(String username);
 	  // ロールIDからロール名とロールIDを含んだRole型を取得
 	  Role selectByRoleId(int role_ID);
+	  // ユーザー名からグループ名を取得
+	  String selectGroupByUsername(String username);
 }
