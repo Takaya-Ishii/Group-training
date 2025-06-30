@@ -13,8 +13,8 @@
     </select>
     
     <!-- ログインしたusernameからグループ名を取得  -->
-    <select id="selectGroupByUsername" resultType="java.lang.String">
-    	SELECT group_name FROM group_table AS G JOIN member_table AS M ON G.group_ID = M.group_ID
+    <select id="selectGroupByUsername" resultType="com.example.demo.entity.Group">
+    	SELECT G.group_ID, group_name, summary FROM group_table AS G JOIN member_table AS M ON G.group_ID = M.group_ID
     	WHERE username = #{username}
     </select>
  </mapper>

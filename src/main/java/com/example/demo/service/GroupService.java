@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.Group;
+
 public interface GroupService {
-	String selectGroupByUsername(String username);
+	Group selectGroupByUsername(String username);
 }

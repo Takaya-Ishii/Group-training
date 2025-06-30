@@ -42,13 +42,13 @@ public class LoginController {
 	 // 以下テスト用(受講者が講師専用画面に遷移できるか、講師が受講者の画面も表示できるか)
 	 @GetMapping("/admin/User")
 	 public String displayAllUser(Model model, @AuthenticationPrincipal LoginUser loginUser) {
-		 model.addAttribute("group_name", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
+		 model.addAttribute("group", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
 		 return "admin/User";
 	 }
 	 
 	 @GetMapping("/participant/traCourse")
 	 public String displaytraCourse(Model model, @AuthenticationPrincipal LoginUser loginUser) {
-		 model.addAttribute("group_name", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
+		 model.addAttribute("group", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
 		 return "participant/traCourse";
 	 }
 }
