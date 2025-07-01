@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ユーザー一覧</title>
+</head>
+<body>
+<h2>ユーザー一覧</h2>
+<!-- メッセージ -->
+<div class="msg" th:if="${message}" th:text="${messsage}"></div>
+<!-- 検索フォーム -->
+<form method="post" th:action="@{/admin/User}">
+    ユーザーID: <input type="text" name="username" th:value="${param.username}" />
+    ユーザー検索: <input type="text" name="account_name" th:value="${param.account_name}" />
+    <input type="submit" value="検索"></input>
+</form>
+<!-- ユーザー一覧 -->
+<table border="1">
+    <thead>
+        <tr>
+            <th>ユーザーID</th>
+            <th>ユーザー名</th>
+            <th>ロール</th>
+            <th>詳細</th>
+            <th>トーク</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="user : ${user}">
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.account_name}"></td>
+            <td th:text="${user.role_ID}"></td>
+            <td>
+				<a th:href="@{/admin/User/{username}(username = ${user.username})}">●</a>
+				</td>
+            <td>
+                <a th:href="@{|/User/${user.username}/talk|}">
+                    <img th:src = "@{/img/talk_picture.png}" alt="トーク" >
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<!-- 新規登録 -->
+<br>
+<a th:href="@{/admin/User/save}">
+    <button>新規登録</button>
+</a>
+</body>
+</html>

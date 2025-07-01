@@ -22,8 +22,8 @@ public class LoginController {
 	 
 	 // 所持ロールによって遷移先を判別
 	 @GetMapping("/default")
-	    public String defaultAfterLogin(Model model,  @AuthenticationPrincipal LoginUser loginUser) {
-		 model.addAttribute("LoginUser", loginUser);   
+	    public String defaultAfterLogin(Model model,@AuthenticationPrincipal LoginUser loginUser) {
+		 //model.addAttribute("LoginUser", loginUser);   
 		 if (loginUser.getAuthorities().stream()
 	                .anyMatch(auth -> auth.getAuthority().equals("ROLE_講師"))) {
 	            return "redirect:admin/User";
@@ -34,7 +34,7 @@ public class LoginController {
 	        return "redirect:/";
 	    }
 	 
-	 // 以下テスト用(受講者が講師専用画面に遷移できるか、講師が受講者の画面も表示できるか)
+	 /** 以下テスト用(受講者が講師専用画面に遷移できるか、講師が受講者の画面も表示できるか)
 	 @GetMapping("/admin/User")
 	 public String displayAllUser() {
 		 return "admin/User";
@@ -43,5 +43,5 @@ public class LoginController {
 	 @GetMapping("/participant/traCourse")
 	 public String displaytraCourse() {
 		 return "participant/traCourse";
-	 }
+	 }*/
 }

@@ -2,26 +2,30 @@ package com.example.demo.service;
 
 import java.util.List;
 
-import com.example.demo.entity.User;
+import com.example.demo.entity.Authentication;
+import com.example.demo.entity.Group.Group;
 
 
 /**サービス実際にJava上での動き*/
 public interface UserService {
-	/**全てのIDを検索します(リポジトリで取得と書いたのは、SQL上の話だから)*/
-	List<User> displayAllUser();
+	/**全てのIDを検索します*/
+	List<Authentication> displayAllUser();
 	
 	/**検索結果を表示する*/
-	List<User>  displaySearchedUser(String username,String account_name);
+	List<Authentication>  displaySearchedUser(String username,String account_name);
 	
 	/**指定されたidの詳細情報を表示する
 	 * @return */
-	User displayUserDetail(String username);
+	Authentication displayUserDetail(String username);
+	
+	/**全グループ名を取得する*/
+	List<Group> selectAllGroup();
 	
 	/**IDを新規登録する*/
-	void registrationUser(User user);
+	void registrationUser(Authentication user);
 	
 	/**指定されたIDの情報を編集する*/
-	void updateUser(User user);
+	void updateUser(Authentication user);
 	
 	/**指定されたIDの情報を削除する*/
 	void deleteUser(String username);

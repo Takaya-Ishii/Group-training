@@ -1,4 +1,4 @@
- package com.example.demo.service.impl;
+package com.example.demo.service.impl;
  import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -19,15 +19,16 @@ import lombok.RequiredArgsConstructor;
  /**
  * カスタム認証サービス
  */
- @Service
+ 
+  @Service
  @RequiredArgsConstructor
  public class LoginUserDatailsServiceImpl implements UserDetailsService {
 	 
 	 /** DI */
 	 private final AuthenticationMapper authenticationMapper;
 	 
-    @Override
-    public UserDetails loadUserByUsername(String username) 
+   @Override
+   public UserDetails loadUserByUsername(String username) 
       throws UsernameNotFoundException {
     	
     	// username(ユーザID)からパスワードとロールIDを取得
@@ -65,5 +66,4 @@ import lombok.RequiredArgsConstructor;
         }
         return authorities;
     }
-	}
- 
+}

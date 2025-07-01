@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/layout}">
@@ -19,5 +19,57 @@
 	<div sec:authentication="principal.departOfOrigin">出身学部</div>
 	<div sec:authentication="principal.role_ID">ロールID</div>
 </div>
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ユーザー一覧</title>
+</head>
+<body>
+<h2>ユーザー一覧</h2>
+<!-- メッセージ -->
+<div class="msg" th:if="${message}" th:text="${message}"></div>
+<!-- 検索フォーム -->
+<form method="post" th:action="@{/User}">
+    ユーザーID: <input type="text" name="username" th:value="${param.username}" />
+    ユーザー名: <input type="text" name="account_name" th:value="${param.account_name}" />
+    <button type="submit">検索</button>
+</form>
+<!-- ユーザー一覧 -->
+<table>
+    <thead>
+        <tr>
+            <th>ユーザーID</th>
+            <th>ユーザー名</th>
+            <th>ロール</th>
+            <th>詳細</th>
+            <th>トーク</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="user : ${LoginUser}">
+            <td sec:authentication="user.principal.username">てすと</td>
+            <td th:text="${user.account_name}"></td>
+            <td th:text="${user.role_ID}"></td>
+            <td>
+				<a th:href="@{/User/${username}}">●</a>
+				</td>
+            <td>
+				!<!--
+                <a th:href="@{|/User/${user.username}/talk|}">
+                    <img th:src="@{${user.hasUnread ? '/images/akahukidasi.png' : '/images/aohukidasi.png'}}" alt="トーク" />
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>-->
+<!-- 新規登録 -->
+<br>
+<a th:href="@{/User/save}">
+    <button>新規登録</button>
+</a>
 </body>
 </html>

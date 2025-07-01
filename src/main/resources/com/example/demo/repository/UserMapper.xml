@@ -3,16 +3,16 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "com.example.demo.repository.UserMapper">
 
-<resultMap id = "Userdetialselect" type = "com.example.demo.entity.User">
+<resultMap id = "Userdetialselect" type = "com.example.demo.entity.Authentication">
 <id property = "username" column = "username"/>
 <result property = "account_name" column = "account_name"/>
 <result property = "TEL" column ="TEL"/>
 <result property = "gender" column ="gender"/>
-<result property = " affiriation" column =" affiriation"/>
-<result property = "address " column =" address"/>
+<result property = "affiriation" column ="affiriation"/>
+<result property = "address" column ="address"/>
 <result property = "departOfOrigin" column ="departOfOrigin"/>
 <result property = "role_ID" column ="role_ID"/>
-<association property = "role" javaType="com.example.demo.entity.Role.Role">
+<association property = "role" javaType="com.example.demo.entity.Role">
 <id property ="role_ID" column = "role_ID"/>
 <result property = "role_name" column = "role_name"/>
 </association>
@@ -25,7 +25,7 @@
 </collection>
 </resultMap>
 
-<resultMap id = "UserAllselect" type = "com.example.demo.entity.User">
+<resultMap id = "UserAllselect" type = "com.example.demo.entity.Authentication">
 <id property = "username" column = "username"/>
 <result property = "account_name" column = "account_name"/>
 <result property = "TEL" column ="TEL"/>
@@ -35,22 +35,25 @@
 <result property = "departOfOrigin" column ="departOfOrigin"/>
 <result property = "role_ID" column ="role_ID"/>
 
-<association property = "role" javaType="com.example.demo.entity.Role.Role">
+<association property = "role" javaType="com.example.demo.entity.Role">
 <id property ="role" column = "role_ID"/>
 <result property = "role_name" column = "role_name"/>
 </association>
 </resultMap>
 
 <!-- ユーザーIDを全てSELECT -->
-<select id="selectAll" resultMap="UserAllselect">
-SELECT P.username, P.account_name ,R.role_name
-FROM profile_table as P
-LEFT JOIN role_table as R
-ON R.role_ID = P.role_ID
+<select id="selectAll" resultType="com.example.demo.entity.Authentication">
+SELECT *
+FROM profile_table 
+</select>
+<!-- 全てのグループ名とそのグループIDを取得 -->
+<select id ="findAllGroup" resultType="com.example.demo.entity.Group.Group">
+SELECT group_name,group_ID
+FROM group_table
 </select>
 
 <!-- ユーザーを検索ボックスで情報を検索 -->
-<select id = "selectByBox" resultMap="UserAllselect">
+<select id = "selectByBox" resultType="com.example.demo.entity.Authentication">
 SELECT P.username, P.account_name, R.role_name
 FROM profile_table as P
 LEFT Join role_table as R
@@ -68,8 +71,8 @@ ON R.role_ID = P.role_ID
 </select>
 
 <!-- 一人のユーザーをユーザー名で検索 -->
-<select id = "selectByrole" resultType="com.example.demo.entity.User">
- SELECT P.username, P.account_name, R.rselectdetailByIdole_name
+<select id = "selectByrole" resultType="com.example.demo.entity.Authentication">
+ SELECT P.username, P.account_name
 FROM profile_table as P
 LEFT Join role_table as R
 ON R.role_ID = P.role_ID
@@ -86,22 +89,22 @@ SELECT
 	P.address,
 	P.gender,
 	P.affiriation,
-	P.departOfOrigin,
-	R.role_ID, 
+	P.departOfOrigin, 
 	R.role_name,
-	G.group_ID,
-	G.username,
 	G.group_name,
-	G.summary
+	R.role_name
 from profile_table as P
-Join group_table as G
-ON P.username = G.username
+Join member_table as M
+ON P.username = M.username
+JOIN group_table as G
+ON G.group_ID = M.group_ID 
 LEFT Join role_table as R
 ON R.role_ID = P.role_ID
 where P.username = #{username};
 </select>
-<!-- ユーザーデータを新規登録する -->
-<insert id="insert">
+
+<!-- ユーザーデータをプロフィールテーブルに新規登録する -->
+<insert id="insert" parameterType="com.example.demo.entity.Authentication">
 INSERT INTO profile_table (username,account_name,password,TEL,address,gender,affiriation,departOfOrigin,
 role_ID)
 VALUES
@@ -109,15 +112,29 @@ VALUES
 #{role_ID});
 </insert>
 
-<!-- ユーザーデータを編集する -->
+<!-- ユーザーデータをメンバーテーブルに登録する -->
+<insert id="insertPlus" parameterType="com.example.demo.entity.Authentication">
+INSERT INTO member_table (group_ID,username,isTeacher)
+VALUES
+(#{group_ID},#{username},(CAST (CASE #{role_ID} WHEN 1 THEN 'FALSE' ELSE 'TRUE' END AS BOOLEAN)));
+</insert>
+
+<!-- プロフィールテーブルのユーザーデータを編集する -->
 <update id="update">
 
 UPDATE profile_table 
-SET account_name = #{account_name},password=#{password},TEL = #{TEL}, address = #{address}, gender = #{gender}, affiriation=#{affiriation}, 
+SET account_name = #{account_name},password = #{password},TEL = #{TEL}, address = #{address}, gender = #{gender}, affiriation=#{affiriation}, 
 departOfOrigin = #{departOfOrigin}, role_ID = #{role_ID} 
 
 WHERE username = #{username};
 
+</update>
+
+<!-- メンバーテーブルのユーザーデータを編集する -->
+<update id="updateMember" parameterType="com.example.demo.entity.Authentication">
+UPDATE member_table
+SET group_ID = #{group_ID}
+WHERE username = #{username};
 </update>
 
 <!-- ユーザーデータを削除する -->
