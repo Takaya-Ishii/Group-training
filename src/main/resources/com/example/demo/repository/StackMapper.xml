@@ -6,13 +6,11 @@
 		SELECT DISTINCT tra_name FROM trainfo_table
 		INNER JOIN traCourse_table 
 		ON trainfo_table.tra_ID = traCourse_table.tra_ID
-		JOIN TPM_table 
-		ON traCourse_table.traCourse_ID = TPM_table.traCourse_ID
-		WHERE TPM_table.traCourse_ID = #{traCourse_ID};
+		WHERE traCourse_table.traCourse_ID = #{traCourse_ID};
 	</select>
 	<!-- 受講研修ID検索 -->
 	<select id="selectTraCourse_ID" resultType="com.example.demo.entity.Stack">
-		SELECT DISTINCT traCourse_ID FROM TPM_table WHERE traCourse_ID = #{traCourse_ID};
+		SELECT DISTINCT traCourse_ID FROM traCourse_table WHERE traCourse_ID = #{traCourse_ID};
 	</select>
 	<!-- 履歴検索 -->
 	<select id="selectStack" resultType="com.example.demo.entity.Stack">
