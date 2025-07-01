@@ -16,7 +16,7 @@
 		</p>
 		
 		<div>
-			<form class="logcenter" th:action="@{/Create}"
+			<form class="logcenter" th:action="@{/admin/Training/create}"
 				th:object="${form}" method="post">
 				
 				<div class="centerform">
@@ -66,7 +66,7 @@
 		</div>
 	</div>
 	
-	<form class="returnbtnL" th:action="@{/}">
+	<form class="returnbtnL" th:action="@{/admin/Training}">
 		<button class="Allreturnbtn">研修一覧に戻る</button>
 	</form>
 </body>

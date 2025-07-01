@@ -41,11 +41,11 @@
 		<!--モーダル呼び出し-->
 		<div class="tablebtnR2">
 			<button class="deletebtn" type="submit" id="open">削除</butto>
-			<form th:action="@{/Edit/{tra_id}(tra_id=${tra_id})}" method="get">
+			<form th:action="@{/admin/Training/edit/{tra_id}(tra_id=${tra_id})}" method="get">
 				<button class="revisionbtn">修正</button>
 			</form>
 		</div>
-		<form th:action="@{/}" method="get">
+		<form th:action="@{/admin/Training}" method="get">
 			<button class="returnbtn" type="submit">研修一覧に戻る</button>
 		</form>
 	</main>
@@ -63,7 +63,7 @@
 			<!--フッター-->
 			<div class="modal-footer">
 				<button id="close" class="cancelbtn" onclick="deleteModal">キャンセル</button>
-				<form th:action="@{/delete/{tra_id}(tra_id=${tra_id})}" method="post">
+				<form th:action="@{/admin/Training/delete/{tra_id}(tra_id=${tra_id})}" method="post">
 					<button type="submit">削除</butto>
 				</form>
 			</div>

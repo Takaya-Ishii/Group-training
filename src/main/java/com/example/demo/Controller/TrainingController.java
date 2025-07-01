@@ -34,7 +34,7 @@ public class TrainingController {
 	/*
 	 * 一覧を表示させる
 	 */
-	@GetMapping("/") // 実装時は/Trainingに変更
+	@GetMapping("/admin/Training") // 実装時は/Trainingに変更
 	public String trainingList(Model model) {
 		model.addAttribute("tra_list", traService.selectAllTra());
 		return "trainingList";
@@ -44,7 +44,7 @@ public class TrainingController {
 	/*
 	 *  研修名から研修の一覧を検索する
 	 */
-	@GetMapping("/Serch")
+	@GetMapping("/admin/Training/serch")
 	public String trainingSerch(@RequestParam(value = "tra_name", required = false) String tra_name, Model model,
 			RedirectAttributes attributes) {
 		
@@ -62,7 +62,7 @@ public class TrainingController {
 	/*
 	 * 指定されたIDの研修詳細を表示する
 	 */
-	@GetMapping("/{tra_id}")
+	@GetMapping("/admin/Training/{tra_id}")
 	public String trainingDetail(@PathVariable("tra_id") String tra_id, Model model) {
 
 		model.addAttribute("tra_detail", traService.selectByIdTra(tra_id));
@@ -72,7 +72,7 @@ public class TrainingController {
 	/*
 	 * 新規登録画面の表示
 	 */
-	@GetMapping("/Save")
+	@GetMapping("/admin/Training/save")
 	public String trainingNew(@ModelAttribute("form") TraForm form, Model model) {
 		
 		return "trainingNew";
@@ -81,7 +81,7 @@ public class TrainingController {
 	/*
 	 * 新規登録の処理
 	 */
-	@PostMapping("/Create")
+	@PostMapping("/admin/Training/create")
 	public String trainingCreate(@Validated @ModelAttribute("form") TraForm form,
 			BindingResult bindingResult, Model model,
 			RedirectAttributes attributes) {
@@ -96,13 +96,13 @@ public class TrainingController {
 		Tra_Manegement tra_mane = TraHelper.convertTra(form);
 		traService.insertTra(tra_mane);
 		attributes.addFlashAttribute("message", form.getTra_name() + "が追加されました。");
-		return "redirect:/";
+		return "redirect:/admin/Training";
 	}
 	
 	/*
 	 * 編集画面の表示
 	 */
-	@GetMapping("/Edit/{tra_id}")
+	@GetMapping("/admin/Training/edit/{tra_id}")
 	public  String trainingEdit(@PathVariable String tra_id, Model model,
 			@ModelAttribute TraForm form, BindingResult bindingResult) {
 		
@@ -113,7 +113,7 @@ public class TrainingController {
 	/*
 	 * 編集画面の更新処理
 	 */
-	@PostMapping("/Update")
+	@PostMapping("admin/Training/update")
 	public String trainingUpdate(@Validated @ModelAttribute("form") TraForm form,
 			BindingResult bindingResult, Model model,
 			RedirectAttributes attributes) {
@@ -128,13 +128,13 @@ public class TrainingController {
 		Tra_Manegement tra_mane = TraHelper.convertTra(form);
 		traService.updateTra(tra_mane);
 		attributes.addFlashAttribute("message", form.getTra_id() +  "を更新しました");
-		return "redirect:/";
+		return "redirect:/admin/Training";
 	}
 	
 	/*
 	 * 詳細画面の削除処理
 	 */
-	@PostMapping("/delete/{tra_id}")
+	@PostMapping("admin/Training/delete/{tra_id}")
 	public String trainingDelete(@PathVariable String tra_id, 
 			@ModelAttribute("form") TraForm form, Model model,
 			RedirectAttributes attributes) {
@@ -143,6 +143,6 @@ public class TrainingController {
 		String name = tra_mane.getTra_name();
 		traService.deleteTra(tra_id);
 		attributes.addFlashAttribute("message", "研修「" + name + "」を削除しました");
-		return "redirect:/";
+		return "redirect:/admin/Training";
 	}
 }
