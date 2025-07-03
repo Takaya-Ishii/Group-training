@@ -67,6 +67,14 @@ header ul li img{
 	text-overflow: ellipsis;
 }
 
+#notBelong{
+	display: block;
+	line-height: 75px;
+	text-decoration: none;
+	color: rgb(0, 64, 128);
+	font-size: large;
+}
+
 #logout{
 	background-image: url(../image/ログアウト.png);
 	background-repeat: no-repeat;
