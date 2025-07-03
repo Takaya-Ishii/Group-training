@@ -37,12 +37,15 @@
 					<a th:href="@{/participant/○○}">週間報告</a></li>
 					
 
-					<li sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')" >
+					<li th:if="${group != null}" sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')" >
 						<a th:href="@{/participant/Group/member/{group_ID}(group_ID = ${group.group_ID})}" class="ellipsis">
 							<span th:text="${group.group_name}"></span>
-						</a></li>
-						
-					
+						</a>
+					</li>
+
+					<li id="notBelong" th:if="${group == null}">
+						<span>グループ未所属</span>
+					</li>
 
 					<li sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')">
 						<img th:src="@{/image/受講者アイコン.png}" alt="受講者アイコン">
