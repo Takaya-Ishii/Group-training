@@ -16,7 +16,7 @@ margin-top: 0;
 }
 
 header ul h1{
-padding-right: 20%;
+padding-right: 25%;
 padding-left: 10px;
 }
 
@@ -24,10 +24,11 @@ header ul li{
 display: table-cell;
 }
 
-header ul li a{
+header ul li button{
 display: block;
-line-height: 75px;
-text-decoration: none;
+border: none;
+padding: 25px 15px 25px;
+background: transparent;
 color: rgb(0, 64, 128);
 font-size: large;
 }
@@ -44,7 +45,7 @@ header ul li.nav a{
 color: rgb(0, 64, 128);
 }
 
-header ul li a:hover{
+header ul li button:hover{
 background-color:cornflowerblue
 }
 
@@ -82,15 +83,12 @@ header ul li img{
 	background-color: rgb(176, 217, 254);
 }
 
-header button{
+header #logout button{
 	padding: 25px 15px 25px 60px;
-	border: none;
-	background: transparent;
 	font-size: medium;
-	color: rgb(0, 64, 128);
 }
 
-header button:hover{
+header #logout button:hover{
 	background-image: url(../image/ログアウト.png);
 	background-repeat: no-repeat;
 	background-position: 20px 20px;
