@@ -51,7 +51,7 @@ public class DisplayController {
 			model.addAttribute("traName", traName);
 			return "/participant/traCourse/stack/save";
 		} else {
-			return "redirect:/participant/traCourse";
+			return "redirect:/error/404";
 		}
 	}
 	
@@ -100,7 +100,7 @@ public class DisplayController {
 			return "/participant/traCourse/stack/edit";
 			
 		} else {
-			return "redirect:/participant/traCourse/detail";
+			return "redirect:/error/404";
 		}
 	}
 	
