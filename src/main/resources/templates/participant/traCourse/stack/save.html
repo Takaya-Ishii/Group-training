@@ -4,71 +4,78 @@
 	  layout:decorate="~{layout/layout}">
 <head>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/css/grouptraining.css">
 	<title>学習履歴登録</title>
 </head>
 <body>
-	<div layout:fragment="header"></div>
-	<div layout:fragment="content">
-		<h2>学習履歴登録</h2>
-		<h2>研修名：<span th:text="${traName.tra_name}"></span></h2>
-			<p th:if="${errorMessage}" th:text="${errorMessage}" style="color: red;">
-				エラーメッセージ
-		</p>
 	
-		<form th:action="@{/participant/traCourse/stack/registration/{id}(id=${stackForm.traCourseID})}" th:object="${stackForm}" method="post">
-			<input type="hidden" th:field="*{traCourseID}">
-			<input type="hidden" th:field="*{statusID}">
-			<table>
-				<tr>
-					<th>日付</th>
-					<td>
-						<input type="date" value="yyyy-mm-dd" th:field="*{studyDay}">
-						<!--日付用：バリデーションエラー表示-->
-						<span th:if="${#fields.hasErrors('studyDay')}"
-							  th:errors="*{studyDay}" style="color: red;">
-							  エラーがあれば表示
-						</span>
-					</td>
-				</tr>
-				<tr>
-					<th>学習時間</th>
-					<td>
-						<input type="text" size="5" th:field="*{studyTime}"><span>時間</span>
-						<!--学習時間用：バリデーションエラー表示-->
-						<span th:if="${#fields.hasErrors('studyTime')}"
-							  th:errors="*{studyTime}" style="color: red;">
-						 エラーがあれば表示
-						 </span>
-					</td>
-				</tr>
-				<tr>
-					<th>進捗率</th>
-					<td>
-						<input type="text" size="5" th:field="*{progress}"><span>％</span>
-						<!--進捗用：バリデーションエラー表示-->
-						<span th:if="${#fields.hasErrors('progress')}"
-							  th:errors="*{progress}" style="color: red;">
-							  エラーがあれば表示
-						</span>
-					</td>
-				</tr>
-				<tr>
-					<th>メモ</th>
-					<td>
-						<textarea rows="7" cols="50" th:field="*{memo}">
-						</textarea>
-						<span th:if="${#fields.hasErrors('memo')}"
-							  th:errors="*{memo}" style="color: red;">
-						 エラーがあれば表示
-						 </span>
-					</td>
-				</tr>
-			</table>
-			<button type="submit">登録</button>
-		</form>
-		<a th:href="@{/participant/traCourse/{id}(id=${stackForm.traCourseID})}">
-			<button type="button">受講研修詳細に戻る</button>
-		</a>
-	</div>
+	<main >
+		<div layout:fragment="header"></div>
+		<div layout:fragment="main"></div>
+		<div layout:fragment="content">
+			<h2>学習履歴登録</h2>
+			<h3>研修名：<span th:text="${traName.tra_name}"></span></h3>
+			<p class="message" th:if="${errorMessage}" th:text="${errorMessage}" style="color: red; background-color: rgb(255, 212, 212)">
+					エラーメッセージ
+			</p>
+		
+			<form th:action="@{/participant/traCourse/stack/registration/{id}(id=${stackForm.traCourseID})}" th:object="${stackForm}" method="post">
+				<input type="hidden" th:field="*{traCourseID}">
+				<input type="hidden" th:field="*{statusID}">
+				<table class="learninglogtable">
+					<tr>
+						<th>日付</th>
+						<td>
+							<input type="date" value="yyyy-mm-dd" th:field="*{studyDay}">
+							<!--日付用：バリデーションエラー表示-->
+							<span th:if="${#fields.hasErrors('studyDay')}"
+								  th:errors="*{studyDay}" style="color: red;">
+								  エラーがあれば表示
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<th>学習時間</th>
+						<td>
+							<input type="text" size="5" th:field="*{studyTime}"><span>時間</span>
+							<!--学習時間用：バリデーションエラー表示-->
+							<span th:if="${#fields.hasErrors('studyTime')}"
+								  th:errors="*{studyTime}" style="color: red;">
+							 エラーがあれば表示
+							 </span>
+						</td>
+					</tr>
+					<tr>
+						<th>進捗率</th>
+						<td>
+							<input type="text" size="5" th:field="*{progress}"><span>％</span>
+							<!--進捗用：バリデーションエラー表示-->
+							<span th:if="${#fields.hasErrors('progress')}"
+								  th:errors="*{progress}" style="color: red;">
+								  エラーがあれば表示
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<th>メモ</th>
+						<td>
+							<textarea rows="7" cols="50" th:field="*{memo}">
+							</textarea>
+							<span th:if="${#fields.hasErrors('memo')}"
+								th:errors="*{memo}" style="color: red;">
+								エラーがあれば表示
+							</span>
+						</td>
+					</tr>
+				</table>
+				<div class="inputbtnR">
+					<button class="registbtn" type="submit">登録</button>
+				</div>
+			</form>
+			<a class="returnbtnL" th:href="@{/participant/traCourse/{id}(id=${stackForm.traCourseID})}">
+				<button class="detailreturnbtn" type="button">研修詳細に戻る</button>
+			</a>
+		</div>	
+	</main>
 </body>
 </html>
