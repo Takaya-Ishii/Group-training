@@ -89,7 +89,7 @@ public class TrainingController {
 		//バリデーションチェック
 			if(bindingResult.hasErrors()) {
 				attributes.addFlashAttribute("form", form);
-				model.addAttribute("message", "入力項目に誤りがあります。メッセージを確認し、再度入力をしてください。");
+				model.addAttribute("errorMessage", "入力項目に誤りがあります。メッセージを確認し、再度入力をしてください。");
 				return "trainingNew";
 			}
 		
@@ -121,7 +121,7 @@ public class TrainingController {
 		//バリデーションチェック
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("form", form);
-			model.addAttribute("message", "入力項目に誤りがあります。メッセージを確認し、再度入力をしてください。");
+			model.addAttribute("errorMessage", "入力項目に誤りがあります。メッセージを確認し、再度入力をしてください。");
 			return "trainingEdit";
 		}
 		 

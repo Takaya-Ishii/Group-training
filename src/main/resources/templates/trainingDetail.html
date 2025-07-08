@@ -64,7 +64,7 @@
 			<div class="modal-footer">
 				<button id="close" class="cancelbtn" onclick="deleteModal">キャンセル</button>
 				<form th:action="@{/admin/Training/delete/{tra_id}(tra_id=${tra_id})}" method="post">
-					<button type="submit">削除</butto>
+					<button class="deletebtn" type="submit">削除</butto>
 				</form>
 			</div>
 		</div>

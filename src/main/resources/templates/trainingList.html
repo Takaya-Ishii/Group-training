@@ -10,11 +10,15 @@
 		<h2>研修一覧</h2>
 		<!--削除したらここにメッセージを表示する-->
 		<!--表示するメッセージごとに色を分ける-->
-		<p class="message" th:if="${message}"
-			th:text="${message}">
+		<p class="message" th:if="${errorMessage}"
+			th:text="${errorMessage}" style="background-color: rgb(255, 212, 212);">
 			エラーメッセージ
 		</p>
 		
+		<p class="message" th:if="${message}"
+			th:text="${message}" style="background-color: rgb(193,254,228 );">
+			新規登録・更新・削除メッセージ
+		</p>
 		<div class="serchcont">
 			<form action="/admin/Training/serch" method="get">
 				<label for="get-value">研修名</label>
