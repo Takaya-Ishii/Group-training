@@ -43,16 +43,16 @@ public class UserController {
     public String displaySearchedUser(@RequestParam String username,@RequestParam String account_name,Model model,RedirectAttributes attributes) {
 		//usernameに対応する「username」の情報を取得する
 		List<Authentication> User= userServiceImpl.displaySearchedUser(username,account_name);
-		if(User != null) {
+		if(User.size()!= 0) {
 			//対象データがある場合はmodelに格納
 			model.addAttribute("user", userServiceImpl.displaySearchedUser(username,account_name));
 			return "admin/User/list";
 			
 		}else {
 			//対象データがない場合はフラッシュメッセージを設定
-			attributes.addFlashAttribute("errorMesssage","対象のユーザーはいません");
+			attributes.addFlashAttribute("errorMessage","対象のユーザーはいません");
 			//リダイレクト
-			return "redirect: /admin/User";
+			return "redirect:/admin/User";
 		}
 	}
 	
@@ -64,6 +64,7 @@ public class UserController {
 		
 		if(User != null) {
 		model.addAttribute("user",userServiceImpl.displayUserDetail(username));
+		System.out.println(userServiceImpl.displayUserDetail(username));
 		return "admin/User/detail";
 		}else {
 			//対象のユーザーの詳細がない場合は、メッセージを表示
@@ -124,19 +125,19 @@ public class UserController {
 		//ここからバリデーションチェックです
 		//入力に問題あるか ifで検査
 		if(bindingResult.hasErrors()) {
+			//フラッシュメッセージ
+			attributes.addFlashAttribute("errorMessage","エラーが発生しました。");
 			//ある場合、更新画面を表示します
-			//System.out.println(form); 
 			return "/admin/User/edit";
 		}
 		//エンティティへの変換
 		Authentication User = Userhelper.convertUser(form);
-		System.out.println(User);
 		//更新処理
-		userServiceImpl.updateUser(User);		
+		userServiceImpl.updateUser(User);
 		//フラッシュメッセージ
 		attributes.addFlashAttribute("message","ユーザー情報が更新されました");
 		//PRGパターン
-		return "redirect:/admin/User/list";
+		return "redirect:/admin/User";
 	}
 	
 	//IDで指定されたユーザー情報を削除する
@@ -147,6 +148,6 @@ public class UserController {
 		userServiceImpl.deleteUser(username);
 		//フラッシュメッセージ
 		attributes.addFlashAttribute("message","ユーザーが処理されました");
-		return "redirect:/admin/User/list";
+		return "redirect:/admin/User";
 	}
 }

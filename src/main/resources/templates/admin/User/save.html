@@ -1,105 +1,119 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>ユーザー新規登録</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="../css/grouptraining.css">
+	<title>ユーザー新規登録</title>
 </head>
 <body>
+	<main>
 <h2>ユーザー新規登録</h2>
-<!--Flashメッセージの表示-->
-<p th:if="${message}" th:text="${message}" style="color:red;">完了メッセージ</p>
-
-
-<p th:if="${errorMessage}" th:text="${errorMessage}" style="color:red;">エラーメッセージ</p>
-
-<!-- 入力エラー全体表示 -->
-<!--<p th:if="${errorMassage}" th:text="${errorMassage}" 
-style="background-color: #fdd; padding: 10px; border: 1px solid red;">
-    入力内容に誤りがあります。メッセージを確認し、再度入力してください。
-</p>
-<p th:if="${errorMassage}" th:text="${errorMassage}" 
-style="background-color: #fdd; padding: 10px; border: 1px solid red;">
-    「パスワード」と「パスワード（確認）」が異なります
-</p>-->
-<form th:action="@{/admin/User/registration}" th:object="${userForm}"method="post">
-	<div>
-	<p>ユーザーID ※<br>
-	<input type="text" th:field="*{username}"placeholder="example@co.jp">
-	<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color:red"></span>
-	</p>
-	</div>
-      
-	<div>
-	<p>ユーザー名 ※<br>
-	<input type="text" th:field="*{account_name}"placeholder="黒須 パワ男">
-	<span th:if="${#fields.hasErrors('account_name')}" th:errors="*{account_name}" style="color:red"></span>
-	</p>
-	</div>
-        
-	<div>
-	<p>パスワード ※<br>
-	<input type="text" th:field="*{password}">
-	<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red"></span>
-	</p>
-	</div>
-            
-	<div>
-	<p>パスワード (確認) ※<br>
-	<input type="text" th:field="*{password}">
-	</p>
-	</div>
+			
+			<!--Flashメッセージの表示-->
+			<p class="message" th:if="${message}" th:text="${message}" style="color:blue; background-color: rgb(193,254,228);">完了メッセージ</p>
+			
+			
+			<p class="message" th:if="${errorMessage}" th:text="${errorMessage}" style="color:red; background-color: rgb(255,212,212);">エラーメッセージ</p>
+			
+				<!-- 入力エラー全体表示 
+			<p class="message" th:if="${errorMessage}" th:text="${errorMessage}" 
+				style="background-color: rgb(255, 212, 212);">
+				入力内容に誤りがあります。メッセージを確認し、再度入力してください。
+			</p>
 	
-	<!--パスワードが一致するかのチェック-->
-	<p th:if="${#fields.hasErrors('samePassword')}" th:errors="*{samePassword}" style="color:red;">
-		相関項目チェックのエラー
-	</p>
-        
-    <div>
-	<p>電話番号 ※<br>
-	<input type="text" th:field="*{TEL}" placeholder="08012345678" maxlength="11">
-	<span th:if="${#fields.hasErrors('TEL')}" th:errors="*{TEL}" style="color:red"></span>
-	</p>
-	</div>
-            
-	<p>住所 <br>
-	<input type="text" name="address" maxlength="50">
-	<span th:if="${#fields.hasErrors('address')}" th:errors="*{address}" style="color:red"></span>
-	</p>
-        
-	<p>性別 ※<br>
-		<label><input type="radio" name="gender" value="男"> 男性</label>
-		<label><input type="radio" name="gender" value="女"> 女性</label>
-		<label><input type="radio" name="gender" value="不"> 不明</label>
-		<span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" style="color:red"></span>
-	</p>
-	
-	<p>所属 ※<br>
-		<label><input type="radio" name="affiriation" value="未定"> 未定</label>
-		<label><input type="radio" name="affiriation" value="アプリ"> アプリ</label>
-		<label><input type="radio" name="affiriation" value="インフラ"> インフラ</label>
-		<span th:if="${#fields.hasErrors('affiriation')}" th:errors="*{affiriation}" style="color:red"></span>
-	</p>
-            
-	<p>グループ ※<br>
-		<select th:field="*{group_ID}">
-			<option value="0" disabled>-- 選択してください --</option>
-			<option th:each = "item:${user}" th:value="${item.group_ID}" th:text="${item.group_name}"></option>
-			<span th:if="${#fields.hasErrors('group_ID')}" th:errors="*{group_ID}" style="color:red"></span>
-		</select>
-            </p>
-             
-	<p>出身学部 <br>
-		<input type="text" name="departOfOrigin" maxlength="10">
-	</p>
-        
-	<p>ロール ※<br>
-		<label><input type="radio" name="role_ID" value="1"> 受講者</label>
-		<label><input type="radio" name="role_ID" value="2"> 講師</label>
-		<span th:if="${#fields.hasErrors('role_ID')}" th:errors="*{role_ID}" style="color:red"></span>
-	</p>  
-  <br>
-  <input type="submit" value="登録"></input>
-  <a th:href="@{/admin/User}"><button type="button">ユーザー一覧に戻る</button></a>
-</form>
-</body>
-</html>
+			<p class="message" th:if="${errorMessage}" th:text="${errorMessage}" 
+				style="background-color: rgb(255, 212, 212);">
+				「パスワード」と「パスワード（確認）」が異なります
+			</p>-->
+<form class="logcenter" th:action="@{/admin/User/registration}" th:object="${userForm}"method="post">
+	<div>
+		<div class="centerform">
+					<label class="labelname">ユーザーID ※</label>
+					<input class="Msizeinput" type="text" th:field="*{username}"placeholder="example@co.jp">
+					<span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color:red"></span>
+				</div>
+			<div class="centerform">
+					<label class="labelname">ユーザー名 ※</label>
+					<input class="Msizeinput" type="text" th:field="*{account_name}"placeholder="黒須 パワ男">
+					<span class="error" th:if="${#fields.hasErrors('account_name')}" th:errors="*{account_name}" style="color:red"></span>
+				</div>
+				
+				
+	     <div class="centerform">
+					<label class="labelname">パスワード ※</label>
+					<input class="Msizeinput" type="password" th:field="*{password}" />
+					<span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red"></span>
+				</div>
+	            
+         <div class="centerform">
+					<label class="labelname">パスワード (確認) ※</label>
+					<input class="Msizeinput" type="password" th:field="*{confirmPassword}" />
+				</div>
+				
+				<!--パスワードが一致するかのチェック-->
+				<span th:if="${#fields.hasErrors('samePassword')}" th:errors = "*{samePassword}" style="color:red;">
+					相関項目チェックのエラー
+				</span>
+				
+		<div class="centerform">
+					<label class="labelname">電話番号 ※</label>
+					<input class="Msizeinput" type="text" th:field="*{TEL}" placeholder="08012345678" maxlength="11">
+					<span class="error" th:if="${#fields.hasErrors('TEL')}" th:errors="*{TEL}" style="color:red"></span>
+				</div>
+         <div class="centerform">
+					<label class="labelname">住所 </label>
+					<input class="Msizeinput" type="text" name="address" maxlength="50">
+					<span class="error" th:if="${#fields.hasErrors('address')}" th:errors="*{address}" style="color:red"></span>
+				</div>
+				
+		<div class="centerformradio2">
+					<label class="labelname2">性別 ※</label><br>
+					<form class="centerselect2">
+						<input class="celinp2" type="radio" name="gender" value="男"> 男性
+						<input type="radio" name="gender" value="女"> 女性
+						<input type="radio" name="gender" value="不"> 不明
+						<span class="error" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" style="color:red"></span>
+					</form>
+				</div>
+		<div class="centerformradio3">
+					<label class="labelname3">所属 ※</label><br>
+					<form class="centerselect3">
+						<input class="celinp3" type="radio" name="affiliation" value="未定"> 未定
+						<input type="radio" name="affiriation" value="アプリ"> アプリ
+						<input type="radio" name="affiriation" value="インフラ"> インフラ
+						<span class="error" th:if="${#fields.hasErrors('affiriation')}" th:errors="*{affiriation}" style="color:red"></span>
+					</form>
+				</div>
+				
+		<div class="centerform">
+					<label class="labelname">グループ ※</label>
+					<select class="Msizeselect" th:field="*{group_ID}">
+						<option value="0">-- 選択してください --</option>
+						<option th:each = "item:${user}" th:value="${item.group_ID}" th:text="${item.group_name}"></option>
+						<span class="error" th:if="${#fields.hasErrors('group_ID')}" th:errors="*{group_ID}" style="color:red"></span>
+						<!-- DBから動的に生成されることを想定 -->
+					</select>
+				</div>
+				
+		<div class="centerform">
+					<label class="labelname">出身学部 </label>
+					<input class="Msizeinput" type="text" name="departOfOrigin" maxlength="10">
+				</div>
+	<div class="centerformradio3">
+					<label class="labelname3">ロール ※</label>
+					<form class="centerselect3">
+						<input class="celinp4" type="radio" name="role_ID" value="1"> 受講者
+						<input type="radio" name="role_ID" value="2"> 講師
+						<span class="error" th:if="${#fields.hasErrors('role_ID')}" th:errors="*{role_ID}" style="color:red"></span>
+					</form>
+				</div>
+				<div class="logbtnR">
+					<button class="registbtn" type="submit">登録</button>
+				</div>
+  <div class="returnbtnL">
+					<a th:href="@{/admin/User}"><button class="Allreturnbtn" type="button">ユーザー一覧に戻る</button></a>
+				</div>
+				</form>
+				</main>
+				</body>
+				</html>

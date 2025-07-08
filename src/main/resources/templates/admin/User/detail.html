@@ -1,62 +1,73 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>ユーザー詳細</title>
-    <link th:href="@{/css/modalStyle.css}" rel="stylesheet">
-</head>
-<body>
-<h2>ユーザー詳細</h2>
-<table border="1">
-    <tr><th>ユーザーID</th><td th:text="${user.username}"></td></tr>
-    <tr><th>ユーザー名</th><td th:text="${user.account_name}"></td></tr>
-    <tr><th>電話番号</th><td th:text="${user.TEL}"></td></tr>
-    <tr><th>性別</th><td th:text="${user.gender}"></td></tr>
-    <tr><th>所属</th><td th:text="${user.affiriation}"></td></tr>
-    <tr><th>住所</th><td th:text="${user.address}"></td></tr>
-    <tr th:each="group:${user.group_name}"><th>グループ</th><td th:text="user:${group.group_name}"></td></tr>
-    <tr><th>出身学部</th><td th:text="${user.departOfOrigin}"></td></tr>
-    <tr><th>ロール</th><td th:text="${user.role.role_name}"></td></tr>
-</table>
-<div>
-    <a th:href="@{/admin/User}">
-        <button type="button">ユーザー一覧に戻る</button>
-    </a>
-    
-    <!--ここから下を修正-->
-    
-    <a th:href="@{/participant/traCourse}">
-        <button type="button">受講研修一覧を見る</button>
-    </a>
-    
-    <button id="open" onclick="showModal">削除</button></a>
-    
-    <a th:href="@{/admin/User/edit/{username}(username = ${user.username})}">
-        <button type="button">修正</button>
-    </a>
-</div>
+	<head>
+	    <meta charset="UTF-8">
+	    <link rel="stylesheet" href="../css/grouptraining.css">
+	    <link rel="stylesheet" th:href="@{/css/modalStyle.css}">
+	    <title>ユーザー詳細</title>
+	</head>
+	<body>
+		<main>
+			<h2>ユーザー詳細</h2>
+			
+			<table class="vertable" border="1">
+				
+				<tr><th>ユーザーID</th><td th:text="${user.username}"></td></tr>
+				<tr><th>ユーザー名</th><td th:text="${user.account_name}"></td></tr>
+				<tr><th>電話番号</th><td th:text="${user.TEL}"></td></tr>
+				<tr><th>性別</th><td th:text="${user.gender}"></td></tr>
+				<tr><th>所属</th><td th:text="${user.affiriation}"></td></tr>
+				<tr><th>住所</th><td th:text="${user.address}"></td></tr>
+				<tr th:each="groups:${user.group}"><th>グループ</th><td th:text="${groups.group_name}"></td></tr>
+				<tr><th>出身学部</th><td th:text="${user.departOfOrigin}"></td></tr>
+				<tr><th>ロール</th><td th:text="${user.role.role_name}"></td></tr>
+				
+				<!--  -->
+				
+			</table>
+			
+			<div class="tablebtnR">
+				<a th:href="@{/participant/traCourse}">
+					<button class="viewlesson" type="button">受講研修一覧を見る</button>
+				</a>
+				
+				<button class="deletebtn"id="open" onclick="showModal">削除</button>
+				
+				<a th:href="@{/admin/User/edit/{username}(username = ${user.username})}">
+					<button class="revisionbtn" type="button">修正</button>
+				</a>
+			</div>
 
-<!--モーダルのレイアウト-->
-	<div id="mask" class="hidden"></div>
-	<section id="modal" class="hidden">
-		<div id="modal-content">
-			
-			<!--モーダルのボディ-->
-			<div id="modal-body">
-				<label>本当に削除してよろしいですか？</label>
+			<div class="returnbtnL">
+				<a th:href="@{/admin/User}">
+					<button class="alluserreturnbtn" type="button">ユーザー一覧に戻る</button>
+				</a>
 			</div>
 			
-			<!--フッター-->
-			<div class="modal-footer">
-				<button id="close" onclick="deleteModal">キャンセル</button>
-				<a th:href="@{/admin/User/delete/{username}(username=${user.username})}" method = "post">
-					<button type="submit">削除</button></a>
-				</form>
-			</div>
-		</div>
-	</section>
+			
+			<!-- モーダルのレイアウト -->
+			
+			<div id="mask" class="hidden"></div>
+			<section id="modal" class="hidden">
+				<div id="modal-content">
+			
+					<!-- モーダルのボディ -->
+					<div id="modal-body">
+						<label>本当に削除してよろしいですか？</label>
+					</div>
+			
+					<!-- フッター -->
+					<div class="modal-footer">
+						<button class="cancelbtn" id="close" onclick="deleteModal">キャンセル</buttonclass="cancelbtn">
+						<a th:href="@{/admin/User/delete/{username}(username=${user.username})}" method = "post">
+							<button class="deletebtn" type="submit">削除</button></a>
+						</a>
+					</div>
+				</div>
+			</section>
 	
-	<script th:src="@{/js/modal.js}"></script>
-	
-</body>
+			<script th:src="@{/js/modal.js}"></script>
+			
+		</main>
+	</body>
 </html>

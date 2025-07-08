@@ -42,8 +42,5 @@ public interface UserMapper {
 	//グループ情報を取得
 	public List<Group> findAllGroup();
 	
-	
-	
-	
 }
 

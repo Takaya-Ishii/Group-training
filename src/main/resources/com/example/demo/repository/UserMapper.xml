@@ -12,6 +12,7 @@
 <result property = "address" column ="address"/>
 <result property = "departOfOrigin" column ="departOfOrigin"/>
 <result property = "role_ID" column ="role_ID"/>
+
 <association property = "role" javaType="com.example.demo.entity.Role">
 <id property ="role_ID" column = "role_ID"/>
 <result property = "role_name" column = "role_name"/>
@@ -43,13 +44,16 @@
 
 <!-- ユーザーIDを全てSELECT -->
 <select id="selectAll" resultType="com.example.demo.entity.Authentication">
-SELECT *
-FROM profile_table 
+SELECT P.username,P.account_name,P.TEL,P.gender,P.affiriation,P.address,P.departOfOrigin,R.role_name
+FROM profile_table as P
+Join role_table as R
+ON R.role_ID = P.role_ID; 
 </select>
 <!-- 全てのグループ名とそのグループIDを取得 -->
 <select id ="findAllGroup" resultType="com.example.demo.entity.Group.Group">
 SELECT group_name,group_ID
 FROM group_table
+ORDER BY group_ID;
 </select>
 
 <!-- ユーザーを検索ボックスで情報を検索 -->
@@ -123,6 +127,7 @@ VALUES
 <update id="update">
 
 UPDATE profile_table 
+
 SET account_name = #{account_name},password = #{password},TEL = #{TEL}, address = #{address}, gender = #{gender}, affiriation=#{affiriation}, 
 departOfOrigin = #{departOfOrigin}, role_ID = #{role_ID} 
 
