@@ -74,12 +74,12 @@
 				</div>
 				<div class="centerformradio3">
 					<label class="labelname3">所属 ※</label><br>
-					<form class="centerselect3">
-						<input class="celinp3" type="radio" name="affiliation" value="未定" required> 未定
-						<input type="radio" name="affiliation" value="アプリ"> アプリ
-						<input type="radio" name="affiliation" value="インフラ"> インフラ
+					<div class="centerselect3">
+						<input class="celinp3" type="radio" name="affiriation" value="未定"> 未定
+						<input type="radio" name="affiriation" value="アプリ"> アプリ
+						<input type="radio" name="affiriation" value="インフラ"> インフラ
 						<span th:if="${#fields.hasErrors('affiriation')}" th:errors="*{affiriation}" style="color:red"></span>
-					</form>
+					</div>
 				</div>
 				
 				<div class="centerform">
@@ -89,11 +89,11 @@
 				
 				<div class="centerformradio3">
 					<label class="labelname3">ロール ※</label>
-					<form class="centerselect3">
+					<div class="centerselect3">
 						<input class="celinp4" type="radio" name="role_ID" value="1"> 受講者
 						<input type="radio" name="role_ID" value="2"> 講師
 						<span th:if="${#fields.hasErrors('role_ID')}" th:errors="*{role_ID}" style="color:red"></span>
-					</form>
+					</div>
 				</div>
 				
 				<div class="logbtnR">
