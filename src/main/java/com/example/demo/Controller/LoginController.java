@@ -34,8 +34,8 @@ public class LoginController {
 	            return "redirect:admin/User";
 	        } else if (loginUser.getAuthorities().stream()
 	                .anyMatch(auth -> auth.getAuthority().equals("ROLE_受講者"))) {
-	            return "redirect:participant/traCourse";
-	        }
+	            return "redirect:participant/traCourse/" + loginUser.getUsername();
+	            }
 	        return "redirect:/";
 	    }
 	 
@@ -46,8 +46,9 @@ public class LoginController {
 		 return "admin/User";
 	 }
 	 
-	 @GetMapping("/participant/traCourse")
+	 @GetMapping("/participant/traCourse/{username}")
 	 public String displaytraCourse(Model model, @AuthenticationPrincipal LoginUser loginUser) {
+		 model.addAttribute("username", loginUser.getUsername());
 		 model.addAttribute("group", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
 		 return "participant/traCourse";
 	 }
