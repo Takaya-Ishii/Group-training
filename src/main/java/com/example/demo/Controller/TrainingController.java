@@ -45,9 +45,10 @@ public class TrainingController {
 	 *  研修名から研修の一覧を検索する
 	 */
 	@GetMapping("/admin/Training/serch")
-	public String trainingSerch(@RequestParam(value = "tra_name", required = false) String tra_name, Model model,
+	public String trainingSerch(@RequestParam(value = "tra_name", required = false) 
+			String tra_name, Model model,
 			RedirectAttributes attributes) {
-		
+		model.addAttribute("tra_name", tra_name);
 		if(tra_name != null && !tra_name.isEmpty()) {
 			if(!tra_name.isEmpty()) {
 				model.addAttribute("tra_list", traService.selectByNameTra(tra_name));
