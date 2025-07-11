@@ -1,20 +1,44 @@
 package com.example.demo.Controller;
 
+import jakarta.servlet.http.HttpServletResponse;
+
+import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.demo.entity.LoginUser;
 
 /**
- * 適宜、追加・編集をお願いいたします。
+ * エラー発生時用のコントローラ
  */
 
 @Controller
-public class DisplayController {
+@RequestMapping("/error")
+public class CustomErrorController implements ErrorController{
 
-	/**
-	 * 受講研修一覧画面を表示します
-	 */
-	@GetMapping("traCourse")
-    public String showTraCourse() {
-        return "traCourse";
- }
+	@GetMapping("")
+    public String handleError(HttpServletResponse response, Model model, @AuthenticationPrincipal LoginUser loginUser)
+    {
+		model.addAttribute("errorUser", loginUser.getUsername());
+		if (response.getStatus() == HttpStatus.NOT_FOUND.value()) {
+            return "/error/404";
+        }
+        else if (response.getStatus() == HttpStatus.FORBIDDEN.value()) {
+        	return "/error/403";
+        }
+        else if (response.getStatus() == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
+        	return "/error/500";
+        }
+        
+        return "";
+    }
+ 
+    public String getErrorPath() {
+        return "/error";
+    }
 }
+
