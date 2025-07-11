@@ -1,29 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>ログイン</title>
+	<meta charset="UTF-8">
+	<title>ログイン</title>
+	<link th:href="@{/CSS/grouptraining.css}" rel="stylesheet">
 </head>
 <body>
-	<h2>ログイン</h2>
-	<div th:if="${param.error}">
-		<p style="color: red;">ユーザーIDまたはパスワードが違います</p>
-	</div>
-	<div th:if="${param.logout}">
-		<p style="color: blue;">ログアウトしました</p>
-	</div>
-	<form th:action="@{/authentication}" method="post" th:object="${loginForm}">
-		<div>
-			<label for="usernameInput">ユーザーID</label>
-			<input type="text" th:field="*{usernameInput}">
+	<main>
+		<h2 class="login">ログイン</h2>
+		<div class="message" th:if="${param.error}">
+			<p style="color: red;">ユーザーIDまたはパスワードが違います</p>
 		</div>
-		<div>
-			<label for="passwordInput">パスワード</label>
-			<input type="password" th:field="*{passwordInput}">
+		
+		<div class="message" th:if="${param.logout}">
+			<p style="color: blue;">ログアウトしました</p>
 		</div>
-		<div>
-			<button type="submit">ログイン</button>
+		<div class="logcenter">
+			<form th:action="@{/authentication}" method="post" th:object="${loginForm}">
+				
+				<div class="logform">
+					<label class="username" for="usernameInput">ユーザーID</label>
+					<input class="logininput" type="text" th:field="*{usernameInput}">
+				</div>
+				
+				<div class="logform">
+					<label class="password" for="passwordInput">パスワード</label>
+					<input class="logininput" type="password" th:field="*{passwordInput}">
+				</div>
+				
+				<div class="loginbtnC">
+					<button class="loginbtn" type="submit">ログイン</button>
+				</div>
+			</form>
 		</div>
-	</form>
+	</main>
 </body>
 </html>
