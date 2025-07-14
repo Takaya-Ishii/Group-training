@@ -19,6 +19,7 @@
 	</select>
 	<!-- 登録 -->
 	<insert id="insert">
+	SELECT setval('tpm_table_stack_no_seq', (SELECT max(stack_no) FROM tpm_table));
 	INSERT INTO TPM_table (traCourse_ID, study_day, memo, study_time, progress, status_id)
 	VALUES (#{traCourse_ID}, #{study_day}, #{memo}, #{study_time}, #{progress}, 
 	(SELECT status_id FROM traCourse_table  WHERE traCourse_ID = #{traCourse_ID}));
