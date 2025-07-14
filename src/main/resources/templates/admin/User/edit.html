@@ -17,7 +17,7 @@
 
 
 <!--本文-->
-<form class="logcenter" th:action="@{/admin/User/update}"th:object="${userForm}" method="post">
+<form th:action="@{/admin/User/update}"th:object="${userForm}" method="post">
 	<div>
 	
 	<div class="centerform">
@@ -26,7 +26,7 @@
 				</div>
 				<div class="centerform">
 					<label class="labelname">ユーザー名 ※</label>
-					<input class="Msizeinput" type="text" name="account_name"placeholder="黒須 パワ男">
+					<input class="Msizeinput" type="text" th:field="*{account_name}"placeholder="黒須 パワ男">
 					<span class="error" th:if="${#fields.hasErrors('account_name')}" th:errors="*{account_name}" style="color:red"></span>
 				</div>
         
@@ -34,6 +34,7 @@
 					<label class="labelname">パスワード ※</label>
 					<input class="Msizeinput" type="password" th:field="*{password}">
 					<span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red"></span>
+					<span class="error"th:text="${Notuse}" style="color:red"></span>
 				</div>
 			
 				<div class="centerform">
@@ -45,37 +46,28 @@
 				</div>
 				<div class="centerform">
 					<label class="labelname">電話番号 ※</label>
-					<input class="Msizeinput" type="text" name="TEL" placeholder="08012345678" maxlength="11">
+					<input class="Msizeinput" type="text" th:field="*{TEL}" placeholder="08012345678" maxlength="11">
 					<span th:if="${#fields.hasErrors('TEL')}" th:errors="*{TEL}" style="color:red"></span>
 				</div>
 					<div class="centerform">
 					<label class="labelname">住所 </label>
-					<input class="Msizeinput" type="text" name="address" maxlength="50">
+					<input class="Msizeinput" type="text" th:field="*{address}" maxlength="50">
 					<span class="error" th:if="${#fields.hasErrors('address')}" th:errors="*{address}" style="color:red"></span>
 				</div>
 				<div class="centerformradio2">
 					<label class="labelname2">性別 ※</label><br>
 					<form class="centerselect2">
-						<input class="celinp2" type="radio" name="gender" value="男"> 男性
+						<input class="celinp2" type="radio" th:field="*{gender}" value="男"> 男性
 						<input type="radio" name="gender" value="女"> 女性
 						<input type="radio" name="gender" value="不"> 不明
 						<span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" style="color:red"></span>
 					</form>
 				</div>
 				
-					<div class="centerformradio3">
-					<label class="labelname3">所属 ※</label><br>
-					<form class="centerselect3">
-						<input class="celinp3" type="radio" name="affiliation" value="未定"> 未定
-						<input type="radio" name="affiliation" value="アプリ"> アプリ
-						<input type="radio" name="affiliation" value="インフラ"> インフラ
-						<span th:if="${#fields.hasErrors('affiriation')}" th:errors="*{affiriation}" style="color:red"></span>
-					</form>
-				</div>
 				<div class="centerformradio3">
 					<label class="labelname3">所属 ※</label><br>
 					<div class="centerselect3">
-						<input class="celinp3" type="radio" name="affiriation" value="未定"> 未定
+						<input class="celinp3" type="radio" th:field="*{affiriation}" value="未定"> 未定
 						<input type="radio" name="affiriation" value="アプリ"> アプリ
 						<input type="radio" name="affiriation" value="インフラ"> インフラ
 						<span th:if="${#fields.hasErrors('affiriation')}" th:errors="*{affiriation}" style="color:red"></span>
@@ -84,13 +76,14 @@
 				
 				<div class="centerform">
 					<label class="labelname">出身学部 </label>
-					<input class="Msizeinput" type="text" name="departOfOrigin" maxlength="10">
+					<input class="Msizeinput" type="text" th:field="*{departOfOrigin}">
+					<span class="error" th:if="${#fields.hasErrors('departOfOrigin')}" th:errors="*{departOfOrigin}" style="color:red"></span>
 				</div>
 				
 				<div class="centerformradio3">
 					<label class="labelname3">ロール ※</label>
 					<div class="centerselect3">
-						<input class="celinp4" type="radio" name="role_ID" value="1"> 受講者
+						<input class="celinp4" type="radio" th:field="*{role_ID}" value="1"> 受講者
 						<input type="radio" name="role_ID" value="2"> 講師
 						<span th:if="${#fields.hasErrors('role_ID')}" th:errors="*{role_ID}" style="color:red"></span>
 					</div>

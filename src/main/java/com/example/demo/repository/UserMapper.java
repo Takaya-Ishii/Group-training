@@ -30,6 +30,9 @@ public interface UserMapper {
 	//「ユーザーデータ」をメンバーテーブルに登録する
 	void insertPlus(Authentication user);
 	
+	//パスワードで一致するものがあるか
+	List<Authentication> selectPassWord(String password);
+	
 	/**プロフィールテーブルの「ユーザーデータ」を更新する*/
 	void update(Authentication user);
 	

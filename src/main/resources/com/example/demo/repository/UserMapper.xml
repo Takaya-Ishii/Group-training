@@ -83,7 +83,6 @@ ON R.role_ID = P.role_ID
 WHERE account_name = #{account_name}
 </select>
 
-
 <!--一つのユーザーの詳細表示-->
 <select id="selectdetailById" resultMap = "Userdetialselect">
 SELECT 
@@ -115,6 +114,13 @@ VALUES
 (#{username},#{account_name},#{password},#{TEL},#{address},#{gender},#{affiriation},#{departOfOrigin},
 #{role_ID});
 </insert>
+
+<!-- 全てのパスワードを取得 -->
+<select id ="selectPassWord" resultType="com.example.demo.entity.Authentication">
+SELECT *
+from profile_table
+where password = #{password}
+</select>
 
 <!-- ユーザーデータをメンバーテーブルに登録する -->
 <insert id="insertPlus" parameterType="com.example.demo.entity.Authentication">

@@ -86,17 +86,26 @@ public class UserController {
 	/**新たな「ユーザー」を新規登録する*/
 	@Transactional
 	@PostMapping("/User/registration")
-	public String registrationUser(@Validated ({InsertValidation.class}) UserForm form,BindingResult bindingResult,RedirectAttributes attributes) {
+	public String registrationUser(@RequestParam String password ,@Validated ({InsertValidation.class})@ModelAttribute UserForm form,BindingResult bindingResult,RedirectAttributes attributes,Model model) {
+		List<Authentication> User = userServiceImpl.IsPasswordTaken(password);
 		//===ここからが、バリデーションチェックです===
 		// 入力に問題があるか ifで検査
 		if(bindingResult.hasErrors()) {
-			//ある場合、入力画面を表示します
+			//すでにパスワードが使われている場合
+			model.addAttribute("userForm",form);
+			model.addAttribute("user",userServiceImpl.selectAllGroup());
+			//入力画面を表示します
+			return "/admin/User/save";
+		}
+		if( User.isEmpty() == false) {
+			model.addAttribute("Notuse","現在このパスワードは利用できません");
+			model.addAttribute("user",userServiceImpl.selectAllGroup());
 			return "/admin/User/save";
 		}
 		//エンティティへの変換
-		Authentication User = Userhelper.convertUser(form);
+		Authentication user = Userhelper.convertUser(form);
 		//更新処理
-		userServiceImpl.registrationUser(User);
+		userServiceImpl.registrationUser(user);
 		//フラッシュメッセージ
 		attributes.addFlashAttribute("message","ユーザーが新規登録されました");
 		//PRGパターン
@@ -121,19 +130,23 @@ public class UserController {
 	/**指定されたIDの情報を編集する*/
 	@Transactional
 	@PostMapping("/User/update")
-	public String updateUser(@Validated ({EditValidation.class})UserForm form,BindingResult bindingResult,RedirectAttributes attributes) {
+	public String updateUser(@RequestParam String password,@Validated ({EditValidation.class})UserForm form,BindingResult bindingResult,RedirectAttributes attributes,Model model) {
+		List<Authentication> User = userServiceImpl.IsPasswordTaken(password);
 		//ここからバリデーションチェックです
 		//入力に問題あるか ifで検査
-		if(bindingResult.hasErrors()) {
+		if(bindingResult.hasErrors() || User.size() != 0) {
+			model.addAttribute("Notuse","現在このパスワードは利用できません");
 			//フラッシュメッセージ
 			attributes.addFlashAttribute("errorMessage","エラーが発生しました。");
+			//全てのグループの名前とグループIDをuserに入れる
+			model.addAttribute("user",userServiceImpl.selectAllGroup());
 			//ある場合、更新画面を表示します
 			return "/admin/User/edit";
 		}
 		//エンティティへの変換
-		Authentication User = Userhelper.convertUser(form);
+		Authentication user = Userhelper.convertUser(form);
 		//更新処理
-		userServiceImpl.updateUser(User);
+		userServiceImpl.updateUser(user);
 		//フラッシュメッセージ
 		attributes.addFlashAttribute("message","ユーザー情報が更新されました");
 		//PRGパターン
@@ -147,7 +160,7 @@ public class UserController {
 		//削除処理
 		userServiceImpl.deleteUser(username);
 		//フラッシュメッセージ
-		attributes.addFlashAttribute("message","ユーザーが処理されました");
+		attributes.addFlashAttribute("message","ユーザーが削除されました");
 		return "redirect:/admin/User";
 	}
 }

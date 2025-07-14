@@ -50,6 +50,14 @@ public class UserServiceImpl implements UserService {
 		userMapper.insert(user);
 		userMapper.insertPlus(user);
 	}
+	
+	/**すでにあるパスワードを取得する*/
+	@Override
+	public List<Authentication> IsPasswordTaken(String password) {
+		
+		return userMapper.selectPassWord(password);
+	}
+	
 	/**指定されたIDの情報を編集する*/
 	@Override
 	public void updateUser(Authentication user) {
