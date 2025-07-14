@@ -18,14 +18,10 @@ import com.example.demo.service.StackService;
 
 import lombok.RequiredArgsConstructor;
 
-/**
- * 適宜、追加・編集をお願いいたします。
- */
-
 @Controller
 @RequestMapping("/participant")
 @RequiredArgsConstructor
-public class DisplayController {
+public class StackController {
 
     private final StackService stackService;
     
