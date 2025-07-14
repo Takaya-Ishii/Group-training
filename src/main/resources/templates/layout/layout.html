@@ -12,8 +12,6 @@
 
 <body>
 	
-	<main th:fragment="main">
-
 	<!-- ヘッダー -->
 	<header th:fragment="header">
 		<nav>
@@ -78,9 +76,9 @@
 		</nav>
 	</header>
 
-	<!-- コンテンツ--> 
-	<div layout:fragment="content"></div>
-	
+	<main th:fragment="main">
+		<!-- コンテンツ --> 
+		<div layout:fragment="content"></div>
 	</main>
 
 </body>
