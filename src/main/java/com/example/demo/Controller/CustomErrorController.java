@@ -23,7 +23,9 @@ public class CustomErrorController implements ErrorController{
 	@GetMapping("")
     public String handleError(HttpServletResponse response, Model model, @AuthenticationPrincipal LoginUser loginUser)
     {
+		//受講者がエラー画面に飛んだ際に、受講研修一覧に戻れるように
 		model.addAttribute("errorUser", loginUser.getUsername());
+		
 		if (response.getStatus() == HttpStatus.NOT_FOUND.value()) {
             return "/error/404";
         }

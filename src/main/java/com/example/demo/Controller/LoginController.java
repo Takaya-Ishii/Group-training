@@ -27,8 +27,7 @@ public class LoginController {
 	 
 	 // 所持ロールによって遷移先を判別
 	 @GetMapping("/default")
-	    public String defaultAfterLogin(Model model,  @AuthenticationPrincipal LoginUser loginUser) {
-		 // model.addAttribute("LoginUser", loginUser);   
+	    public String defaultAfterLogin(Model model,  @AuthenticationPrincipal LoginUser loginUser) {   
 		 if (loginUser.getAuthorities().stream()
 	                .anyMatch(auth -> auth.getAuthority().equals("ROLE_講師"))) {
 	            return "redirect:admin/User";
@@ -46,6 +45,7 @@ public class LoginController {
 		 return "admin/User";
 	 }
 	 
+	 // それぞれコントローラーと機能が競合したら削除する
 	 @GetMapping("/participant/traCourse/{username}")
 	 public String displaytraCourse(Model model, @AuthenticationPrincipal LoginUser loginUser) {
 		 model.addAttribute("username", loginUser.getUsername());
