@@ -16,4 +16,10 @@
     <update id="updatePassword" parameterType="com.example.demo.entity.Authentication">
     	UPDATE profile_table SET password = #{password} WHERE username=#{username}
     </update>
+
+    <!-- ログインしたusernameからグループ名を取得  -->
+    <select id="selectGroupByUsername" resultType="com.example.demo.entity.Group">
+    	SELECT G.group_ID, group_name, summary FROM group_table AS G JOIN member_table AS M ON G.group_ID = M.group_ID
+    	WHERE username = #{username}
+    </select>
  </mapper>
