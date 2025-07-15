@@ -8,10 +8,10 @@
 	<title>学習履歴修正・削除</title>
 </head>
 <body>
-	<main>
-		<div layout:fragment="header"></div>
-		<div layout:fragment="main"></div>
-		<div layout:fragment="content">
+	<header th:replace="~{layout :: header}"></header>
+	
+	<div layout:fragment="content">
+		<main>
 			<h2>学習履歴修正・削除</h2>
 			<h3>研修名：<span th:text="${traName.tra_name}"></span></h3>
 			<p class="message" th:if="${errorMessage}" th:text="${errorMessage}" style="color: red; background-color: rgb(255, 212, 212)";>
@@ -80,8 +80,8 @@
 			<a class="returnbtnL" th:href="@{/participant/traCourse/{id}(id=${stackForm.traCourseID})}">
 				<button class="detailreturnbtn" type="button">研修詳細に戻る</button>
 			</a>
-			
-		</div>
-	</main>
+		</main>
+	</div>
+
 </body>
 </html>
