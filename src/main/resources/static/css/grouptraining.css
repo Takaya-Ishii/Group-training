@@ -1,8 +1,11 @@
 @charset "UTF-8";
+
+
+
 /*-- 共通CSS --*/
 
 html {
-	background-color: rgb(255, 255, 255);
+	background-color: rgb(219, 244, 249);
 }
 
 body {
@@ -779,93 +782,3 @@ button {
 /*　グループ詳細　*/
 
 /*　トーク画面　*/
-
-header{
-background-color:  rgb(223, 240, 254);
-}
-
-body{
-	margin: auto;
-}
-
-header ul{
-display: flex;
-justify-content: space-between;
-padding-left: 0;
-margin-top: 0;
-}
-
-header ul h1{
-padding-right: 25%;
-padding-left: 10px;
-}
-
-header ul li{
-display: table-cell;
-}
-
-header ul li button{
-display: block;
-border: none;
-padding: 25px 15px 25px;
-background: transparent;
-color: rgb(0, 64, 128);
-font-size: large;
-margin-top: 0;
-}
-
-header ul li#account_name{
-	color: rgb(0, 64, 128);
-}
-
-header ul li button:hover{
-background-color:cornflowerblue
-}
-
-header ul li img{
-	float: left;
-	padding-top: 20px;
-	padding-right: 10px;
-}
-
-#account_name{
-	font-size: medium;
-	color: rgb(0, 64, 128);
-	line-height: 75px;
-}
-
-.ellipsis{
-	width: 200px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	height: 75.6px;
-}
-
-#notBelong{
-	display: block;
-	line-height: 75px;
-	text-decoration: none;
-	color: rgb(0, 64, 128);
-	font-size: large;
-}
-
-#logout{
-	background-image: url(../image/ログアウト.png);
-	background-repeat: no-repeat;
-	background-position: 20px 20px;
-	background-color: rgb(176, 217, 254);
-}
-
-header #logout button{
-	padding: 25px 15px 25px 60px;
-	height: 75px;
-	font-size: medium;
-}
-
-header #logout button:hover{
-	background-image: url(../image/ログアウト.png);
-	background-repeat: no-repeat;
-	background-position: 20px 20px;
-	background-color:cornflowerblue
-}

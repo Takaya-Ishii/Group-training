@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/layout}">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/css/grouptraining.css">
+	<title>学習履歴修正・削除</title>
+</head>
+<body>
+	<header th:replace="~{layout :: header}"></header>
+	
+	<div layout:fragment="content">
+		<main>
+			<h2>学習履歴修正・削除</h2>
+			<h3>研修名：<span th:text="${traName.tra_name}"></span></h3>
+			<p class="message" th:if="${errorMessage}" th:text="${errorMessage}" style="color: red; background-color: rgb(255, 212, 212)";>
+					エラーメッセージ
+			</p>
+		
+			<form th:action="@{/participant/traCourse/stack/update/{id}/{no}(id=${stackForm.traCourseID}, no=${stackForm.stackNo})}" 
+			  th:object="${stackForm}" method="post">
+				<input type="hidden" th:field="*{traCourseID}">
+				<input type="hidden" th:field="*{statusID}">
+				<input type="hidden" th:field="*{stackNo}">
+				<table class="learninglogtable">
+					<tr>
+						<th>日付</th>
+						<td>
+							<input type="date" value="yyyy-mm-dd" th:field="*{studyDay}">
+							<!--日付用：バリデーションエラー表示-->
+							<span th:if="${#fields.hasErrors('studyDay')}"
+								  th:errors="*{studyDay}" style="color: red;">
+								  エラーがあれば表示
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<th>学習時間</th>
+						<td>
+							<input type="text" size="5" th:field="*{studyTime}"><span>時間</span>
+							<!--学習時間用：バリデーションエラー表示-->
+							<span th:if="${#fields.hasErrors('studyTime')}"
+								  th:errors="*{studyTime}" style="color: red;">
+							 エラーがあれば表示
+							 </span>
+						</td>
+					</tr>
+					<tr>
+						<th>進捗率</th>
+						<td>
+							<input type="text" size="5" th:field="*{progress}"><span>％</span>
+							<!--進捗用：バリデーションエラー表示-->
+							<span th:if="${#fields.hasErrors('progress')}"
+								  th:errors="*{progress}" style="color: red;">
+								  エラーがあれば表示
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<th>メモ</th>
+						<td>
+							<textarea rows="7" cols="50" th:field="*{memo}">
+							</textarea>
+							<p th:if="${#fields.hasErrors('memo')}"
+								th:errors="*{memo}" style="color: red;">
+								エラーがあれば表示
+							</p>
+						</td>
+					</tr>
+				</table>
+				<div class="inputbtnR">
+					<button class="revisionbtn" type="submit">修正</button>
+				</div>
+			</form>
+			<form class="inputeditbtnR" th:action="@{/participant/traCourse/stack/delete/{id}/{no}(id=${stackForm.traCourseID}, no=${stackForm.stackNo})}" method="post">
+				<button class="deletebtn" type="submit">削除</button>
+			</form>
+
+			<a class="returnbtnL" th:href="@{/participant/traCourse/{id}(id=${stackForm.traCourseID})}">
+				<button class="detailreturnbtn" type="button">研修詳細に戻る</button>
+			</a>
+		</main>
+	</div>
+
+</body>
+</html>
