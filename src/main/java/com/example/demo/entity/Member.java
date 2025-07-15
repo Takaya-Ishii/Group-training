@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Menber {
+public class Member {
 	/* グループと所属メンバーを判別するID */
 	private int group_user_ID;
 	/* グループID */
