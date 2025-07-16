@@ -2,10 +2,46 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<link th:href="@{/css/grouptraining2.css}" rel="stylesheet">
+	<link th:href="@{/css/grouptraining.css}" rel="stylesheet">
 	<title>研修管理システム</title>
 </head>
 <body>
+	<!-- ヘッダー -->
+	<header th:fragment="header">
+	<div>
+		<nav>
+			<div>
+				研修管理システム
+				<ul class="nav">
+					<li sec:authorize="hasAuthority('ROLE_講師')"><a th:href="@{/admin/Training}">研修管理</a></li>
+					<li sec:authorize="hasAuthority('ROLE_講師')"><a th:href="@{/admin/Group}">グループ管理</a></li>
+					<li sec:authorize="hasAuthority('ROLE_講師')"><a th:href="@{/admin/User}">ユーザー管理</a></li>
+
+					<!-- 報告確認機能はスコープ外なのでコメントアウト
+					<li sec:authorize="hasAuthority('ROLE_講師')"><a th:href="@{/admin/○○}">報告確認</a></li>
+					-->
+					<!-- トーク機能はスコープ外なのでコメントアウト
+					<li sec:authorize="hasAuthority('ROLE_受講者')"><a th:href="@{/participant/talk}">トーク</a></li>	
+					-->
+
+					<li sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')"><a th:href="@{/participant/traCourse}">受講研修</a></li>
+
+					<!-- 週間報告機能はスコープ外なのでコメントアウト
+					<li sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')">
+					<a th:href="@{/participant/○○}">週間報告</a></li>
+					-->
+
+					<li sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')"><a th:href="@{/participant/traCourse}">[[${group_name}]]</a></li>
+						
+					<li><form th:action="@{/logout}" method="post">
+						<input type="submit" value="ログアウト">
+						</form></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	</header>
+	
 	<main>
 		<h2>研修一覧</h2>
 		<!--削除したらここにメッセージを表示する-->

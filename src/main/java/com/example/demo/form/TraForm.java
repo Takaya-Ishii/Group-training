@@ -15,11 +15,14 @@ import lombok.NoArgsConstructor;
 public class TraForm {
 
 	@NotBlank(message = "研修IDは、必須項目です")
-	@Pattern(regexp = "^(?!.*[%\\s|　]).*$", message = "研修IDは、必須項目です")
+	@Pattern(regexp = "^(?!.*[%]).*$", message = "")
+	@Pattern(regexp = "^(?!.*[\\s|　]).*$", message = "研修IDは、必須項目です")
+	@Size(max=5, message = "")
 	private String tra_id;
 	
 	@NotBlank(message = "研修名は、必須項目です")
 	@Pattern(regexp = "^(?!.*[\\s|　]).*$", message = "研修名は、必須項目です")
+	@Size(max=20, message = "")
 	private String tra_name;
 	
 	@Max(300)
