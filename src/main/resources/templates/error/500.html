@@ -9,7 +9,9 @@
 	<h2>500エラー サーバー内部で問題が発生しました</h2>
 	<div>お手数ですが時間を空けて再度お問い合わせください。</div>
 	<a sec:authorize="hasAuthority('ROLE_講師')" th:href="@{/admin/User}">ユーザ一覧へ</a>
-	<a sec:authorize="hasAuthority('ROLE_受講者')" th:href="@{/participant/traCourse}">受講研修一覧へ</a>
+	<a sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')" th:href="@{/participant/traCourse/{username}(username=${errorUser})}">
+		受講研修一覧へ
+	</a>
 	<form th:action="@{/logout}" method="post">
 		<input type="submit" value="ログアウト">
 	</form>
