@@ -3,71 +3,73 @@
 	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
 	<meta charset="UTF-8">
-	<link th:href="@{/css/gruoptraining.css}" rel="stylesheet">
+	<link th:href="@{/css/grouptraining2.css}" rel="stylesheet">
 	<title>研修管理システム</title>
 </head>
 <body>
-	<div class="container">
-		<h2>研修新規登録</h2>
-		
-		<p class="message" th:if="${errorMessage}"
-			th:text="${errorMessage}" style="background-color: rgb(255, 212, 212);">
-			エラーメッセージ
-		</p>
-		
-		<div>
-			<form class="logcenter" th:action="@{/admin/Training/create}"
-				th:object="${form}" method="post">
-				
-				<div class="centerform">
-					<label class="labelname">研修ID  *</label>
-					<input class="Msizeinput" type="text" th:field="*{tra_id}">
+	<main>
+		<div class="container">
+			<h2>研修新規登録</h2>
+			
+			<p class="message" th:if="${errorMessage}"
+				th:text="${errorMessage}" style="background-color: rgb(255, 212, 212);">
+				エラーメッセージ
+			</p>
+			
+			<div>
+				<form class="logcenter" th:action="@{/admin/Training/create}"
+					th:object="${form}" method="post">
 					
-					<p class="errormessage" th:if="${#fields.hasErrors('tra_id')}"
-						th:errors="*{tra_id}" style="color: red;">
-						エラーがあれば表示
-					</p>
-				</div>
-				
-				<div class="centerform">
-					<label class="labelname">研修名  *</label>
-					<input class="Msizeinput" type="text" th:field="*{tra_name}">
+					<div class="centerform">
+						<label class="labelname">研修ID  *</label>
+						<input class="Msizeinput" type="text" th:field="*{tra_id}">
+						
+						<p class="errormessage" th:if="${#fields.hasErrors('tra_id')}"
+							th:errors="*{tra_id}" style="color: red;">
+							エラーがあれば表示
+						</p>
+					</div>
 					
-					<p class="errormessage" th:if="${#fields.hasErrors('tra_name')}"
-						th:errors="*{tra_name}" style="color: red;">
-						エラーがあれば表示
-					</p>
-				</div>
-				
-				<div class="centerform">
-					<label class="labelname">想定時間</label>
-					<input class="Msizeinput" type="text" th:field="*{est_time}">
-				</div>
-				
-				<div class="centerform">
-					<label class="labelname">使用教材</label>
-					<input class="Msizeinput" type="text" th:field="*{text_book}">
-				</div>
-				
-				<div class="centerform">
-					<label class="labelname">説明</label>
-					<input class="descinput" type="text" th:field="*{description}">
-				</div>
-				
-				<div class="centerform">
-					<label class="labelname">課題</label>
-					<input class="issueinput" type="text" th:field="*{assignment}">
-				</div>
-				
-				<div class="inputbtnR">
-					<button class="registbtn" type="submit">登録</button>
-				</div>
-			</form>
+					<div class="centerform">
+						<label class="labelname">研修名  *</label>
+						<input class="Msizeinput" type="text" th:field="*{tra_name}">
+						
+						<p class="errormessage" th:if="${#fields.hasErrors('tra_name')}"
+							th:errors="*{tra_name}" style="color: red;">
+							エラーがあれば表示
+						</p>
+					</div>
+					
+					<div class="centerform">
+						<label class="labelname">想定時間</label>
+						<input class="Msizeinput" type="text" th:field="*{est_time}">
+					</div>
+					
+					<div class="centerform">
+						<label class="labelname">使用教材</label>
+						<input class="Msizeinput" type="text" th:field="*{text_book}">
+					</div>
+					
+					<div class="centerform">
+						<label class="labelname">説明</label>
+						<textarea class="descinput" type="text" th:field="*{description}"></textarea>
+					</div>
+					
+					<div class="centerform">
+						<label class="labelname">課題</label>
+						<textarea class="issueinput" type="text" th:field="*{assignment}"></textarea>
+					</div>
+					
+					<div class="inputbtnR">
+						<button class="registbtn" type="submit">登録</button>
+					</div>
+				</form>
+			</div>
 		</div>
-	</div>
-	
-	<form class="returnbtnL" th:action="@{/admin/Training}">
-		<button class="Allreturnbtn">研修一覧に戻る</button>
+		
+		<form class="returnbtnL" th:action="@{/admin/Training}">
+			<button class="Allreturnbtn">研修一覧に戻る</button>
 	</form>
+	</main>
 </body>
 </html>

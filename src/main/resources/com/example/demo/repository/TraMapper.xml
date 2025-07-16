@@ -14,8 +14,8 @@
 	</select>
 	<!-- 名前 1件検索 -->
 	<select id="selectByName" resultType="com.example.demo.entity.Tra_Manegement">
-		SELECT tra_id, tra_name, est_time, text_book, assignment,
-		description FROM trainfo_table
+		SELECT tra_id, tra_name, est_time, text_book, description,
+		assignment FROM trainfo_table
 		WHERE tra_name LIKE '%' || #{tra_name} || '%'
 	</select>
 	<!-- 新規登録 -->

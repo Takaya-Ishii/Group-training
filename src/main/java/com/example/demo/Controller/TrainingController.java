@@ -87,12 +87,14 @@ public class TrainingController {
 			BindingResult bindingResult, Model model,
 			RedirectAttributes attributes) {
 		
+		
+		
 		//バリデーションチェック
-			if(bindingResult.hasErrors()) {
-				attributes.addFlashAttribute("form", form);
-				model.addAttribute("errorMessage", "入力項目に誤りがあります。メッセージを確認し、再度入力をしてください。");
-				return "trainingNew";
-			}
+		if(bindingResult.hasErrors()) {
+			attributes.addFlashAttribute("form", form);
+			model.addAttribute("errorMessage", "入力項目に誤りがあります。メッセージを確認し、再度入力をしてください。");
+			return "trainingNew";
+		}
 		
 		Tra_Manegement tra_mane = TraHelper.convertTra(form);
 		traService.insertTra(tra_mane);
