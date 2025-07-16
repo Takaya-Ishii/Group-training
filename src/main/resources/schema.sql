@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS group_table CASCADE;
 DROP TABLE IF EXISTS profile_table CASCADE;
+DROP TABLE IF EXISTS member_table CASCADE;
 DROP TABLE IF EXISTS trainfo_table CASCADE;
 DROP TABLE IF EXISTS traCourse_table CASCADE;
 DROP TABLE IF EXISTS role_table CASCADE;
@@ -64,25 +65,26 @@ CREATE TABLE IF NOT EXISTS profile_table(
 --グループ管理テーブル
 CREATE TABLE IF NOT EXISTS group_table (
 	--グループID
-	group_ID SERIAL, --PRIMARY KEY,
-	--ユーザID(メイン講師)
-	username VARCHAR(30) NOT NULL,
-	FOREIGN KEY (username) REFERENCES profile_table(username) ON DELETE CASCADE,
+	group_ID SERIAL PRIMARY KEY,
 	--グループ名: 必須
 	group_name VARCHAR(30) NOT NULL UNIQUE,
 	--概要
-	summary TEXT UNIQUE,
-	--グループIDとユーザIDの組み合わせを主キーに設定
-	PRIMARY KEY (group_ID, username)
+	summary TEXT
 );
 
---相互参照のためグループ管理テーブルを定義後に個人情報テーブルにグループIDを追加
---一度実行した後は「既にgroup_IDという列は存在しています」というエラーが出るので
---３行ともコメントアウトしてください。
-
---ALTER TABLE profile_table
---ADD COLUMN group_ID INT,
---ADD CONSTRAINT group_ID FOREIGN KEY (group_ID) REFERENCES group_table(group_ID);
+--グループメンバテーブル: ユーザーとグループの中間テーブル
+CREATE TABLE IF NOT EXISTS member_table(
+	--どのグループに誰が所属しているかを判別する主キー
+	group_user_ID SERIAL PRIMARY KEY,
+	--グループID
+	group_ID INT NOT NULL,
+	FOREIGN KEY (group_ID) REFERENCES group_table(group_ID) ON DELETE CASCADE,
+	--グループに所属している利用者リスト
+	username VARCHAR(30) NOT NULL,
+	FOREIGN KEY (username) REFERENCES profile_table(username) ON DELETE CASCADE,
+	--メイン講師のみtrueに設定
+	isTeacher BOOLEAN NOT NULL
+);
 
 --受講研修テーブル
 CREATE TABLE IF NOT EXISTS traCourse_table(
@@ -131,5 +133,6 @@ CREATE TABLE IF NOT EXISTS TPM_table(
 ALTER SEQUENCE role_table_role_ID_seq RESTART WITH 1;
 ALTER SEQUENCE status_table_status_ID_seq RESTART WITH 1;
 ALTER SEQUENCE group_table_group_ID_seq RESTART WITH 1;
+ALTER SEQUENCE member_table_group_user_ID_seq RESTART WITH 1;
 ALTER SEQUENCE traCourse_table_traCourse_ID_seq RESTART WITH 1;
 ALTER SEQUENCE TPM_table_stack_No_seq RESTART WITH 1;

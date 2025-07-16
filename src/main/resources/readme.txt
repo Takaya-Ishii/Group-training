@@ -1,36 +1,7 @@
 schema.sqlとdata.sqlの動作に関して
 
-めちゃくちゃややこしいことになってるのでテーブルを正常に定義するための手順を書きます
-
-①何もコードを変更せずそのまま動作させ、エラーが無ければ実行を停止してください。
-data.sqlにダミーデータを追加したので一度全部作り直します。
-ここで個人情報、グループ、受講研修の主キー周り以外の定義とそれ以外のテーブルの定義をします
-
-②schema.sqlファイルのALTER TABLE profile_tableから続く3行をコメントアウトしてください
-再実行時に「profile_tableには既にgroup_IDという列が存在しています」というエラーを防ぐためです
-
-③group_tableのgroup_IDのPRYMARY KEYを削除orコメントアウトしてください
-この段階ではgroup_tableの主キーはgroup_IDのみです
-
-④group_tableの一番下のPRIMARY KEYのコメントアウトを外し、上のsummaryの文末にカンマを付けてください
-そのためここで複合主キーにするためにテーブルの設計(設定)を変更します
-
-⑤schema.sqlの最上部のDROP TABLE group_table文以外をコメントアウトしてください
-設定が新しくなったのでグループテーブルのみ一度削除して再度作成するようにします
-
-⑥data.sqlのINSERT INTO group_table文の文末、ON CONFLICTのカッコ内にカンマとusernameを追記します
-主キーがgroup_IDからgroup_IDとusernameの複合主キーになったためです
-
-⑦再実行します。
-これで正しくテーブルが定義され、これ以降も使用できます。
-
-！！！！⑧！！！！ ⑤でコメントアウトを外したDROP TABLE文を再度コメントアウトします
-これをしないと実行するたびにグループ管理テーブルが初期化されます
-
-以上です
-
-どうしてこうなってしまったんでしょうね。
-本当に申し訳ない。
+何もしなくてもテーブルを正常に定義できるようになりました
+一度全テーブルをDROPしてからコメントアウトすれば問題なく動きます。
 
 --追記--
 以下DB操作について
@@ -44,7 +15,7 @@ ER図でいうと線が繋がっているデータの(FK)がついてない側�
 
 例:
 ・あるユーザIDを持ったユーザを個人情報テーブルから削除すると、
-グループテーブルでそのユーザIDを参照している全てのグループが一緒に削除される。
+メンバーテーブル内のユーザIDを参照しているデータが全て一緒に削除される。
 ・ステータスIDを削除すると、受講研修一覧テーブルと研修進捗管理テーブルから
 削除されたステータスIDと同じステータスIDが設定されていたデータが全て削除される。
 ・受講研修一覧テーブルと研修進捗管理テーブルのデータを削除しても、
@@ -55,11 +26,11 @@ UPDATE文の1部のみトランザクションというめんどくさい処理�
 
 例:
 BEGIN;
-INSERT INTO profile_table VALUES ('temp@example.jp', 'temp data', 'password', '08011112222', null, '不明', '未定', null, 2, null);
-UPDATE group_table SET username = 'temp@example.jp' WHERE group_ID = 1 AND username='fugafuga@example.jp';
-UPDATE profile_table SET username = 'gahagaha@example.jp', account_name = 'gaha gaha' WHERE username = 'fugafuga@example.jp';
-UPDATE group_table SET username = 'gahagaha@example.jp' WHERE group_ID = 1 AND username = 'temp@example.jp';
-DELETE FROM profile_table WHERE username='temp@example.jp';
+INSERT INTO profile_table VALUES ('temp', 'temp', 'temp', '11111111111', NULL, '不明', 'アプリ', NULL, 2);
+UPDATE member_table SET username = 'temp' WHERE username = 'fugafuga@example.jp';
+UPDATE profile_table SET username = 'pakapaka@example.jp' WHERE username = 'fugafuga@example.jp';
+UPDATE member_table SET username = 'pakapaka@example.jp' WHERE username = 'temp';
+DELETE FROM profile_table WHERE username = 'temp';
 COMMIT;
 
 BEGIN～COMMIT間の処理中にエラーが出た場合、DBに対し何もしなかったことになるという処理です。
@@ -69,9 +40,9 @@ BEGIN～COMMIT間の処理中にエラーが出た場合、DBに対し何もし�
 
 上では個人情報テーブルのIDを変更したい場合の処理です。
 個人情報テーブルにダミーデータ(temp)を登録
-グループテーブルのメイン講師を一時的にダミーを参照させる
+メンバーテーブルのメイン講師を一時的にダミーを参照させる
 ユーザの情報を更新する
-グループテーブルのメイン講師を情報更新されたユーザに再設定する
+メンバーテーブルのメイン講師を情報更新されたユーザに再設定する
 ダミーデータを削除する
 
 まぁusernameとかtra_IDとかの主キーは今回そもそも編集画面で編集出来ないはずなので
