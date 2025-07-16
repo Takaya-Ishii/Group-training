@@ -41,7 +41,7 @@ public class StackController {
 			@ModelAttribute StackForm stackForm, @AuthenticationPrincipal LoginUser loginUser, Model model) {
 		stackForm.setTraCourseID(traCourse_ID);
 		model.addAttribute("group", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
-		return "participant/traCourse/detail";
+		return "participant/traCourse/tracoursedetail";
 	}
 	
 	
