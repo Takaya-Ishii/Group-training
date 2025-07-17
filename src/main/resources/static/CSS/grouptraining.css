@@ -1,8 +1,6 @@
 @charset "UTF-8";
 
-
 /** ヘッダー */
-
 
 header{
 	background-color:  rgb(223, 240, 254);
@@ -96,9 +94,6 @@ header #logout button:hover{
 
 
 
-
-
-
 /*-- 共通CSS --*/
 
 html {
@@ -127,6 +122,18 @@ main {
 .errormessage {
 	margin: 0;
 	text-align: left;
+}
+
+.error1 {
+	margin-left: 90px;
+}
+
+.error2 {
+	margin-left: 55px;
+}
+
+.error3 {
+	margin-left: 70px;
 }
 
 .registmessage { /* 登録完了メッセージ表示 */
@@ -253,14 +260,12 @@ a {
 }
 
 
-
-
-
 /*　テーブル設定（縦、横）　*/
 
 table {
 	color: rgb(5, 79, 145);
 }
+
 
 
 .nomaltable { /* tdに色がつかない縦テーブル */
@@ -285,8 +290,6 @@ table {
 	min-width: 80px;
 	background-color: rgb(176, 217, 254);
 }
-
-
 
 
 
@@ -322,8 +325,6 @@ td {
 tr:nth-child(2n+1) td {
   background-color: rgb(223, 240, 254);
 }
-
-
 
 
 
@@ -363,8 +364,6 @@ tr:nth-child(2n+1) td {
 
 
 
-
-
 .vertable {
 	border: solid black 2px;
 	margin: auto;
@@ -394,7 +393,6 @@ tr:nth-child(2n+1) td {
 .vtableheight2 {
 	height: 60px;
 }
-
 
 
 
@@ -441,7 +439,6 @@ td {
 }
 
 
-
 /*　各種ボタン設定　*/
 
 .maru {
@@ -458,7 +455,6 @@ button,
 	margin-top: 20px;
 	transition: .5s;
 }
-
 
 
 /*　青ボタン　*/
@@ -486,9 +482,7 @@ button,
 }
 
 
-
 /*　水色ボタン　*/
-
 
 .addlessonlogbtn { /* 研修履歴登録 */
 	padding: 2px 12px;
@@ -542,7 +536,6 @@ button,
 }
 
 
-
 /*　緑ボタン　*/
 
 .chengebtn { /* 変更ボタン */
@@ -582,7 +575,6 @@ button,
 }
 
 
-
 /*　赤ボタン　*/
 
 .deletebtn { /* 削除 */
@@ -597,7 +589,6 @@ button,
 }
 
 
-
 /*　藍色ボタン　*/
 
 .returnbtn { /* 研修一覧戻る */
@@ -610,7 +601,6 @@ button,
 .returnbtn:hover {
 	background-color: rgb(103, 99, 154);
 }
-
 
 .Allreturnbtn { /* 受講研修一覧に戻る */
 	padding: 0 20px 4px 20px;
@@ -648,7 +638,6 @@ button,
 .detailreturnbtn:hover {
 	background-color: rgb(103, 99, 154);
 }
-
 
 
 /*　灰色ボタン　*/
@@ -723,7 +712,6 @@ button,
 
 /*　ログイン画面　*/
 
-
 .logcenter { /* ログイン画面にてメイン部分全体を中央揃えにする */
 	text-align: center;
 }
@@ -748,11 +736,13 @@ button,
 	margin-bottom: 20px;
 }
 
+
 /*　受講研修一覧　*/
 
 .lh08{
 	line-height: 0.8;
 }
+
 
 /*　HTML・CSS研修(受講研修詳細画面)　*/
 
@@ -762,11 +752,6 @@ button,
 	height: 40px;
 }
 
-/*　学習履歴登録　*/
-
-/*　学習履歴修正・削除　*/
-
-/*　ユーザー一覧　*/
 
 .ユーザー一覧 {
 	max-width: 200px;
@@ -798,7 +783,6 @@ button,
 
 /*　ユーザー新規登録　*/
 
-
 .centerformradio2 { /* ユーザー管理画面でのみ使用 */
 	width: 58%;
 	margin-bottom: 20px;
@@ -819,8 +803,6 @@ button,
 .celinp2 { /* ユーザー管理画面でのみ使用 */
 	margin-left: 35%;
 }
-
-
 
 .centerformradio3 { /* ユーザー管理画面でのみ使用 */
 	width: 62.5%;
@@ -847,17 +829,12 @@ button,
 }
 
 
-/*　ユーザー編集　*/
-
 /*　研修一覧テーブル　*/
 
 .研修名 {
 	width: 350px;
 }
 
-/*　研修詳細　*/
-
-/*　研修新規登録　*/
 
 /*　研修編集　*/
 
@@ -889,21 +866,3 @@ button,
 .目標期日 {
 	width: 250px;
 }
-
-/*　週刊報告一覧　*/
-
-/*　報告確認　*/
-
-/*　週間報告　*/
-
-/*　グループ一覧　*/
-
-/*　グループメンバー一覧　*/
-
-/*　グループ新規登録　*/
-
-/*　グループ編集　*/
-
-/*　グループ詳細　*/
-
-/*　トーク画面　*/
