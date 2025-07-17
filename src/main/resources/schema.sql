@@ -17,10 +17,10 @@ CREATE TABLE IF NOT EXISTS trainfo_table(
 	est_time INTEGER,
 	--使用教材
 	text_book VARCHAR(50),
-	--課題
-	assignment VARCHAR(100),
 	--説明
-	description VARCHAR(100)
+	description VARCHAR(100),
+	--課題
+	assignment VARCHAR(100)
 );
 
 --ロールテーブル

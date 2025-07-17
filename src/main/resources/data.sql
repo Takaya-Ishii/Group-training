@@ -26,6 +26,7 @@ INSERT INTO member_table (group_ID, username, isTeacher) VALUES (1, 'fugafuga@ex
 INSERT INTO member_table (group_ID, username, isTeacher) VALUES (2, 'foofoo@example.jp', TRUE)  ON CONFLICT (group_user_ID) DO NOTHING;
 INSERT INTO member_table (group_ID, username, isTeacher) VALUES (2, 'hogahoga@example.jp', FALSE)  ON CONFLICT (group_user_ID) DO NOTHING;
 
+
 INSERT INTO traCourse_table (tra_ID, username, isTakeCourse, latestProgress, status_ID, target_date) VALUES ('H0001', 'hogehoge@example.jp', TRUE, 100, 5, '2025-04-01') ON CONFLICT (traCourse_ID) DO NOTHING;
 INSERT INTO traCourse_table (tra_ID, username, isTakeCourse, latestProgress, status_ID, target_date) VALUES ('J0001', 'hogehoge@example.jp', TRUE, 100, 5, '2025-05-01') ON CONFLICT (traCourse_ID) DO NOTHING;
 INSERT INTO traCourse_table (tra_ID, username, isTakeCourse, latestProgress, status_ID, target_date) VALUES ('H0001', 'foofoo@example.jp', TRUE, 100, 5, '2025-05-01') ON CONFLICT (traCourse_ID) DO NOTHING;
