@@ -58,4 +58,9 @@ public class TraServiceImpl implements TraService{
 	public List<Tra_Manegement> selectTraName(String tra_id) {
 		return traMapper.selectTraName(tra_id);
 	}
+	
+	@Override
+	public boolean existsByIdTra(String tra_id) {
+		return false;
+	}
 }

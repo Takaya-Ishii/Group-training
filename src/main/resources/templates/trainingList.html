@@ -8,38 +8,66 @@
 <body>
 	<!-- ヘッダー -->
 	<header th:fragment="header">
-	<div>
 		<nav>
-			<div>
-				研修管理システム
-				<ul class="nav">
-					<li sec:authorize="hasAuthority('ROLE_講師')"><a th:href="@{/admin/Training}">研修管理</a></li>
-					<li sec:authorize="hasAuthority('ROLE_講師')"><a th:href="@{/admin/Group}">グループ管理</a></li>
-					<li sec:authorize="hasAuthority('ROLE_講師')"><a th:href="@{/admin/User}">ユーザー管理</a></li>
+			<ul>
+			<h1>研修管理システム</h1>
+				<li sec:authorize="hasAuthority('ROLE_講師')">
+					<button onclick="location.href='/admin/Training'">研修管理</button>
+				</li>
+				<li sec:authorize="hasAuthority('ROLE_講師')">
+					<button onclick="location.href='/admin/Group'">グループ管理</button>
+				</li>
+				<li sec:authorize="hasAuthority('ROLE_講師')">
+					<button onclick="location.href='/admin/User'">ユーザー管理</button>
+				</li>
+				<li sec:authorize="hasAuthority('ROLE_講師')">
+					<button onclick="location.href='/admin/WeeklyRepo'">報告確認</button>
+				</li>
 
-					<!-- 報告確認機能はスコープ外なのでコメントアウト
-					<li sec:authorize="hasAuthority('ROLE_講師')"><a th:href="@{/admin/○○}">報告確認</a></li>
-					-->
-					<!-- トーク機能はスコープ外なのでコメントアウト
-					<li sec:authorize="hasAuthority('ROLE_受講者')"><a th:href="@{/participant/talk}">トーク</a></li>	
-					-->
 
-					<li sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')"><a th:href="@{/participant/traCourse}">受講研修</a></li>
+				<li sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')">
+					<form th:action="@{/participant/talk/{room_ID}(room_ID = ${MsgRoom_room_id})}" method="get">
+						<button type="submit">トーク</button>
+					</form>
+				</li>	
+				<li sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')">
+					<form th:action="@{/participant/traCourse/{username}(username=${username})}" method="get">
+						<button type="submit">受講研修</button>
+					</form>
+				</li>
+				<li sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')">
+					<button onclick="location.href='/participant/WeeklyRepo'">週間報告</button>
+				</li>
+					
 
-					<!-- 週間報告機能はスコープ外なのでコメントアウト
-					<li sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')">
-					<a th:href="@{/participant/○○}">週間報告</a></li>
-					-->
+				<li th:if="${group != null}" sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')" >
+					<form th:action="@{/participant/Group/member/{group_ID}(group_ID = ${group.group_ID})}" method="get">
+						<button type="submit" class="ellipsis">
+							<span th:text="${group.group_name}"></span>
+						</button>
+					</form>
+				</li>
 
-					<li sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')"><a th:href="@{/participant/traCourse}">[[${group_name}]]</a></li>
-						
-					<li><form th:action="@{/logout}" method="post">
-						<input type="submit" value="ログアウト">
-						</form></li>
-				</ul>
-			</div>
+				<li id="notBelong" th:if="${group == null}" sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')">
+					<span>グループ未所属</span>
+				</li>
+
+				<li class="ellipsis" sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')">
+					<img th:src="@{/image/受講者アイコン.png}" alt="受講者アイコン">
+					<span id="account_name" sec:authentication="principal.account_name"></span>
+				</li>
+				<li class="ellipsis" sec:authorize="hasAuthority('ROLE_講師')">
+					<img th:src="@{/image/講師アイコン.png}" alt="講師アイコン">
+					<span id="account_name" sec:authentication="principal.account_name"></span>
+				</li>
+
+				<li id="logout">
+					<form th:action="@{/logout}" method="post">
+					<button type="submit">ログアウト</button>
+					</form>
+				</li>
+			</ul>
 		</nav>
-	</div>
 	</header>
 	
 	<main>

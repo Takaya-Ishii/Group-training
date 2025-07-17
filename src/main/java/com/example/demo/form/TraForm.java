@@ -1,5 +1,7 @@
 package com.example.demo.form;
 
+import com.example.demo.validator.DuplicateCheck;
+
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -18,6 +20,7 @@ public class TraForm {
 	@Pattern(regexp = "^(?!.*[%]).*$", message = "")
 	@Pattern(regexp = "^(?!.*[\\s|　]).*$", message = "研修IDは、必須項目です")
 	@Size(max=5, message = "")
+	@DuplicateCheck
 	private String tra_id;
 	
 	@NotBlank(message = "研修名は、必須項目です")

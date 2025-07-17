@@ -30,4 +30,6 @@ public interface TraMapper {
 	
 	//指定された研修IDに対応する研修名を取得
 	List<Tra_Manegement> selectTraName(@Param("tra_id") String tra_id);
+	
+	boolean existsById(@Param("tra_id") String tra_id);
 }

@@ -22,4 +22,6 @@ public interface TraService {
 	void deleteTra(String tra_id);
 	
 	List<Tra_Manegement> selectTraName(String tra_id);
+	
+	boolean existsByIdTra(String tra_id);
 }

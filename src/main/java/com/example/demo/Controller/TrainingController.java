@@ -48,6 +48,7 @@ public class TrainingController {
 	public String trainingSerch(@RequestParam(value = "tra_name", required = false) 
 			String tra_name, Model model,
 			RedirectAttributes attributes) {
+		
 		model.addAttribute("tra_name", tra_name);
 		if(tra_name != null && !tra_name.isEmpty()) {
 			if(!tra_name.isEmpty()) {
@@ -87,11 +88,15 @@ public class TrainingController {
 			BindingResult bindingResult, Model model,
 			RedirectAttributes attributes) {
 		
-		
-		
 		//バリデーションチェック
 		if(bindingResult.hasErrors()) {
 			attributes.addFlashAttribute("form", form);
+			model.addAttribute("errorMessage", "入力項目に誤りがあります。メッセージを確認し、再度入力をしてください。");
+			return "trainingNew";
+		}
+		
+		//重複チェック
+		if(traService.existsByIdTra(form.getTra_id()) == true) {
 			model.addAttribute("errorMessage", "入力項目に誤りがあります。メッセージを確認し、再度入力をしてください。");
 			return "trainingNew";
 		}
