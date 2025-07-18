@@ -841,7 +841,7 @@ button,
 .descinput,
 .issueinput { /* 説明、課題の入力欄 */
 	padding: 4px 10px;
-	font-size: 1em;
+	font-size: 1.15em;
 	width: 60%;
 }
 
