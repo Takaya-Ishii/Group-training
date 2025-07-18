@@ -1,9 +1,5 @@
 package com.example.demo.entity;
 
-import java.util.List;
-
-import com.example.demo.entity.Group.Group;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,16 +24,6 @@ public class Authentication {
    private String affiriation;
    /** 出身学部 */
    private String departOfOrigin;
-   /**グループのID*/
-   private int group_ID;
    /** ロールID */
    private int role_ID;
-   //ユーザーのグループ名
-   private String group_name;
-   //ユーザー名のロール名
-   private String role_name;
-   //ユーザーとグループの一対多の関係
- 	private List<Group> group; 
-   //ユーザーとロールIDの一対一の関係
- 	private Role role;
 }

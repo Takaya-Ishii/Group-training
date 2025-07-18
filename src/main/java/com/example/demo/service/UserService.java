@@ -3,7 +3,7 @@ package com.example.demo.service;
 import java.util.List;
 
 import com.example.demo.entity.Authentication;
-import com.example.demo.entity.Group.Group;
+import com.example.demo.entity.Group;
 
 
 /**サービス実際にJava上での動き*/

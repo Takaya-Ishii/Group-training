@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.Authentication;
-import com.example.demo.entity.Group.Group;
+import com.example.demo.entity.Group;
 import com.example.demo.repository.UserMapper;
 import com.example.demo.service.UserService;
 

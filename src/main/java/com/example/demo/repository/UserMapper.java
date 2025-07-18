@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.example.demo.entity.Authentication;
-import com.example.demo.entity.Group.Group;
+import com.example.demo.entity.Group;
 
 
 /**User リポジトリ*/

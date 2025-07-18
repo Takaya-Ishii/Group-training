@@ -1,103 +1,6 @@
 @charset "UTF-8";
 
 
-/** ヘッダー */
-
-
-header{
-	background-color:  rgb(223, 240, 254);
-}
-
-body{
-	margin: auto;
-}
-
-header ul{
-	display: flex;
-	justify-content: space-between;
-	padding-left: 0;
-	margin-top: 0;
-}
-
-header ul h1{
-	padding-right: 25%;
-	padding-left: 10px;
-}
-
-header ul li{
-	display: table-cell;
-}
-
-header ul li button{
-	display: block;
-	border: none;
-	padding: 25px 15px 25px;
-	background: transparent;
-	color: rgb(0, 64, 128);
-	font-size: large;
-	margin-top: 0;
-}
-
-header ul li#account_name{
-	color: rgb(0, 64, 128);
-}
-
-header ul li button:hover{
-	background-color:cornflowerblue
-}
-
-header ul li img{
-	float: left;
-	padding-top: 20px;
-	padding-right: 10px;
-}
-
-#account_name{
-	font-size: medium;
-	color: rgb(0, 64, 128);
-	line-height: 75px;
-}
-
-.ellipsis{
-	width: 200px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	height: 75.6px;
-}
-
-#notBelong{
-	display: block;
-	line-height: 75px;
-	text-decoration: none;
-	color: rgb(0, 64, 128);
-	font-size: large;
-}
-
-#logout{
-	background-image: url(../image/ログアウト.png);
-	background-repeat: no-repeat;
-	background-position: 20px 20px;
-	background-color: rgb(176, 217, 254);
-}
-
-header #logout button{
-	padding: 25px 15px 25px 60px;
-	height: 75px;
-	font-size: medium;
-}
-
-header #logout button:hover{
-	background-image: url(../image/ログアウト.png);
-	background-repeat: no-repeat;
-	background-position: 20px 20px;
-	background-color:cornflowerblue
-}
-
-
-
-
-
 
 /*-- 共通CSS --*/
 a {text-decoration:none}
@@ -114,6 +17,8 @@ a {text-decoration:none}
 	margin-left: 70px;
 }
 
+
+/*-- 共通CSS --*/
 html {
 	background-color: rgb(255, 255, 255);
 }
@@ -262,9 +167,6 @@ input[type="date"] { /* 日付入力欄のサイズ変更 */
 }
 
 
-
-
-
 /*　テーブル設定（縦、横）　*/
 
 table {
@@ -287,15 +189,13 @@ table {
 
 .nomaltable td {
 	text-align: center;
+	word-break: break-all;
 }
 
 .nomaltable th {
 	min-width: 80px;
 	background-color: rgb(176, 217, 254);
 }
-
-
-
 
 
 .table { /* tdに色がつくテーブル */
@@ -332,9 +232,6 @@ tr:nth-child(2n+1) td {
 }
 
 
-
-
-
 .table5 { /* ユーザー一覧でのみ使用の5列のテーブル */
 	border: solid black 2px;
 	margin: auto;
@@ -351,6 +248,7 @@ tr:nth-child(2n+1) td {
 
 .table5
 th {
+
 	font-size: 1.03rem;
 	min-width: 50px;
 	background-color: rgb(176, 217, 254);
@@ -368,8 +266,6 @@ td {
 tr:nth-child(2n+1) td {
   background-color: rgb(223, 240, 254);
 }
-
-
 
 
 
@@ -405,7 +301,6 @@ tr:nth-child(2n+1) td {
 
 
 
-
 .learninglogtable {
 	border-collapse: collapse;
 	margin: 20px 0;
@@ -425,6 +320,7 @@ th {
 .learninglogtable
 td {
 	padding: 5px 0;
+	word-break: break-all;
 }
 
 .learninglogtable input[type="text"],
@@ -755,7 +651,14 @@ button,
 	margin-bottom: 20px;
 }
 
+
 /*　受講研修一覧　*/
+
+.lh08{
+	line-height: 0.8;
+}
+
+
 
 /*　HTML・CSS研修(受講研修詳細画面)　*/
 
@@ -764,6 +667,7 @@ button,
 	margin-left: 12%;
 	height: 40px;
 }
+
 
 /*　学習履歴登録　*/
 
@@ -824,7 +728,6 @@ button,
 }
 
 
-
 .centerformradio3 { /* ユーザー管理画面でのみ使用 */
 	width: 62.5%;
 	margin-bottom: 20px;
@@ -850,13 +753,16 @@ button,
 }
 
 
+
 /*　ユーザー編集　*/
+
 
 /*　研修一覧テーブル　*/
 
 .研修名 {
 	width: 350px;
 }
+
 
 /*　研修詳細　*/
 
@@ -893,6 +799,7 @@ button,
 	width: 250px;
 }
 
+
 /*　週刊報告一覧　*/
 
 /*　報告確認　*/
@@ -910,3 +817,95 @@ button,
 /*　グループ詳細　*/
 
 /*　トーク画面　*/
+
+
+header{
+background-color:  rgb(223, 240, 254);
+}
+
+body{
+	margin: auto;
+}
+
+header ul{
+display: flex;
+justify-content: space-between;
+padding-left: 0;
+margin-top: 0;
+}
+
+header ul h1{
+padding-right: 25%;
+padding-left: 10px;
+}
+
+header ul li{
+display: table-cell;
+}
+
+header ul li button{
+display: block;
+border: none;
+padding: 25px 15px 25px;
+background: transparent;
+color: rgb(0, 64, 128);
+font-size: large;
+margin-top: 0;
+}
+
+header ul li#account_name{
+	color: rgb(0, 64, 128);
+}
+
+header ul li button:hover{
+background-color:cornflowerblue
+}
+
+header ul li img{
+	float: left;
+	padding-top: 20px;
+	padding-right: 10px;
+}
+
+#account_name{
+	font-size: medium;
+	color: rgb(0, 64, 128);
+	line-height: 75px;
+}
+
+.ellipsis{
+	width: 200px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 75.6px;
+}
+
+#notBelong{
+	display: block;
+	line-height: 75px;
+	text-decoration: none;
+	color: rgb(0, 64, 128);
+	font-size: large;
+}
+
+#logout{
+	background-image: url(../image/ログアウト.png);
+	background-repeat: no-repeat;
+	background-position: 20px 20px;
+	background-color: rgb(176, 217, 254);
+}
+
+header #logout button{
+	padding: 25px 15px 25px 60px;
+	height: 75px;
+	font-size: medium;
+}
+
+header #logout button:hover{
+	background-image: url(../image/ログアウト.png);
+	background-repeat: no-repeat;
+	background-position: 20px 20px;
+	background-color:cornflowerblue
+}
+
