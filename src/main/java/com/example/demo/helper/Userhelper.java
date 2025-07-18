@@ -24,8 +24,8 @@ public class Userhelper {
 		user.setGender(form.getGender());
 		user.setAffiriation(form.getAffiriation());
 		user.setDepartOfOrigin(form.getDepartOfOrigin());
-		//user.setGroup_ID(form.getGroup_ID());
-		//user.setRole(form.getRole());
+		user.setGroup_ID(form.getGroup_ID());
+		user.setRole(form.getRole());
 		user.setGroup_ID(form.getGroup_ID());
 		user.setRole_ID(form.getRole_ID());
 		return user;

@@ -25,18 +25,15 @@ import lombok.NoArgsConstructor;
 public class UserForm {
 	//ユーザーのID
 	@NotBlank(message = "ユーザーIDは必須項目です。",groups = {InsertValidation.class})
-	@NotBlank(message = "ユーザーIDは必須項目です。",groups = {EditValidation.class})
 	@Email(message="メールアドレスの形式が無効です。",groups = {InsertValidation.class})
-	@Email(message="メールアドレスの形式が無効です。",groups = {EditValidation.class})
-	@Size(min = 1, max = 30,message = "最大文字数を超過しています。",groups = {InsertValidation.class})
-	@Size(min = 1, max = 30,message = "最大文字数を超過しています。",groups = {EditValidation.class})
+	@Size(min=0,max = 30,message = "最大文字数を超過しています。",groups = {InsertValidation.class})
 		private String username;
 	
 		//ユーザーの名前
 	@NotBlank(message = "ユーザー名は必須項目です。",groups = {InsertValidation.class})
-	@Size(min = 1, max = 20,message = "最大文字数を超過しています。",groups = {InsertValidation.class})
+	@Size(min=0,max = 20,message = "最大文字数を超過しています。",groups = {InsertValidation.class})
 	@NotBlank(message = "ユーザー名は必須項目です。",groups = {EditValidation.class})
-	@Size(min = 1, max = 20,message = "最大文字数を超過しています。",groups = {EditValidation.class})
+	@Size(min=0,max = 20,message = "最大文字数を超過しています。",groups = {EditValidation.class})
 		private String account_name;
 	
 		//ユーザーのパスワード
@@ -51,13 +48,12 @@ public class UserForm {
 		//ユーザーの電話番号
 	@NotBlank(message = "電話番号は必須項目です。",groups = {InsertValidation.class})
 	@NotBlank(message = "電話番号は必須項目です。",groups = {EditValidation.class})
-	@Pattern(regexp = "^\\d{3}\\d{4}\\d{4}", message = "ハイフンがあるもしくは入力に誤りがあります。",groups = {InsertValidation.class})
-	@Pattern(regexp = "^\\d{3}\\d{4}\\d{4}", message = "ハイフンがあるもしくは入力に誤りがあります。",groups = {EditValidation.class})
+	@Pattern(regexp = "^\\d{3}\\d{4}\\d{4}", message = "入力に誤りがあります。",groups = {InsertValidation.class})
+	@Pattern(regexp = "^\\d{3}\\d{4}\\d{4}", message = "入力に誤りがあります。",groups = {EditValidation.class})
 		private String TEL;
 	
 		//ユーザーの住所
-	@NotBlank(message = "住所は必須項目です。" ,groups = {InsertValidation.class})
-	@NotBlank(message = "住所は必須項目です。",groups = {EditValidation.class} )
+	@Size(min = 1, max = 50,message = "最大文字数を超過しています。",groups = {InsertValidation.class})
 	@Size(min = 1, max = 50,message = "最大文字数を超過しています。",groups = {EditValidation.class})
 		private String address;
 		
@@ -72,12 +68,13 @@ public class UserForm {
 		private String affiriation;
 	
 		//ユーザーのグループ
-	@NotNull(message = "グループは必須項目です。",groups ={EditValidation.class})
+	@NotNull(message = "グループ選択は必須です。",groups ={InsertValidation.class})
+	@NotNull(message = "グループ選択は必須です。",groups ={EditValidation.class})
 		private Integer group_ID; 
 		
 		//ユーザーの出身学部
-	@Size(min = 1, max = 10,message = "最大文字数を超過しています。",groups = {InsertValidation.class})
-	@Size(min = 1, max = 10,message = "最大文字数を超過しています。",groups = {EditValidation.class})
+	@Size(min=0,max = 10,message = "10文字以下でなくてはなりません。",groups = {InsertValidation.class})
+	@Size(min = 0,max = 10,message = "10文字以下でなくてはなりません。",groups = {EditValidation.class})
 		private String departOfOrigin;
 		
 		//ユーザーのロールID
@@ -95,8 +92,8 @@ public class UserForm {
 		private String summary;
 		
 		//パスワードと確認用パスワードが一致するかチェック
-		@AssertTrue(message = "「パスワード」と「パスワード（確認）」が異なります",groups = {InsertValidation.class})
-		@AssertTrue(message = "「パスワード」と「パスワード（確認）」が異なります",groups ={EditValidation.class})
+		@AssertTrue(message = "パスワードが異なります",groups = {InsertValidation.class})
+		@AssertTrue(message = "パスワードが異なります",groups ={EditValidation.class})
 		public boolean isSamePassword() {
 			return Objects.equals(password, confirmPassword);
 		}

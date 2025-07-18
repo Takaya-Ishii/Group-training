@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
@@ -11,8 +10,8 @@
 			<h2>ユーザー一覧</h2>
 		
 			<!-- メッセージ -->
-			<div class="message" th:if="${message}" th:text="${message}"></div>
-			<div class="msssage" th:if="${errorMessage}" th:text="${errorMessage}" style="color:red;"></div>
+			<div class="message" th:if="${message}" th:text="${message}"style="color:blue; background-color: rgb(193,254,228);"></div>
+			<div class="message" th:if="${errorMessage}" th:text="${errorMessage}"style="color:red; background-color: rgb(255, 212, 212);"></div>
 			
 			<!-- 検索フォーム -->
 			<form class="serchcont" method="post" th:action="@{/admin/User}">

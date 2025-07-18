@@ -47,7 +47,7 @@ public class GroupTrainingApplication {
 		
 		//登録データ更新
 		System.out.println("===更新確認===");
-		Authentication target = mapper.selectdetailById("fugafuga@example.jp");
+		Authentication target = mapper.selectdetailById("hogehoge@example.jp");
 		target.setUsername("リポジトリのテスト");
 		target.setAccount_name("テスト");
 		target.setPassword("あいうえお");
