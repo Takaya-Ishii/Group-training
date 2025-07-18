@@ -44,16 +44,10 @@
 
 <!-- ユーザーIDを全てSELECT -->
 <select id="selectAll" resultType="com.example.demo.entity.Authentication">
-SELECT P.username,P.account_name,P.TEL,P.gender,P.affiriation,P.address,P.departOfOrigin,R.role_name
+SELECT P.username,P.account_name,P.password,P.TEL,P.gender,P.affiriation,P.address,P.departOfOrigin,R.role_name
 FROM profile_table as P
 Join role_table as R
 ON R.role_ID = P.role_ID; 
-</select>
-<!-- 全てのグループ名とそのグループIDを取得 -->
-<select id ="findAllGroup" resultType="com.example.demo.entity.Group.Group">
-SELECT group_name,group_ID
-FROM group_table
-ORDER BY group_ID;
 </select>
 
 <!-- ユーザーを検索ボックスで情報を検索 -->
@@ -106,6 +100,27 @@ ON R.role_ID = P.role_ID
 where P.username = #{username};
 </select>
 
+<!-- 全てのパスワードを取得 -->
+<select id ="selectPassWord" resultType="com.example.demo.entity.Authentication">
+SELECT *
+from profile_table
+where password = #{password}
+</select>
+
+<!-- 全ての電話番号を取得 -->
+<select id="selectTEL" resultType ="com.example.demo.entity.Authentication">
+SELECT *
+from profile_table
+where TEL = #{TEL}
+</select>
+
+<!-- 全てのグループ名とそのグループIDを取得 -->
+<select id ="findAllGroup" resultType="com.example.demo.entity.Group.Group">
+SELECT group_name,group_ID
+FROM group_table
+ORDER BY group_ID;
+</select>
+
 <!-- ユーザーデータをプロフィールテーブルに新規登録する -->
 <insert id="insert" parameterType="com.example.demo.entity.Authentication">
 INSERT INTO profile_table (username,account_name,password,TEL,address,gender,affiriation,departOfOrigin,
@@ -114,13 +129,6 @@ VALUES
 (#{username},#{account_name},#{password},#{TEL},#{address},#{gender},#{affiriation},#{departOfOrigin},
 #{role_ID});
 </insert>
-
-<!-- 全てのパスワードを取得 -->
-<select id ="selectPassWord" resultType="com.example.demo.entity.Authentication">
-SELECT *
-from profile_table
-where password = #{password}
-</select>
 
 <!-- ユーザーデータをメンバーテーブルに登録する -->
 <insert id="insertPlus" parameterType="com.example.demo.entity.Authentication">

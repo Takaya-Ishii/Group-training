@@ -33,6 +33,9 @@ public interface UserMapper {
 	//パスワードで一致するものがあるか
 	List<Authentication> selectPassWord(String password);
 	
+	//TELで一致するものがあるか
+	List<Authentication> selectTEL(String TEL);
+	
 	/**プロフィールテーブルの「ユーザーデータ」を更新する*/
 	void update(Authentication user);
 	

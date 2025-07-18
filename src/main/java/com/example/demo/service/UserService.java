@@ -21,6 +21,7 @@ public interface UserService {
 	/**全グループ名を取得する*/
 	List<Group> selectAllGroup();
 	
+	
 	/**IDを新規登録する*/
 	void registrationUser(Authentication user);
 	
@@ -32,4 +33,7 @@ public interface UserService {
 
 	/**すでにパスワードが使われているのかをチェックする*/
 	List<Authentication> IsPasswordTaken(String password);
+	
+	/**全電話番号を取得*/
+	List<Authentication> IsTELTaken(String TEL);
 }

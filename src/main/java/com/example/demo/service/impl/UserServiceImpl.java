@@ -58,6 +58,11 @@ public class UserServiceImpl implements UserService {
 		return userMapper.selectPassWord(password);
 	}
 	
+	/**既にある電話番号を取得する*/
+	public List<Authentication> IsTELTaken(String TEL){
+		return userMapper.selectTEL(TEL);
+	}
+	
 	/**指定されたIDの情報を編集する*/
 	@Override
 	public void updateUser(Authentication user) {
