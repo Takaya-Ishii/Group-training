@@ -67,6 +67,7 @@ public class UserController {
 		System.out.println(userServiceImpl.displayUserDetail(username));
 		return "admin/User/detail";
 		}else {
+			System.out.println(User);
 			//対象のユーザーの詳細がない場合は、メッセージを表示
 			attributes.addFlashAttribute("errorMessage","対象のユーザーの詳細なデータはありません");
 			return "redirect:/admin/User";
@@ -86,20 +87,30 @@ public class UserController {
 	/**新たな「ユーザー」を新規登録する*/
 	@Transactional
 	@PostMapping("/User/registration")
-	public String registrationUser(@RequestParam String password ,@Validated ({InsertValidation.class})@ModelAttribute UserForm form,BindingResult bindingResult,RedirectAttributes attributes,Model model) {
+	public String registrationUser(@RequestParam String password ,String TEL,@Validated ({InsertValidation.class})@ModelAttribute UserForm form,BindingResult bindingResult,RedirectAttributes attributes,Model model) {
 		List<Authentication> User = userServiceImpl.IsPasswordTaken(password);
+		List<Authentication> TELexist = userServiceImpl.IsTELTaken(TEL);
+		System.out.println(bindingResult);
 		//===ここからが、バリデーションチェックです===
 		// 入力に問題があるか ifで検査
 		if(bindingResult.hasErrors()) {
 			//すでにパスワードが使われている場合
 			model.addAttribute("userForm",form);
 			model.addAttribute("user",userServiceImpl.selectAllGroup());
+			model.addAttribute("errorMessage","入力内容に誤りがあります。");
 			//入力画面を表示します
 			return "/admin/User/save";
 		}
 		if( User.isEmpty() == false) {
-			model.addAttribute("Notuse","現在このパスワードは利用できません");
+			model.addAttribute("NotusePassword","現在このパスワードは利用できません");
 			model.addAttribute("user",userServiceImpl.selectAllGroup());
+			model.addAttribute("errorMessage","このパスワードは現在登録することができません。");
+			return "/admin/User/save";
+		}
+		if(TELexist .isEmpty()== false) {
+			model.addAttribute("NotuseNumber","この番号はすでに使われています。");
+			model.addAttribute("user",userServiceImpl.selectAllGroup());
+			model.addAttribute("errorMessage","この電話番号は登録することができません。");
 			return "/admin/User/save";
 		}
 		//エンティティへの変換
@@ -119,6 +130,7 @@ public class UserController {
 		Authentication User = userServiceImpl.displayUserDetail(username);
 		//対象のデータをFormに変換
 		UserForm form1 = Userhelper.convertUserForm(User);
+		System.out.println(form1);
 		//モデルに格納
 		model.addAttribute("userForm",form1);
 		//全てのグループの名前とグループIDをuserに入れる
@@ -130,14 +142,13 @@ public class UserController {
 	/**指定されたIDの情報を編集する*/
 	@Transactional
 	@PostMapping("/User/update")
-	public String updateUser(@RequestParam String password,@Validated ({EditValidation.class})UserForm form,BindingResult bindingResult,RedirectAttributes attributes,Model model) {
-		List<Authentication> User = userServiceImpl.IsPasswordTaken(password);
+	public String updateUser(@RequestParam String password,String TEL,@Validated ({EditValidation.class})UserForm form,BindingResult bindingResult,RedirectAttributes attributes,Model model) {
 		//ここからバリデーションチェックです
 		//入力に問題あるか ifで検査
-		if(bindingResult.hasErrors() || User.size() != 0) {
-			model.addAttribute("Notuse","現在このパスワードは利用できません");
+		if(bindingResult.hasErrors()) {
+			System.out.println(bindingResult);
 			//フラッシュメッセージ
-			attributes.addFlashAttribute("errorMessage","エラーが発生しました。");
+			model.addAttribute("errorMessage","エラーが発生しました。");
 			//全てのグループの名前とグループIDをuserに入れる
 			model.addAttribute("user",userServiceImpl.selectAllGroup());
 			//ある場合、更新画面を表示します
