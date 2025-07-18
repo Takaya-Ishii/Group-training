@@ -32,6 +32,9 @@ public interface UserService {
 	/**指定されたIDの情報を編集する*/
 	void updateUser(Authentication user);
 	
+	/**指定されたユーザーのメンバーテーブルを編集する*/
+	void updateMember(Member member,Authentication user);
+	
 	/**指定されたIDの情報を削除する*/
 	void deleteUser(String username);
 

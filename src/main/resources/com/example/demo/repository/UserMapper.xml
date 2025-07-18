@@ -6,6 +6,7 @@
 <resultMap id = "Userdetialselect" type = "com.example.demo.entity.Authentication">
 <id property = "username" column = "username"/>
 <result property = "account_name" column = "account_name"/>
+<result property = "password" column ="password"/>
 <result property = "TEL" column ="TEL"/>
 <result property = "gender" column ="gender"/>
 <result property = "affiriation" column ="affiriation"/>
@@ -28,6 +29,7 @@
 <resultMap id = "UserAllselect" type = "com.example.demo.entity.Authentication">
 <id property = "username" column = "username"/>
 <result property = "account_name" column = "account_name"/>
+<result property = "password" column ="password"/>
 <result property = "TEL" column ="TEL"/>
 <result property = "gender" column ="gender"/>
 <result property = " affiriation" column =" affiriation"/>
@@ -44,6 +46,7 @@
 <resultMap id ="InsertUser" type="com.example.demo.entity.Authentication">
 <id property = "username" column = "username"/>
 <result property = "account_name" column = "account_name"/>
+<result property = "password" column ="password"/>
 <result property = "TEL" column ="TEL"/>
 <result property = "gender" column ="gender"/>
 <result property = " affiriation" column =" affiriation"/>
@@ -109,6 +112,7 @@ SELECT
 	P.address,
 	P.gender,
 	P.affiriation,
+	P.password,
 	P.departOfOrigin, 
 	R.role_name,
 	G.group_name,
@@ -162,8 +166,6 @@ VALUES
 
 <!-- プロフィールテーブルのユーザーデータを編集する -->
 <update id="update" parameterType="com.example.demo.entity.Authentication">
->
-
 UPDATE profile_table 
 
 SET account_name = #{account_name},password = #{password},TEL = #{TEL}, address = #{address}, gender = #{gender}, affiriation=#{affiriation}, 
@@ -174,10 +176,10 @@ WHERE username = #{username};
 </update>
 
 <!-- メンバーテーブルのユーザーデータを編集する -->
-<update id="updateMember" parameterType="com.example.demo.entity.Authentication">
+<update id="updateMember" parameterType="com.example.demo.entity.Member">
 UPDATE member_table
-SET group_ID = #{group_ID}
-WHERE username = #{username};
+SET group_ID = #{member.group_ID}
+WHERE username = #{user.username};
 </update>
 
 <!-- ユーザーデータを削除する -->

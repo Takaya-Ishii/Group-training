@@ -70,7 +70,10 @@ public class UserServiceImpl implements UserService {
 	public void updateUser(Authentication user) {
 		 //TODO 自動生成されたメソッド・スタブ
 		userMapper.update(user);
-		userMapper.updateMember(user);
+	}
+	
+	public void updateMember(Member member, Authentication user) {
+		userMapper.updateMember(member,user);
 	}
 	
 	/**指定されたIDの情報を削除する*/

@@ -41,7 +41,7 @@ public interface UserMapper {
 	void update(Authentication user);
 	
 	/**メンバーテーブルの「ユーザーデータ」を更新する*/
-	void updateMember(Authentication user);
+	void updateMember(Member member,Authentication user);
 	
 	/**id指定された情報を削除*/
 	void delete(@Param("username") String username);
