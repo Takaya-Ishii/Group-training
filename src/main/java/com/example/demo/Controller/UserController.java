@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Authentication;
+import com.example.demo.entity.Member;
 import com.example.demo.form.UserForm;
 import com.example.demo.helper.Userhelper;
 import com.example.demo.service.impl.UserServiceImpl;
@@ -63,7 +64,7 @@ public class UserController {
 		Authentication User = userServiceImpl.displayUserDetail(username);
 		
 		if(User != null) {
-		model.addAttribute("user",userServiceImpl.displayUserDetail(username));
+		model.addAttribute("user",User);
 		System.out.println(userServiceImpl.displayUserDetail(username));
 		return "admin/User/detail";
 		}else {
@@ -90,7 +91,6 @@ public class UserController {
 	public String registrationUser(@RequestParam String password ,String TEL,@Validated ({InsertValidation.class})@ModelAttribute UserForm form,BindingResult bindingResult,RedirectAttributes attributes,Model model) {
 		List<Authentication> User = userServiceImpl.IsPasswordTaken(password);
 		List<Authentication> TELexist = userServiceImpl.IsTELTaken(TEL);
-		System.out.println(bindingResult);
 		//===ここからが、バリデーションチェックです===
 		// 入力に問題があるか ifで検査
 		if(bindingResult.hasErrors()) {
@@ -115,8 +115,10 @@ public class UserController {
 		}
 		//エンティティへの変換
 		Authentication user = Userhelper.convertUser(form);
+		Member member = Userhelper.convert_User(form);
 		//更新処理
 		userServiceImpl.registrationUser(user);
+		userServiceImpl.registrationMember(member, user);
 		//フラッシュメッセージ
 		attributes.addFlashAttribute("message","ユーザーが新規登録されました");
 		//PRGパターン

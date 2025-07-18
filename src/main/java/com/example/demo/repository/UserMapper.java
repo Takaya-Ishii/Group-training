@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.example.demo.entity.Authentication;
 import com.example.demo.entity.Group;
+import com.example.demo.entity.Member;
 
 
 /**User リポジトリ*/
@@ -28,7 +29,7 @@ public interface UserMapper {
 	void insert(Authentication user);
 	
 	//「ユーザーデータ」をメンバーテーブルに登録する
-	void insertPlus(Authentication user);
+	void insertPlus(Member member, Authentication user);
 	
 	//パスワードで一致するものがあるか
 	List<Authentication> selectPassWord(String password);

@@ -18,9 +18,8 @@
 <result property = "role_name" column = "role_name"/>
 </association>
 
-<collection property = "group" ofType ="com.example.demo.entity.Group.Group">
+<collection property = "group" javaType ="com.example.demo.entity.Group">
 <id property = "group_ID" column = "group_ID"/>
-<result property = "username" column = "username"/>
 <result property = "group_name" column = "group_name"/>
 <result property = "summary" column ="summary"/>
 </collection>
@@ -37,13 +36,37 @@
 <result property = "role_ID" column ="role_ID"/>
 
 <association property = "role" javaType="com.example.demo.entity.Role">
-<id property ="role" column = "role_ID"/>
+<id property ="role_ID" column = "role_ID"/>
 <result property = "role_name" column = "role_name"/>
 </association>
 </resultMap>
 
+<resultMap id ="InsertUser" type="com.example.demo.entity.Authentication">
+<id property = "username" column = "username"/>
+<result property = "account_name" column = "account_name"/>
+<result property = "TEL" column ="TEL"/>
+<result property = "gender" column ="gender"/>
+<result property = " affiriation" column =" affiriation"/>
+<result property = "address " column =" address"/>
+<result property = "departOfOrigin" column ="departOfOrigin"/>
+<result property = "role_ID" column ="role_ID"/>
+
+<association property = "member" javaType="com.example.demo.entity.Member">
+<id property ="username" column = "username"/>
+<result property = "group_ID" column = "group_ID"/>
+<result property = "group_user_ID" column = "group_user_ID"/>
+<result property = "isTeacher" column = "isTeacher"/>
+</association>
+
+<association property = "role" javaType="com.example.demo.entity.Role">
+<id property ="role_ID" column = "role_ID"/>
+<result property = "role_name" column = "role_name"/>
+</association>
+
+</resultMap>
+
 <!-- ユーザーIDを全てSELECT -->
-<select id="selectAll" resultType="com.example.demo.entity.Authentication">
+<select id="selectAll" resultMap="UserAllselect">
 SELECT P.username,P.account_name,P.password,P.TEL,P.gender,P.affiriation,P.address,P.departOfOrigin,R.role_name
 FROM profile_table as P
 Join role_table as R
@@ -115,7 +138,7 @@ where TEL = #{TEL}
 </select>
 
 <!-- 全てのグループ名とそのグループIDを取得 -->
-<select id ="findAllGroup" resultType="com.example.demo.entity.Group.Group">
+<select id ="findAllGroup" resultType="com.example.demo.entity.Group">
 SELECT group_name,group_ID
 FROM group_table
 ORDER BY group_ID;
@@ -131,14 +154,15 @@ VALUES
 </insert>
 
 <!-- ユーザーデータをメンバーテーブルに登録する -->
-<insert id="insertPlus" parameterType="com.example.demo.entity.Authentication">
+<insert id="insertPlus" parameterType="com.example.demo.entity.Member">
 INSERT INTO member_table (group_ID,username,isTeacher)
 VALUES
-(#{group_ID},#{username},(CAST (CASE #{role_ID} WHEN 1 THEN 'FALSE' ELSE 'TRUE' END AS BOOLEAN)));
+(#{member.group_ID},#{user.username},(CAST (CASE #{user.role_ID} WHEN 1 THEN 'FALSE' ELSE 'TRUE' END AS BOOLEAN)));
 </insert>
 
 <!-- プロフィールテーブルのユーザーデータを編集する -->
-<update id="update">
+<update id="update" parameterType="com.example.demo.entity.Authentication">
+>
 
 UPDATE profile_table 
 

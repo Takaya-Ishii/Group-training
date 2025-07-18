@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.Authentication;
 import com.example.demo.entity.Group;
+import com.example.demo.entity.Member;
 import com.example.demo.repository.UserMapper;
 import com.example.demo.service.UserService;
 
@@ -48,8 +49,9 @@ public class UserServiceImpl implements UserService {
 	public void registrationUser(Authentication user) {
 		 //TODO 自動生成されたメソッド・スタブ
 		userMapper.insert(user);
-		userMapper.insertPlus(user);
 	}
+	public void registrationMember(Member member, Authentication user) {
+		userMapper.insertPlus(member,user);	}
 	
 	/**すでにあるパスワードを取得する*/
 	@Override
@@ -77,5 +79,6 @@ public class UserServiceImpl implements UserService {
 		 //TODO 自動生成されたメソッド・スタブ
 		userMapper.delete(username);
 	}
+	
 
 }

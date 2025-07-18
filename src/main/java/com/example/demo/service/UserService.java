@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.demo.entity.Authentication;
 import com.example.demo.entity.Group;
+import com.example.demo.entity.Member;
 
 
 /**サービス実際にJava上での動き*/
@@ -24,6 +25,9 @@ public interface UserService {
 	
 	/**IDを新規登録する*/
 	void registrationUser(Authentication user);
+	
+	/**ユーザーをメンバーテーブルに入れる*/
+	void registrationMember(Member member,Authentication user);
 	
 	/**指定されたIDの情報を編集する*/
 	void updateUser(Authentication user);
