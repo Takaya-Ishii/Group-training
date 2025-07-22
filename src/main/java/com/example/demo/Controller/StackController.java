@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.LoginUser;
-import com.example.demo.entity.Stack;
+import com.example.demo.entity.TraTpm;
+import com.example.demo.entity.Trainfo;
 import com.example.demo.form.StackForm;
 import com.example.demo.helper.StackHelper;
 import com.example.demo.repository.AuthenticationMapper;
@@ -53,7 +54,7 @@ public class StackController {
 			@AuthenticationPrincipal LoginUser loginUser, Model model) {
 		stackForm.setTraCourseID(traCourse_ID);
 		model.addAttribute("group", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
-		Stack traName = stackService.findTra_name(traCourse_ID);
+		Trainfo traName = stackService.findTra_name(traCourse_ID);
 		if (traName != null) {
 			model.addAttribute("traName", traName);
 			return "/participant/traCourse/stack/save";
@@ -73,14 +74,14 @@ public class StackController {
 		//バリデーションチェック
 		//入力チェックNG：学習履歴登録の画面を表示
 		if (bindingResult.hasErrors()) {
-			Stack traName = stackService.findTra_name(traCourse_ID);
+			Trainfo traName = stackService.findTra_name(traCourse_ID);
 			model.addAttribute("traName", traName);
 			model.addAttribute("errorMessage", "入力内容に誤りがあります。再度入力してください");
 			return "/participant/traCourse/stack/save";
 			
 		} 
 		//エンティティへの変換
-		Stack stack = StackHelper.convertStack(stackForm);
+		TraTpm stack = StackHelper.convertStack(stackForm);
 
 		//登録実行
 		stackService.insertStack(stack);
@@ -93,8 +94,8 @@ public class StackController {
 	@GetMapping("/stack/edit/{traCourse_ID}/{stack_No}")
 	public String displayEditStack(@PathVariable Integer traCourse_ID, @PathVariable Integer stack_No, 
 			@AuthenticationPrincipal LoginUser loginUser, Model model, RedirectAttributes attributes) {
-		Stack target = stackService.findStack(traCourse_ID, stack_No);
-		Stack traName = stackService.findTra_name(traCourse_ID);
+		TraTpm target = stackService.findStack(traCourse_ID, stack_No);
+		Trainfo traName = stackService.findTra_name(traCourse_ID);
 		model.addAttribute("group", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
 		if (target != null) {
 			
@@ -124,14 +125,14 @@ public class StackController {
 		//バリデーションチェック
 		//入力チェックNG：学習履歴登録の画面を表示
 		if (bindingResult.hasErrors()) {
-			Stack traName = stackService.findTra_name(traCourse_ID);
+			Trainfo traName = stackService.findTra_name(traCourse_ID);
 			model.addAttribute("traName", traName);
 			model.addAttribute("errorMessage", "入力内容に誤りがあります。再度入力してください");
 			return "/participant/traCourse/stack/edit";
 			
 		}
 		//エンティティへの変換
-		Stack stack = StackHelper.convertStack(stackForm);
+		TraTpm stack = StackHelper.convertStack(stackForm);
 		//更新処理
 		stackService.updateStack(stack);
 		System.out.println(stack);
@@ -145,7 +146,7 @@ public class StackController {
 	@PostMapping("/stack/delete/{traCourse_ID}/{stack_No}")
 	public String deleteStack(@PathVariable Integer traCourse_ID, @PathVariable Integer stack_No,
 			RedirectAttributes attributes, @AuthenticationPrincipal LoginUser loginUser, Model model) {
-		Stack traCourseID = stackService.findTraCourse_ID(traCourse_ID);
+		TraTpm traCourseID = stackService.findTraCourse_ID(traCourse_ID);
 		model.addAttribute("group", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
 		//削除処理
 		stackService.deleteStack(traCourse_ID, stack_No);

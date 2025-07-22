@@ -3,7 +3,8 @@ package com.example.demo.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.entity.Stack;
+import com.example.demo.entity.TraTpm;
+import com.example.demo.entity.Trainfo;
 import com.example.demo.repository.StackMapper;
 import com.example.demo.service.StackService;
 
@@ -22,27 +23,27 @@ public class StackServiceImpl implements StackService {
 	private final StackMapper stackMapper;
 	
 	@Override
-	public Stack findTra_name(Integer traCourse_ID) {
+	public Trainfo findTra_name(Integer traCourse_ID) {
 		return stackMapper.selectTra_name(traCourse_ID);
 	}
 	
 	@Override
-	public Stack findTraCourse_ID(Integer traCourse_ID) {
+	public TraTpm findTraCourse_ID(Integer traCourse_ID) {
 		return stackMapper.selectTraCourse_ID(traCourse_ID);
 	}
 	
 	@Override
-	public Stack findStack(Integer traCourse_ID, Integer stack_No) {
+	public TraTpm findStack(Integer traCourse_ID, Integer stack_No) {
 		return stackMapper.selectStack(traCourse_ID, stack_No);
 	}
 	
 	@Override
-	public void insertStack(Stack stack) {
+	public void insertStack(TraTpm stack) {
 		stackMapper.insert(stack);
 	}
 	
 	@Override
-	public void updateStack(Stack stack) {
+	public void updateStack(TraTpm stack) {
 		stackMapper.update(stack);
 	}
 	
