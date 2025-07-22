@@ -1,21 +1,70 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layout/layout}">
-<head>
-	<title>受講研修詳細画面</title>
-</head>
-<body>
-	<div layout:fragment="header"></div>
-	<div layout:fragment="content">
-	<h2>受講研修詳細画面</h2>
-
-		<a th:href="@{/participant/traCourse/stack/edit/{id}/{no}(id=${stackForm.traCourseID}, no=${stackForm.stackNo})}">
-			<button type="button">修正</button>
-		</a>
-		<a th:href="@{/participant/traCourse/stack/save/{id}(id=${stackForm.traCourseID})}">
-				<button type="button">学習履歴登録</button>
-		</a>
-	</div>
-</body>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+	
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" th:href="@{/css/grouptraining.css}">
+		<title>受講研修詳細画面</title>
+	</head>
+	
+	<body>
+		<header th:replace="~{layout :: header}"></header>
+		<di layout:fragment="content">
+			<main>
+				<h2><span th:text="${traCourse.trainfo.tra_name}"></h2>
+				<h3>受講者名:<span th:text="${traUser.account_name}"></span></h3>
+				<p class="subtitle">概要</p>
+				<table class="vertable" border="1">
+			
+					<tr><th>使用教材</th><td th:text="${traCourse.trainfo.text_book}"></td></tr>
+					<tr><th>想定時間</th><td th:text="|${traCourse.trainfo.est_time}時間|"></td></tr>
+					<tr><th>進捗</th><td th:text="|${traCourse.latestprogress}％|"></td></tr>
+					<tr><th>説明</th><td th:text="${traCourse.trainfo.description}"></td></tr>
+			
+				</table>
+		
+				<p class="subtitle">ステータス変更</p>
+				<form class="centerselect" th:action="@{/participant/traCourse/{traCourse_ID}/update(traCourse_ID=${traCourse.tracourse_id})}" method="post" th:object="${traCourse}">
+					<input type="hidden" th:field="*{tracourse_id}">
+					<input type="hidden" th:field="*{latestprogress}">
+					<input type="radio"  th:field="*{status_id}" name="statusRadio" th:value="${item.status_id}" th:text="${item.status}" th:checked="${item.status_id == traCourse.status_id}" th:each="item:${statusAll}">
+				<div class="tablebtnR">
+					<button class="chengebtn"  type="submit">変更</button>
+				</div>
+				</form>
+				<p class="subtitle">課題</p><br>
+				<textarea class="issuetextarea" th:text="${traCourse.trainfo.assignment}" readonly></textarea>
+			
+				<br>
+				<p class="subtitle">学習履歴</p>
+				<table class="nomaltable" border="1">
+					<tr>
+						<th>日付</th>
+						<th>学習時間</th>
+						<th>メモ</th>
+						<th>進捗</th>
+						<th>修正</th>
+					</tr>
+					<tr th:each="item:${traTpm}">
+						<td th:text="${item.study_day}"></td>
+						<td th:if="${item.study_time !=null && item.study_time != 0.0 } " th:text="|${item.study_time}時間|"></td>
+						<td th:if="${item.study_time == null || item.study_time == 0.0}" th:text="'-'"></td>							
+						<td th:text="${item.memo}"></td>		
+						<td th:text="|${item.progress}％|"></td>								
+						<td><a class="maru" th:href="@{/participant/traCourse/stack/edit/{traCourse_ID}/{stack_No}(traCourse_ID=${traCourse.tracourse_id},stack_No=${item.stack_No})}">●</a>		 
+					</td>
+				</table>
+				<form class="tablebtnR" sec:authorize="hasAuthority('ROLE_講師')" th:action="@{/admin/traCourse/save/{uName}(uName=${traUser.username})}">
+							<button class="addlessonbtn" type="submit">受講研修登録</button>
+				</form>
+				<form class="returnbtnL" th:action="@{/participant/traCourse/{uName}(uName=${traCourse.username})}">
+					<button class="Allreturnbtn" type="submit">受講研修一覧に戻る</button>
+				</form>
+				
+			</main>
+		</div>
+	</body>
+			
 </html>
