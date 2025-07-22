@@ -44,12 +44,4 @@ public class LoginController {
 		 model.addAttribute("group", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
 		 return "admin/User";
 	 }
-	 
-	 // それぞれコントローラーと機能が競合したら削除する
-	 @GetMapping("/participant/traCourse/{username}")
-	 public String displaytraCourse(Model model, @AuthenticationPrincipal LoginUser loginUser) {
-		 model.addAttribute("username", loginUser.getUsername());
-		 model.addAttribute("group", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
-		 return "participant/traCourse";
-	 }
 }
