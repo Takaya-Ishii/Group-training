@@ -35,7 +35,9 @@ public class CustomErrorController implements ErrorController{
         else if (response.getStatus() == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
         	return "/error/500";
         }
-        
+        else if(response.getStatus() == HttpStatus.BAD_REQUEST.value()) {
+        	return "/error/400";
+        }
         return "";
     }
  
