@@ -97,8 +97,8 @@ public class TrainingController {
 				return "trainingNew";
 			}
 			
-			Trainfo tra_mane = TraHelper.convertTra(form);
-			traService.insertTra(tra_mane);
+			Trainfo tra_mana = TraHelper.convertTra(form);
+			traService.insertTra(tra_mana);
 			attributes.addFlashAttribute("message", form.getTra_name() + "が追加されました。");
 			return "redirect:/admin/Training";
 			
@@ -147,8 +147,8 @@ public class TrainingController {
 			return "trainingEdit";
 		}
 		 
-		Trainfo tra_mane = TraHelper.convertTra(form);
-		traService.updateTra(tra_mane);
+		Trainfo tra_mana = TraHelper.convertTra(form);
+		traService.updateTra(tra_mana);
 		attributes.addFlashAttribute("message", form.getTra_id() +  "を更新しました");
 		return "redirect:/admin/Training";
 	}
@@ -161,8 +161,8 @@ public class TrainingController {
 			@ModelAttribute("form") TraForm form, Model model,
 			RedirectAttributes attributes) {
 		
-		Trainfo tra_mane = traService.selectByIdTra(tra_id);
-		String name = tra_mane.getTra_name();
+		Trainfo tra_mana = traService.selectByIdTra(tra_id);
+		String name = tra_mana.getTra_name();
 		traService.deleteTra(tra_id);
 		attributes.addFlashAttribute("message", "研修「" + name + "」を削除しました");
 		return "redirect:/admin/Training";
