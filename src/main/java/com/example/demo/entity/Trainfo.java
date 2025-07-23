@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Tra_Manegement {
+public class Trainfo {
 	
 	/*研修ID*/
 	private String tra_id;

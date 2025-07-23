@@ -1,13 +1,13 @@
 package com.example.demo.helper;
 
-import com.example.demo.entity.Tra_Manegement;
+import com.example.demo.entity.Trainfo;
 import com.example.demo.form.TraForm;
 
 public class TraHelper {
 
-	public static Tra_Manegement convertTra(TraForm form) {
+	public static Trainfo convertTra(TraForm form) {
 		
-		Tra_Manegement tra_mane = new Tra_Manegement();
+		Trainfo tra_mane = new Trainfo();
 		tra_mane.setTra_id(form.getTra_id());
 		tra_mane.setTra_name(form.getTra_name());
 		tra_mane.setEst_time(form.getEst_time());
@@ -19,7 +19,7 @@ public class TraHelper {
 		return tra_mane;
 	}
 	
-	public static TraForm convertTraForm(Tra_Manegement tra_mane) {
+	public static TraForm convertTraForm(Trainfo tra_mane) {
 		
 		TraForm form = new TraForm();
 		form.setTra_id(tra_mane.getTra_id());

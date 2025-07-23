@@ -7,113 +7,52 @@
 	<title>研修管理システム</title>
 </head>
 <body>
-	<!-- ヘッダー -->
-	<header th:fragment="header">
-		<nav>
-			<ul>
-			<h1>研修管理システム</h1>
-				<li sec:authorize="hasAuthority('ROLE_講師')">
-					<button onclick="location.href='/admin/Training'">研修管理</button>
-				</li>
-				<li sec:authorize="hasAuthority('ROLE_講師')">
-					<button onclick="location.href='/admin/Group'">グループ管理</button>
-				</li>
-				<li sec:authorize="hasAuthority('ROLE_講師')">
-					<button onclick="location.href='/admin/User'">ユーザー管理</button>
-				</li>
-				<li sec:authorize="hasAuthority('ROLE_講師')">
-					<button onclick="location.href='/admin/WeeklyRepo'">報告確認</button>
-				</li>
-
-
-				<li sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')">
-					<form th:action="@{/participant/talk/{room_ID}(room_ID = ${MsgRoom_room_id})}" method="get">
-						<button type="submit">トーク</button>
-					</form>
-				</li>	
-				<li sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')">
-					<form th:action="@{/participant/traCourse/{username}(username=${username})}" method="get">
-						<button type="submit">受講研修</button>
-					</form>
-				</li>
-				<li sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')">
-					<button onclick="location.href='/participant/WeeklyRepo'">週間報告</button>
-				</li>
-					
-
-				<li th:if="${group != null}" sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')" >
-					<form th:action="@{/participant/Group/member/{group_ID}(group_ID = ${group.group_ID})}" method="get">
-						<button type="submit" class="ellipsis">
-							<span th:text="${group.group_name}"></span>
-						</button>
-					</form>
-				</li>
-
-				<li id="notBelong" th:if="${group == null}" sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')">
-					<span>グループ未所属</span>
-				</li>
-
-				<li class="ellipsis" sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')">
-					<img th:src="@{/image/受講者アイコン.png}" alt="受講者アイコン">
-					<span id="account_name" sec:authentication="principal.account_name"></span>
-				</li>
-				<li class="ellipsis" sec:authorize="hasAuthority('ROLE_講師')">
-					<img th:src="@{/image/講師アイコン.png}" alt="講師アイコン">
-					<span id="account_name" sec:authentication="principal.account_name"></span>
-				</li>
-
-				<li id="logout">
-					<form th:action="@{/logout}" method="post">
-					<button type="submit">ログアウト</button>
-					</form>
-				</li>
-			</ul>
-		</nav>
-	</header>
+	<header th:replace="~{layout :: header}"></header>
 	
-	<main>
-		<h2>研修詳細</h2>
-		<div class="vercontainer">
-			<table class="vertable" border="1" th:object="${tra_detail}">
-				<tr>
-					<th>研修ID</th>
-					<td th:text="*{tra_id}"></td>
-				</tr>
-				<tr>
-					<th>研修名</th>
-					<td th:text="*{tra_name}"></td>
-				</tr>
-				<tr>
-					<th>想定時間</th>
-					<td th:text="*{est_time} + 時間"></td>
-				</tr>
-				<tr>
-					<th>使用教材</th>
-					<td th:text="*{text_book}"></td>
-				</tr>
-				<tr>
-					<th class="vtableheight2">説明</th>
-					<td th:text="*{description}"></td>
-				</tr>
-				<tr>
-					<th class="vtableheight2">課題</th>
-					<td th:text="*{assignment}"></td>
-				</tr>
-			</table>
-		</div>
-		
-		<!--モーダル呼び出し-->
-		<div class="tablebtnR2">
-			<button class="deletebtn" type="submit" id="open">削除</butto>
-			<form th:action="@{/admin/Training/edit/{tra_id}(tra_id=${tra_id})}" method="get">
-				<button class="revisionbtn">修正</button>
+	<div layout:fragment="content">
+		<main>
+			<h2>研修詳細</h2>
+			<div class="vercontainer">
+				<table class="vertable" border="1" th:object="${tra_detail}">
+					<tr>
+						<th>研修ID</th>
+						<td th:text="*{tra_id}"></td>
+					</tr>
+					<tr>
+						<th>研修名</th>
+						<td th:text="*{tra_name}"></td>
+					</tr>
+					<tr>
+						<th>想定時間</th>
+						<td th:text="*{est_time} + 時間"></td>
+					</tr>
+					<tr>
+						<th>使用教材</th>
+						<td th:text="*{text_book}"></td>
+					</tr>
+					<tr>
+						<th class="vtableheight2">説明</th>
+						<td th:text="*{description}"></td>
+					</tr>
+					<tr>
+						<th class="vtableheight2">課題</th>
+						<td th:text="*{assignment}"></td>
+					</tr>
+				</table>
+			</div>
+			
+			<!--モーダル呼び出し-->
+			<div class="tablebtnR2">
+				<button class="deletebtn" type="submit" id="open">削除</butto>
+				<form th:action="@{/admin/Training/edit/{tra_id}(tra_id=${tra_id})}" method="get">
+					<button class="revisionbtn">修正</button>
+				</form>
+			</div>
+			<form th:action="@{/admin/Training}" method="get">
+				<button class="returnbtn" type="submit">研修一覧に戻る</button>
 			</form>
-		</div>
-		<form th:action="@{/admin/Training}" method="get">
-			<button class="returnbtn" type="submit">研修一覧に戻る</button>
-		</form>
-	</main>
-	
+		</main>
+	</div>
 	<!--モーダルのレイアウト-->
 	<div id="mask" class="hidden"></div>
 	<section id="modal" class="hidden">

@@ -14,17 +14,18 @@ public class DuplicateCheckImpl implements ConstraintValidator<DuplicateCheck, S
 	TraService traService;
 	
 	@Override
-    public void initialize(DuplicateCheck constraintAnnotation) {
+    public void initialize(DuplicateCheck contraintAnnotation) {
+		
     }
 	
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
 		
 		boolean existsCheck = traService.existsByIdTra(value);
-		if(existsCheck != false) {
-			return true;
+		if(existsCheck == true) {
+			
+			return false;
 		}
-		
-		return false;
+			return true;
 	}
 }

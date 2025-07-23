@@ -6,134 +6,74 @@
 	<title>研修管理機能</title>
 </head>
 <body>
-	<!-- ヘッダー -->
-	<header th:fragment="header">
-		<nav>
-			<ul>
-			<h1>研修管理システム</h1>
-				<li sec:authorize="hasAuthority('ROLE_講師')">
-					<button onclick="location.href='/admin/Training'">研修管理</button>
-				</li>
-				<li sec:authorize="hasAuthority('ROLE_講師')">
-					<button onclick="location.href='/admin/Group'">グループ管理</button>
-				</li>
-				<li sec:authorize="hasAuthority('ROLE_講師')">
-					<button onclick="location.href='/admin/User'">ユーザー管理</button>
-				</li>
-				<li sec:authorize="hasAuthority('ROLE_講師')">
-					<button onclick="location.href='/admin/WeeklyRepo'">報告確認</button>
-				</li>
-
-
-				<li sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')">
-					<form th:action="@{/participant/talk/{room_ID}(room_ID = ${MsgRoom_room_id})}" method="get">
-						<button type="submit">トーク</button>
-					</form>
-				</li>	
-				<li sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')">
-					<form th:action="@{/participant/traCourse/{username}(username=${username})}" method="get">
-						<button type="submit">受講研修</button>
-					</form>
-				</li>
-				<li sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')">
-					<button onclick="location.href='/participant/WeeklyRepo'">週間報告</button>
-				</li>
-					
-
-				<li th:if="${group != null}" sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')" >
-					<form th:action="@{/participant/Group/member/{group_ID}(group_ID = ${group.group_ID})}" method="get">
-						<button type="submit" class="ellipsis">
-							<span th:text="${group.group_name}"></span>
-						</button>
-					</form>
-				</li>
-
-				<li id="notBelong" th:if="${group == null}" sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')">
-					<span>グループ未所属</span>
-				</li>
-
-				<li class="ellipsis" sec:authorize="hasAuthority('ROLE_受講者') and not hasAuthority('ROLE_講師')">
-					<img th:src="@{/image/受講者アイコン.png}" alt="受講者アイコン">
-					<span id="account_name" sec:authentication="principal.account_name"></span>
-				</li>
-				<li class="ellipsis" sec:authorize="hasAuthority('ROLE_講師')">
-					<img th:src="@{/image/講師アイコン.png}" alt="講師アイコン">
-					<span id="account_name" sec:authentication="principal.account_name"></span>
-				</li>
-
-				<li id="logout">
-					<form th:action="@{/logout}" method="post">
-					<button type="submit">ログアウト</button>
-					</form>
-				</li>
-			</ul>
-		</nav>
-	</header>
+	<header th:replace="~{layout :: header}"></header>
 	
-	<main>
-		<div class="container">
-			<h2>研修編集</h2>
-			
-			<p class="message" th:if="${errorMessage}"
-				th:text="${errorMessage}" style="background-color: rgb(255, 212, 212);">
-				エラーメッセージ
-			</p>
-			
-			<div>
-				<form class="logcenter" th:action="@{/admin/Training/update}"
-					 th:object="${form}" method="post">
-					 
-					<div class="centerform">
-						<label class="labelname">研修ID</label>
-						<input type="text" class="Msizeinput" th:field="*{tra_id}"  readonly
-						 style="background-color: lightgray;">
-					</div>
-					
-					<div class="centerform">
-						<label class="labelname">研修名</label>
-						<input type="text" class="Msizeinput" th:field="*{tra_name}"
-							th:classappend="${#fields.hasErrors('tra_name')} ? 'error-border' : ''">
+	<div layout:fragment="content">
+		<main>
+			<div class="container">
+				<h2>研修編集</h2>
+				
+				<p class="message" th:if="${errorMessage}"
+					th:text="${errorMessage}" style="background-color: rgb(255, 212, 212);">
+					エラーメッセージ
+				</p>
+				
+				<div>
+					<form class="logcenter" th:action="@{/admin/Training/update/{tra_ID}}"
+						 th:object="${form}" method="post">
+						 
+						<div class="centerform">
+							<label class="labelname">研修ID</label>
+							<input type="text" class="Msizeinput" th:field="*{tra_id}"  readonly
+							 style="background-color: lightgray;">
+						</div>
 						
-						<!--研修名のバリデーションチェック-->
-						<p class="errormessage" th:if="${#fields.hasErrors('tra_name')}"
-							th:errors="*{tra_name}" style="color: red;">
-							エラーがあれば表示
-						</p>
-					</div>
-					
-					<div class="centerform">
-						<label class="labelname">想定時間</label>
-						<input type="text" class="Msizeinput" th:field="*{est_time}">
-					</div>
-					
-					<div class="centerform">
-						<label class="labelname">使用教材</label>
-						<input type="text" class="Msizeinput" th:field="*{text_book}">
-					</div>
-					
-					<div class="centerform">
-						<label class="labelname">説明</label>
-						<textarea type="text" class="descinput" rows="5" cols="30" th:field="*{description}">
-						</textarea>
-					</div>
-					
-					<div class="centerform">
-						<label class="labelname">課題</label>
-						<textarea type="text" class="issueinput" rows="5" cols="30" th:field="*{assignment}">
+						<div class="centerform">
+							<label class="labelname">研修名</label>
+							<input type="text" class="Msizeinput" th:field="*{tra_name}"
+								th:classappend="${#fields.hasErrors('tra_name')} ? 'error-border' : ''">
 							
-						</textarea>
-					</div>
-					
-					<div class="inputbtnR">
-						<button class="updatebtn" type="submit">更新</button>
-					</div>
-				</form>
+							<!--研修名のバリデーションチェック-->
+							<p class="errormessage" th:if="${#fields.hasErrors('tra_name')}"
+								th:errors="*{tra_name}" style="color: red;">
+								エラーがあれば表示
+							</p>
+						</div>
+						
+						<div class="centerform">
+							<label class="labelname">想定時間</label>
+							<input type="text" class="Msizeinput" th:field="*{est_time}">
+						</div>
+						
+						<div class="centerform">
+							<label class="labelname">使用教材</label>
+							<input type="text" class="Msizeinput" th:field="*{text_book}">
+						</div>
+						
+						<div class="centerform">
+							<label class="labelname">説明</label>
+							<textarea type="text" class="descinput" rows="5" cols="30" th:field="*{description}">
+							</textarea>
+						</div>
+						
+						<div class="centerform">
+							<label class="labelname">課題</label>
+							<textarea type="text" class="issueinput" rows="5" cols="30" th:field="*{assignment}">
+								
+							</textarea>
+						</div>
+						
+						<div class="inputbtnR">
+							<button class="updatebtn" type="submit">更新</button>
+						</div>
+					</form>
+				</div>
 			</div>
-		</div>
-		
-		<form class="returnbtnL" th:action="@{/admin/Training}">
-			<button class="returnbtn">研修一覧に戻る</button>
-		</form>
-	</main>
+			
+			<form class="returnbtnL" th:action="@{/admin/Training}">
+				<button class="returnbtn">研修一覧に戻る</button>
+			</form>
+		</main>
+	</div>
 </body>
 </html>

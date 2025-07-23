@@ -2,26 +2,26 @@ package com.example.demo.service;
 
 import java.util.List;
 
-import com.example.demo.entity.Tra_Manegement;
+import com.example.demo.entity.Trainfo;
 
 /**
  * 研修管理サービス
  * */
 public interface TraService {
 
-	List<Tra_Manegement> selectAllTra();
+	List<Trainfo> selectAllTra();
 	
-	Tra_Manegement selectByIdTra(String tra_id);
+	Trainfo selectByIdTra(String tra_id);
 	
-	List<Tra_Manegement> selectByNameTra(String tra_name);
+	List<Trainfo> selectByNameTra(String tra_name);
 	
-	void insertTra(Tra_Manegement tra_Manegement);
+	void insertTra(Trainfo tra_Manegement);
 	
-	void updateTra(Tra_Manegement tra_Manegement);
+	void updateTra(Trainfo tra_Manegement);
 	
 	void deleteTra(String tra_id);
 	
-	List<Tra_Manegement> selectTraName(String tra_id);
+	List<Trainfo> selectTraName(String tra_id);
 	
 	boolean existsByIdTra(String tra_id);
 }

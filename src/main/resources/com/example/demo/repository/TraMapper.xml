@@ -2,18 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.TraMapper">
 	<!-- 全件検索 -->
-	<select id="selectAll" resultType="com.example.demo.entity.Tra_Manegement">
+	<select id="selectAll" resultType="com.example.demo.entity.Trainfo">
 		SELECT tra_id, tra_name, est_time, text_book, assignment, 
 		description FROM trainfo_table
 	</select>
 	<!-- 1件検索 -->
-	<select id="selectById" parameterType="String" resultType="com.example.demo.entity.Tra_Manegement">
+	<select id="selectById" parameterType="String" resultType="com.example.demo.entity.Trainfo">
 		SELECT tra_id, tra_name, est_time, text_book, assignment, description 
 		FROM trainfo_table
 		WHERE tra_id = #{tra_id}
 	</select>
 	<!-- 名前 1件検索 -->
-	<select id="selectByName" resultType="com.example.demo.entity.Tra_Manegement">
+	<select id="selectByName" resultType="com.example.demo.entity.Trainfo">
 		SELECT tra_id, tra_name, est_time, text_book, description,
 		assignment FROM trainfo_table
 		WHERE tra_name LIKE '%' || #{tra_name} || '%'
@@ -37,9 +37,10 @@
 		DELETE FROM trainfo_table WHERE tra_id = #{tra_id}
 	</delete>
 	<!-- 名前を取得 -->
-	<select id="selectTraName" resultType="com.example.demo.entity.Tra_Manegement">
+	<select id="selectTraName" resultType="com.example.demo.entity.Trainfo">
 		SELECT tra_name FROM trainfo_table WHERE tra_id = #{tra_id}
 	</select>
+	<!-- 重複をtrueかfalseで返す -->
 	<select id="existsById" resultType="boolean">
 		SELECT COUNT(*) > 0 FROM trainfo_table WHERE tra_id = #{tra_id}
 	</select>
