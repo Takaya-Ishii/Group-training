@@ -112,15 +112,6 @@ public class TrainingController {
 		}
 	}
 	
-	@GetMapping("/admin/Training/registration")
-	public String registrationTraining2(@Validated @ModelAttribute("form") TraForm form,
-			BindingResult bindingResult, Model model,
-			RedirectAttributes attributes) {
-		
-		
-		return "redirect:/admin/Training/registration";
-	}
-	
 	/*
 	 * 編集画面の表示
 	 */
