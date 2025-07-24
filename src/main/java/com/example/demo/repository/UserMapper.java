@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.example.demo.entity.Authentication;
 import com.example.demo.entity.Group;
 import com.example.demo.entity.Member;
+import com.example.demo.entity.Role;
 
 
 /**User リポジトリ*/
@@ -48,6 +49,9 @@ public interface UserMapper {
 	
 	//グループ情報を取得
 	public List<Group> findAllGroup();
+	
+	//ロール情報を取得
+	public List<Role> findAllRole();
 	
 }
 

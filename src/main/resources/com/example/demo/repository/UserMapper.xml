@@ -148,6 +148,14 @@ FROM group_table
 ORDER BY group_ID;
 </select>
 
+<!-- 全てのロール名とロールIDを取得 -->
+<select id = "findAllRole" resultType="com.example.demo.entity.Role">
+SELECT role_ID,role_name
+FROM role_table
+order by role_ID;
+
+
+</select>
 <!-- ユーザーデータをプロフィールテーブルに新規登録する -->
 <insert id="insert" parameterType="com.example.demo.entity.Authentication">
 INSERT INTO profile_table (username,account_name,password,TEL,address,gender,affiriation,departOfOrigin,

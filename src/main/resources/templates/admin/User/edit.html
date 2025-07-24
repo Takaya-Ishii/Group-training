@@ -93,11 +93,10 @@
 				<div class="centerformradio3">
 					<label class="labelname3">ロール ※</label>
 					<div class="centerselect3">
-						<input class="celinp4" type="radio" th:field="*{role_ID}" value="1"> 受講者
-						<input type="radio" name="role_ID" value="2"> 講師
-						<br><span class="error3" th:if="${#fields.hasErrors('role_ID')}" th:errors="*{role_ID}" style="color:red"></span>
+					<input type= "radio" th:field="*{role_ID}" th:each = "Role:${item}" th:value="${Role.role_ID}" th:text="${Role.role_name}"></input>
+					<br><span type= "radio" class="error3" th:if="${#fields.hasErrors('role_ID')}" th:errors="*{role_ID}" style="color:red"></span>
 					</div>
-				</div>
+	</div>
 				
 				<div class="logbtnR">
 					<button class="updatebtn" type="submit">更新</button>

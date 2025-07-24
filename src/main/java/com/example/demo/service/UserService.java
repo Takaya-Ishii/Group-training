@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.demo.entity.Authentication;
 import com.example.demo.entity.Group;
 import com.example.demo.entity.Member;
+import com.example.demo.entity.Role;
 
 
 /**サービス実際にJava上での動き*/
@@ -22,6 +23,8 @@ public interface UserService {
 	/**全グループ名を取得する*/
 	List<Group> selectAllGroup();
 	
+	/**全ロール名を取得する*/
+	List<Role> selectAllRole();
 	
 	/**IDを新規登録する*/
 	void registrationUser(Authentication user);

@@ -81,6 +81,9 @@ public class UserController {
 	public String displaySaveUser(@ModelAttribute UserForm form, Model model) {
 		//全てのグループの名前とグループIDをuserに入れる
 		model.addAttribute("user",userServiceImpl.selectAllGroup());
+		//全てのロール名と、ロールIDをitemにいれる
+		model.addAttribute("item",userServiceImpl.selectAllRole());
+		System.out.println(userServiceImpl.selectAllRole());
 		//新規登録画面の設定
 		return "/admin/User/save";
 	}
@@ -98,6 +101,7 @@ public class UserController {
 			//すでにパスワードが使われている場合
 			model.addAttribute("userForm",form);
 			model.addAttribute("user",userServiceImpl.selectAllGroup());
+			model.addAttribute("item",userServiceImpl.selectAllRole());
 			model.addAttribute("errorMessage","入力内容に誤りがあります。");
 			//入力画面を表示します
 			return "/admin/User/save";
@@ -105,12 +109,14 @@ public class UserController {
 		if( User.isEmpty() == false) {
 			model.addAttribute("NotusePassword","現在このパスワードは利用できません");
 			model.addAttribute("user",userServiceImpl.selectAllGroup());
+			model.addAttribute("item",userServiceImpl.selectAllRole());
 			model.addAttribute("errorMessage","このパスワードは現在登録することができません。");
 			return "/admin/User/save";
 		}
 		if(TELexist .isEmpty()== false) {
 			model.addAttribute("NotuseNumber","この番号はすでに使われています。");
 			model.addAttribute("user",userServiceImpl.selectAllGroup());
+			model.addAttribute("item",userServiceImpl.selectAllRole());
 			model.addAttribute("errorMessage","この電話番号は登録することができません。");
 			return "/admin/User/save";
 		}
@@ -133,11 +139,12 @@ public class UserController {
 		Authentication User = userServiceImpl.displayUserDetail(username);
 		//対象のデータをFormに変換
 		UserForm form1 = Userhelper.convertUserForm(User);
-		System.out.println(form1);
 		//モデルに格納
 		model.addAttribute("userForm",form1);
 		//全てのグループの名前とグループIDをuserに入れる
 		model.addAttribute("user",userServiceImpl.selectAllGroup());
+		//全てのロール名と、ロールIDをitemにいれる
+		model.addAttribute("item",userServiceImpl.selectAllRole());
 		//編集登録画面を表示
 		return "/admin/User/edit";
 	}
@@ -154,6 +161,8 @@ public class UserController {
 			model.addAttribute("errorMessage","エラーが発生しました。");
 			//全てのグループの名前とグループIDをuserに入れる
 			model.addAttribute("user",userServiceImpl.selectAllGroup());
+			//全てのロール名と、ロールIDをitemにいれる
+			model.addAttribute("item",userServiceImpl.selectAllRole());
 			//ある場合、更新画面を表示します
 			return "/admin/User/edit";
 		}

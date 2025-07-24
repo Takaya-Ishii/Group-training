@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.entity.Authentication;
 import com.example.demo.entity.Group;
 import com.example.demo.entity.Member;
+import com.example.demo.entity.Role;
 import com.example.demo.repository.UserMapper;
 import com.example.demo.service.UserService;
 
@@ -37,6 +38,11 @@ public class UserServiceImpl implements UserService {
 	/**全グループ名を取得する*/
 	public List<Group> selectAllGroup(){
 		return userMapper.findAllGroup();
+	}
+	
+	/**全ロール名を取得する*/
+	public List<Role> selectAllRole(){
+		return userMapper.findAllRole();
 	}
 	/**ユーザーの詳細表示
 	 * @return */
