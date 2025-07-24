@@ -2,10 +2,11 @@
 
 
 
+
 /*-- 共通CSS --*/
 
 html {
-	background-color: rgb(219, 244, 249);
+	background-color: rgb(255, 255, 255);
 }
 
 body {
@@ -30,6 +31,18 @@ main {
 .errormessage {
 	margin: 0;
 	text-align: left;
+}
+
+.error1 {
+	margin-left: 90px;
+}
+
+.error2 {
+	margin-left: 55px;
+}
+
+.error3 {
+	margin-left: 70px;
 }
 
 .registmessage { /* 登録完了メッセージ表示 */
@@ -118,6 +131,11 @@ input:invalid {
   border: solid 1px red;
 }
 
+.centerform
+#account_name {
+	line-height: 0px;
+}
+
 .summary {
 	padding: 4px 10px;
 	font-size: 1em;
@@ -146,7 +164,9 @@ input[type="date"] { /* 日付入力欄のサイズ変更 */
 	padding: 0 0 0 80px;
 }
 
-
+a {
+	text-decoration: none;
+}
 
 
 
@@ -155,7 +175,6 @@ input[type="date"] { /* 日付入力欄のサイズ変更 */
 table {
 	color: rgb(5, 79, 145);
 }
-
 
 .nomaltable { /* tdに色がつかない縦テーブル */
 	border: solid black 2px;
@@ -172,14 +191,13 @@ table {
 
 .nomaltable td {
 	text-align: center;
+	word-break: break-all;
 }
 
 .nomaltable th {
 	min-width: 80px;
 	background-color: rgb(176, 217, 254);
 }
-
-
 
 
 
@@ -199,24 +217,22 @@ table {
 
 .table
 th {
-	font-size: 1.1rem;
+	font-size: 1rem;
 	min-width: 110px;
 	background-color: rgb(176, 217, 254);
 }
 
 .table
 td {
-	font-size: 1.1rem;
+	font-size: 1rem;
 	text-align: center;
+	word-break: break-all;
 }
 
 .table 
 tr:nth-child(2n+1) td {
   background-color: rgb(223, 240, 254);
 }
-
-
-
 
 
 .table5 { /* ユーザー一覧でのみ使用の5列のテーブル */
@@ -235,25 +251,23 @@ tr:nth-child(2n+1) td {
 
 .table5
 th {
-	font-size: 1.03rem;
+	font-size: 1rem;
 	min-width: 50px;
 	background-color: rgb(176, 217, 254);
 }
 
 .table5
 td {
-	font-size: 1.03rem;
+	font-size: 1rem;
 	max-width: 170px;
 	text-align: center;
+	word-break: break-all;
 }
 
 .table5 
 tr:nth-child(2n+1) td {
   background-color: rgb(223, 240, 254);
 }
-
-
-
 
 
 .vertable {
@@ -267,6 +281,7 @@ tr:nth-child(2n+1) td {
 .vertable th,
 .vertable td {
 	border: solid black 0.5px;
+	word-break: break-all;
 }
 
 .vertable th {
@@ -284,8 +299,6 @@ tr:nth-child(2n+1) td {
 .vtableheight2 {
 	height: 60px;
 }
-
-
 
 
 .learninglogtable {
@@ -307,6 +320,7 @@ th {
 .learninglogtable
 td {
 	padding: 5px 0;
+	word-break: break-all;
 }
 
 .learninglogtable input[type="text"],
@@ -330,21 +344,22 @@ td {
 }
 
 
-
 /*　各種ボタン設定　*/
 
 .maru {
 	text-decoration: none;
 }
 
-button {
+button,
+.revisionbtn,
+.groupreturnbtn,
+.deletebtn {
 	display: inline-block;
 	border: none;
 	color: #fff;
 	margin-top: 20px;
 	transition: .5s;
 }
-
 
 
 /*　青ボタン　*/
@@ -372,9 +387,7 @@ button {
 }
 
 
-
 /*　水色ボタン　*/
-
 
 .addlessonlogbtn { /* 研修履歴登録 */
 	padding: 2px 12px;
@@ -428,7 +441,6 @@ button {
 }
 
 
-
 /*　緑ボタン　*/
 
 .chengebtn { /* 変更ボタン */
@@ -468,7 +480,6 @@ button {
 }
 
 
-
 /*　赤ボタン　*/
 
 .deletebtn { /* 削除 */
@@ -483,7 +494,6 @@ button {
 }
 
 
-
 /*　藍色ボタン　*/
 
 .returnbtn { /* 研修一覧戻る */
@@ -496,7 +506,6 @@ button {
 .returnbtn:hover {
 	background-color: rgb(103, 99, 154);
 }
-
 
 .Allreturnbtn { /* 受講研修一覧に戻る */
 	padding: 0 20px 4px 20px;
@@ -536,7 +545,6 @@ button {
 }
 
 
-
 /*　灰色ボタン　*/
 
 .cancelbtn { /* キャンセルボタン */
@@ -573,6 +581,12 @@ button {
 	margin-top: -48px;
 }
 
+.tableeditbtnR {
+	text-align: right;
+	margin-right: 23%;
+	margin-top: -48px;
+}
+
 .logbtnR { /* 学習履歴の画面でボタンを右寄せにしたいとき */
 	text-align: right;
 	margin-right: 24%;
@@ -603,7 +617,6 @@ button {
 
 /*　ログイン画面　*/
 
-
 .logcenter { /* ログイン画面にてメイン部分全体を中央揃えにする */
 	text-align: center;
 }
@@ -628,7 +641,13 @@ button {
 	margin-bottom: 20px;
 }
 
+
 /*　受講研修一覧　*/
+
+.lh08{
+	line-height: 0.8;
+}
+
 
 /*　HTML・CSS研修(受講研修詳細画面)　*/
 
@@ -638,11 +657,6 @@ button {
 	height: 40px;
 }
 
-/*　学習履歴登録　*/
-
-/*　学習履歴修正・削除　*/
-
-/*　ユーザー一覧　*/
 
 .ユーザー一覧 {
 	max-width: 200px;
@@ -674,28 +688,26 @@ button {
 
 /*　ユーザー新規登録　*/
 
-
 .centerformradio2 { /* ユーザー管理画面でのみ使用 */
 	width: 58%;
 	margin-bottom: 20px;
 	align-items: center;
+	text-align: center;
 }
 
 .labelname2 { /* ユーザー管理画面でのみ使用 */
 	font-weight: bold;
 	text-align: left;
-	margin-right: 10px;
+	margin-left: -3%;
 }
 
 .centerselect2 { /* ユーザー管理画面でのみ使用 */
-	text-align: center;
+	color: black;
 }
 
 .celinp2 { /* ユーザー管理画面でのみ使用 */
 	margin-left: 35%;
 }
-
-
 
 .centerformradio3 { /* ユーザー管理画面でのみ使用 */
 	width: 62.5%;
@@ -722,17 +734,12 @@ button {
 }
 
 
-/*　ユーザー編集　*/
-
 /*　研修一覧テーブル　*/
 
 .研修名 {
 	width: 350px;
 }
 
-/*　研修詳細　*/
-
-/*　研修新規登録　*/
 
 /*　研修編集　*/
 
@@ -751,6 +758,10 @@ button {
 	height: 200px;
 }
 
+.error-border{
+	border: solid 1px red;
+}
+
 /*　受講研修登録　*/
 
 .tablecheckbox {
@@ -765,23 +776,6 @@ button {
 	width: 250px;
 }
 
-/*　週刊報告一覧　*/
-
-/*　報告確認　*/
-
-/*　週間報告　*/
-
-/*　グループ一覧　*/
-
-/*　グループメンバー一覧　*/
-
-/*　グループ新規登録　*/
-
-/*　グループ編集　*/
-
-/*　グループ詳細　*/
-
-/*　トーク画面　*/
 
 header{
 background-color:  rgb(223, 240, 254);
