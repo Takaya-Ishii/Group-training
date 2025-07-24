@@ -85,6 +85,7 @@
 					<select class="Msizeselect" th:field="*{group_ID}">
 						<option value="">-- 選択してください --</option>
 						<option th:each = "item:${user}" th:value="${item.group_ID}" th:text="${item.group_name}"></option>
+						<br><span class="error2" th:if="${#fields.hasErrors('group_ID')}" th:errors="*{group_ID}" style="color:red"></span>
 						<!-- DBから動的に生成されることを想定 -->
 					</select>
 				</div>

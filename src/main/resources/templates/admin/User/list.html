@@ -34,7 +34,7 @@
 					<tr th:each="user : ${user}">
 						<td th:text="${user.username}"></td>
 						<td th:text="${user.account_name}"></td>
-						<td th:text="${user.role_name}"></td>
+						<td th:text="${user.Role.role_name}"></td>
 						<td>
 							<a th:href="@{/admin/User/{username}(username = ${user.username})}">●</a>
 						</td>

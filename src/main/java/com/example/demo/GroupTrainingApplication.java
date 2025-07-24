@@ -29,8 +29,8 @@ public class GroupTrainingApplication {
 		}
 		
 		//一件検索
-		System.out.println("===一件検索===");
-		System.out.println(mapper.selectdetailById("hogehoge@example.jp"));
+		/**System.out.println("===一件検索===");
+		System.out.println(mapper.selectdetailById("hogehoge@example.jp"));**/
 		
 		//登録データ作成
 		System.out.println("====データ作成====");
@@ -46,7 +46,7 @@ public class GroupTrainingApplication {
 		user.setRole_ID(1);
 		
 		//登録データ更新
-		System.out.println("===更新確認===");
+		/**System.out.println("===更新確認===");
 		Authentication target = mapper.selectdetailById("hogehoge@example.jp");
 		target.setUsername("リポジトリのテスト");
 		target.setAccount_name("テスト");
@@ -56,7 +56,7 @@ public class GroupTrainingApplication {
 		target.setGender("男性");
 		target.setAffiriation("アプリ");
 		target.setDepartOfOrigin(null);
-		target.setRole_ID(1);
+		target.setRole_ID(1);*/
 		
 		//データ削除
 		/**mapper.delete("fugafuga@example.jp");

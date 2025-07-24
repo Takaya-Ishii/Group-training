@@ -91,6 +91,7 @@ public class UserController {
 	public String registrationUser(@RequestParam String password ,String TEL,@Validated ({InsertValidation.class})@ModelAttribute UserForm form,BindingResult bindingResult,RedirectAttributes attributes,Model model) {
 		List<Authentication> User = userServiceImpl.IsPasswordTaken(password);
 		List<Authentication> TELexist = userServiceImpl.IsTELTaken(TEL);
+		System.out.println(bindingResult);
 		//===ここからが、バリデーションチェックです===
 		// 入力に問題があるか ifで検査
 		if(bindingResult.hasErrors()) {

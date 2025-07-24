@@ -26,7 +26,7 @@ public interface UserService {
 	/**IDを新規登録する*/
 	void registrationUser(Authentication user);
 	
-	/**ユーザーをメンバーテーブルに入れる*/
+	/**ユーザーをメンバーテーブルに登録する*/
 	void registrationMember(Member member,Authentication user);
 	
 	/**指定されたIDの情報を編集する*/
@@ -41,6 +41,6 @@ public interface UserService {
 	/**すでにパスワードが使われているのかをチェックする*/
 	List<Authentication> IsPasswordTaken(String password);
 	
-	/**全電話番号を取得*/
+	/**すでに電話番号が使われているかをチェックする*/
 	List<Authentication> IsTELTaken(String TEL);
 }

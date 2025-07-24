@@ -32,7 +32,7 @@
         
 	<div class="centerform">
 					<label class="labelname">新しいパスワード ※</label>
-					<input class="Msizeinput" type="password" th:field="*{password}" />
+					<input class="Msizeinput" type="password"  th:value ="${password}"th:field="*{password}" />
 					<span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red"></span>
 					<span class="error"th:text="${NotusePassword}" style="color:red"></span>
 				</div>
