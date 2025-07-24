@@ -2,18 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.StackMapper">
 	<!-- 研修名検索 -->
-	<select id="selectTra_name" resultType="com.example.demo.entity.Stack">
+	<select id="selectTra_name" resultType="com.example.demo.entity.Trainfo">
 		SELECT DISTINCT tra_name FROM trainfo_table
 		INNER JOIN traCourse_table 
 		ON trainfo_table.tra_ID = traCourse_table.tra_ID
 		WHERE traCourse_table.traCourse_ID = #{traCourse_ID};
 	</select>
 	<!-- 受講研修ID検索 -->
-	<select id="selectTraCourse_ID" resultType="com.example.demo.entity.Stack">
+	<select id="selectTraCourse_ID" resultType="com.example.demo.entity.TraTpm">
 		SELECT DISTINCT traCourse_ID FROM traCourse_table WHERE traCourse_ID = #{traCourse_ID};
 	</select>
 	<!-- 履歴検索 -->
-	<select id="selectStack" resultType="com.example.demo.entity.Stack">
+	<select id="selectStack" resultType="com.example.demo.entity.TraTpm">
 		SELECT study_day, study_time, progress, memo FROM TPM_table
 		WHERE traCourse_ID = #{traCourse_ID} AND stack_No = #{stack_No};
 	</select>
