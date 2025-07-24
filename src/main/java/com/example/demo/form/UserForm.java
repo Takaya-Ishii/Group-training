@@ -3,8 +3,8 @@ package com.example.demo.form;
 import java.util.List;
 import java.util.Objects;
 
+import com.example.demo.entity.Group;
 import com.example.demo.entity.Role;
-import com.example.demo.entity.Group.Group;
 import com.example.demo.validation.EditValidation;
 import com.example.demo.validation.InsertValidation;
 
@@ -79,7 +79,7 @@ public class UserForm {
 		
 		//ユーザーのロールID
 	@NotNull(message = "ロールは必須項目です。",groups = {InsertValidation.class})
-	@NotNull(message= "ロールは必須項目です。",groups ={EditValidation.class})
+	@NotNull(message = "ロールは必須項目です。",groups ={EditValidation.class})
 		private Integer role_ID;
 	
 		//新規判定

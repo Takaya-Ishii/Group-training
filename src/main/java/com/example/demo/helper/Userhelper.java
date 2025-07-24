@@ -3,6 +3,7 @@ package com.example.demo.helper;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.entity.Authentication;
+import com.example.demo.entity.Group;
 import com.example.demo.entity.Member;
 import com.example.demo.form.UserForm;
 
@@ -68,6 +69,22 @@ public class Userhelper {
 			target.setRole_ID(1);
 		}
 		return target;
+	}
+	
+	public static Group convertuser(UserForm form) {
+		Group group = new Group();
+		group.setGroup_ID(form.getGroup_ID());
+		group.setGroup_name(form.getGroup_name());
+		group.setSummary(form.getSummary());
+		return group;
+	}
+	
+	public static UserForm convertuserform(Group group) {
+		UserForm groups = new UserForm();
+		groups.setGroup_ID(group.getGroup_ID());
+		groups.setGroup_name(group.getGroup_name());
+		groups.setSummary(group.getSummary());
+		return groups;
 	}
 }
 
