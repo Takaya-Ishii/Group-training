@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/layout}">
 <head>
 	<meta charset="UTF-8">
-	<link th:href="@{/css/grouptraining.css}" rel="stylesheet">
-	<title>研修管理機能</title>
+	<link th:href="@{/CSS/grouptraining.css}" rel="stylesheet">
+	<title>研修編集</title>
 </head>
 <body>
 	<header th:replace="~{layout :: header}"></header>
