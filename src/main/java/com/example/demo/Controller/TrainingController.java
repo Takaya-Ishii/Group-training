@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
  * 研修管理：コントローラー
  */
 @Controller
-@RequestMapping("/")//←を変えるときは最初に出力するページの設定を変える
+@RequestMapping("/")
 @RequiredArgsConstructor
 
 public class TrainingController {
