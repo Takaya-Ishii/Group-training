@@ -56,8 +56,8 @@
 						<td><a class="maru" th:href="@{/participant/traCourse/stack/edit/{traCourse_ID}/{stack_No}(traCourse_ID=${traCourse.tracourse_id},stack_No=${item.stack_No})}">●</a>		 
 					</td>
 				</table>
-				<form class="tablebtnR" sec:authorize="hasAuthority('ROLE_講師')" th:action="@{/admin/traCourse/save/{uName}(uName=${traUser.username})}">
-							<button class="addlessonbtn" type="submit">受講研修登録</button>
+				<form class="tablebtnR" th:action="@{/participant/traCourse/stack/save/{traCourse_ID}(traCourse_ID=${traCourse.tracourse_id})}">
+					<button class="addlessonbtn" type="submit">学習履歴登録</button>
 				</form>
 				<form class="returnbtnL" th:action="@{/participant/traCourse/{uName}(uName=${traCourse.username})}">
 					<button class="Allreturnbtn" type="submit">受講研修一覧に戻る</button>
