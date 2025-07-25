@@ -19,7 +19,7 @@ public class TraForm {
 	@NotBlank(message = "研修IDは、必須項目です")
 	@Pattern(regexp = "^(?!.*[%]).*$", message = "")
 	@Pattern(regexp = "^(?!.*[\\s|　]).*$", message = "研修IDは、必須項目です")
-	@Size(min=0, max=5, message = "5文字以内で入力してください")
+	@Pattern(regexp = "^.{5}$", message = "5文字で入力してください")
 	@DuplicateCheck
 	private String tra_id;
 	

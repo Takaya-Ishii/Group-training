@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS TPM_table CASCADE;
 --研修情報テーブル
 CREATE TABLE IF NOT EXISTS trainfo_table(
 	--研修ID: 主キー
-	tra_ID VARCHAR(5) PRIMARY KEY,
+	tra_ID CHAR(5) PRIMARY KEY,
 	--研修名: 必須
 	tra_name VARCHAR(20) NOT NULL,
 	--想定時間
