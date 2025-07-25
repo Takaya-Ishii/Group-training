@@ -57,16 +57,16 @@
 				</div>
          <div class="centerform">
 					<label class="labelname">住所 </label>
-					<input class="Msizeinput" type="text" th:field="*{address}" maxlength="50">
+					<input class="Msizeinput" type="text" th:field="*{address}">
 					<span class="error" th:if="${#fields.hasErrors('address')}" th:errors="*{address}" style="color:red"></span>
 				</div>
 				
 		<div class="centerformradio2">
 					<label class="labelname2">性別 ※</label><br>
 					<form class="centerselect2">
-						<input class="celinp2" type="radio" th:field="*{gender}" value="男"> 男性
-						<input type="radio" name="gender" value="女"> 女性
-						<input type="radio" name="gender" value="不"> 不明
+						<input class="celinp2" type="radio" th:field="*{gender}" value="男性"> 男性
+						<input type="radio" name="gender" value="女性"> 女性
+						<input type="radio" name="gender" value="不明"> 不明
 					<br><span class="error1" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" style="color:red"></span>
 					</form>
 				</div>
@@ -85,9 +85,9 @@
 					<select class="Msizeselect" th:field="*{group_ID}">
 						<option value="">-- 選択してください --</option>
 						<option th:each = "item:${user}" th:value="${item.group_ID}" th:text="${item.group_name}"></option>
-						<br><span class="error2" th:if="${#fields.hasErrors('group_ID')}" th:errors="*{group_ID}" style="color:red"></span>
 						<!-- DBから動的に生成されることを想定 -->
 					</select>
+					<br><span class="error" th:if="${#fields.hasErrors('group_ID')}" th:errors="*{group_ID}" style="color:red"></span>
 				</div>
 				
 		<div class="centerform">

@@ -39,6 +39,8 @@ public class UserForm {
 		//ユーザーのパスワード
 	@NotBlank(message ="パスワードは必須項目です",groups = {InsertValidation.class})
 	@NotBlank(message ="パスワードは必須項目です",groups = {EditValidation.class})
+	@Size(min=0,max = 72,message = "最大文字数を超過しています。",groups = {InsertValidation.class})
+	@Size(min=0,max = 72,message = "最大文字数を超過しています。",groups = {EditValidation.class})
 		private String password;
 	
 	//ユーザーのパスワード確認用
@@ -53,13 +55,13 @@ public class UserForm {
 		private String TEL;
 	
 		//ユーザーの住所
-	@Size(min = 1, max = 50,message = "最大文字数を超過しています。",groups = {InsertValidation.class})
-	@Size(min = 1, max = 50,message = "最大文字数を超過しています。",groups = {EditValidation.class})
+	@Size(min = 0, max = 50,message = "最大文字数を超過しています。",groups = {InsertValidation.class})
+	@Size(min = 0, max = 50,message = "最大文字数を超過しています。",groups = {EditValidation.class})
 		private String address;
 		
 		//ユーザーの性別
-		@NotBlank(message = "性別は必須項目です。",groups = {InsertValidation.class})
-		@NotBlank(message = "性別は必須項目です。",groups ={EditValidation.class})
+	@NotBlank(message = "性別は必須項目です。",groups = {InsertValidation.class})
+	@NotBlank(message = "性別は必須項目です。",groups ={EditValidation.class})
 		private String gender;
 		
 		//ユーザーの所属
@@ -73,8 +75,8 @@ public class UserForm {
 		private Integer group_ID; 
 		
 		//ユーザーの出身学部
-	@Size(min=0,max = 10,message = "10文字以下でなくてはなりません。",groups = {InsertValidation.class})
-	@Size(min = 0,max = 10,message = "10文字以下でなくてはなりません。",groups = {EditValidation.class})
+	@Size(min=0,max = 10,message = "最大文字数を超過しています。",groups = {InsertValidation.class})
+	@Size(min = 0,max = 10,message = "最大文字数を超過しています。",groups = {EditValidation.class})
 		private String departOfOrigin;
 		
 		//ユーザーのロールID
@@ -92,8 +94,8 @@ public class UserForm {
 		private String summary;
 		
 		//パスワードと確認用パスワードが一致するかチェック
-		@AssertTrue(message = "パスワードが異なります",groups = {InsertValidation.class})
-		@AssertTrue(message = "パスワードが異なります",groups ={EditValidation.class})
+	@AssertTrue(message = "パスワードが異なります",groups = {InsertValidation.class})
+	@AssertTrue(message = "パスワードが異なります",groups ={EditValidation.class})
 		public boolean isSamePassword() {
 			return Objects.equals(password, confirmPassword);
 		}
