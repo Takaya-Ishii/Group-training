@@ -29,6 +29,7 @@ public class Userhelper {
 		return user;
 	}
 	
+	
 	/**上とは逆に、DBのデータを編集されたものとして扱います。
 	 * これは、編集機能がありそれを再度登録するためのものです。maybe
 	 */

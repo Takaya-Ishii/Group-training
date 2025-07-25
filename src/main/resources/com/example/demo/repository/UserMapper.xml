@@ -127,12 +127,6 @@ ON R.role_ID = P.role_ID
 where P.username = #{username};
 </select>
 
-<!-- 全てのパスワードを取得 -->
-<select id ="selectPassWord" resultType="com.example.demo.entity.Authentication">
-SELECT *
-from profile_table
-where password = #{password}
-</select>
 
 <!-- 全ての電話番号を取得 -->
 <select id="selectTEL" resultType ="com.example.demo.entity.Authentication">
@@ -167,9 +161,9 @@ VALUES
 
 <!-- ユーザーデータをメンバーテーブルに登録する -->
 <insert id="insertPlus" parameterType="com.example.demo.entity.Member">
-INSERT INTO member_table (group_user_ID,group_ID,username,isTeacher)
+INSERT INTO member_table (group_user_ID, group_ID,username,isTeacher)
 VALUES
-(#{member.group_user_ID},#{member.group_ID},#{user.username},(CAST (CASE #{user.role_ID} WHEN 1 THEN 'FALSE' ELSE 'TRUE' END AS BOOLEAN)));
+((SELECT MAX(group_user_ID) FROM member_table) +1, #{member.group_ID},#{user.username},(CAST (CASE #{user.role_ID} WHEN 1 THEN 'FALSE' ELSE 'TRUE' END AS BOOLEAN)));
 </insert>
 
 <!-- プロフィールテーブルのユーザーデータを編集する -->

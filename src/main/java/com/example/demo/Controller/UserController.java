@@ -2,6 +2,7 @@ package com.example.demo.Controller;
 
 import java.util.List;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ import com.example.demo.entity.Authentication;
 import com.example.demo.entity.Member;
 import com.example.demo.form.UserForm;
 import com.example.demo.helper.Userhelper;
+import com.example.demo.repository.AuthenticationMapper;
 import com.example.demo.service.impl.UserServiceImpl;
 import com.example.demo.validation.EditValidation;
 import com.example.demo.validation.InsertValidation;
@@ -30,7 +32,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserController {
 	/**DI*/
+	
+	
 	private final UserServiceImpl userServiceImpl;
+	private final AuthenticationMapper authenticationMapper;
 	
 	/**「ユーザー」の一覧を表示する*/
 	@GetMapping("/User")
@@ -92,7 +97,6 @@ public class UserController {
 	@Transactional
 	@PostMapping("/User/registration")
 	public String registrationUser(@RequestParam String password ,String TEL,@Validated ({InsertValidation.class})@ModelAttribute UserForm form,BindingResult bindingResult,RedirectAttributes attributes,Model model) {
-		List<Authentication> User = userServiceImpl.IsPasswordTaken(password);
 		List<Authentication> TELexist = userServiceImpl.IsTELTaken(TEL);
 		System.out.println(bindingResult);
 		//===ここからが、バリデーションチェックです===
@@ -104,13 +108,6 @@ public class UserController {
 			model.addAttribute("item",userServiceImpl.selectAllRole());
 			model.addAttribute("errorMessage","入力内容に誤りがあります。");
 			//入力画面を表示します
-			return "/admin/User/save";
-		}
-		if( User.isEmpty() == false) {
-			model.addAttribute("NotusePassword","現在このパスワードは利用できません");
-			model.addAttribute("user",userServiceImpl.selectAllGroup());
-			model.addAttribute("item",userServiceImpl.selectAllRole());
-			model.addAttribute("errorMessage","このパスワードは現在登録することができません。");
 			return "/admin/User/save";
 		}
 		if(TELexist .isEmpty()== false) {
@@ -126,6 +123,9 @@ public class UserController {
 		//更新処理
 		userServiceImpl.registrationUser(user);
 		userServiceImpl.registrationMember(member, user);
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		authenticationMapper.updatePassword(user.getUsername(), encodedPassword);
 		//フラッシュメッセージ
 		attributes.addFlashAttribute("message","ユーザーが新規登録されました");
 		//PRGパターン
@@ -170,6 +170,9 @@ public class UserController {
 		Authentication user = Userhelper.convertUser(form);
 		//更新処理
 		userServiceImpl.updateUser(user);
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		authenticationMapper.updatePassword(user.getUsername(), encodedPassword);
 		//フラッシュメッセージ
 		attributes.addFlashAttribute("message","ユーザー情報が更新されました");
 		//PRGパターン

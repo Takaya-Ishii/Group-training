@@ -32,9 +32,6 @@ public interface UserMapper {
 	//「ユーザーデータ」をメンバーテーブルに登録する
 	void insertPlus(Member member, Authentication user);
 	
-	//パスワードで一致するものがあるか
-	List<Authentication> selectPassWord(String password);
-	
 	//TELで一致するものがあるか
 	List<Authentication> selectTEL(String TEL);
 	

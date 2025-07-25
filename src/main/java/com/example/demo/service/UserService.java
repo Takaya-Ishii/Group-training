@@ -40,9 +40,6 @@ public interface UserService {
 	
 	/**指定されたIDの情報を削除する*/
 	void deleteUser(String username);
-
-	/**すでにパスワードが使われているのかをチェックする*/
-	List<Authentication> IsPasswordTaken(String password);
 	
 	/**すでに電話番号が使われているかをチェックする*/
 	List<Authentication> IsTELTaken(String TEL);

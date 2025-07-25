@@ -59,13 +59,6 @@ public class UserServiceImpl implements UserService {
 	public void registrationMember(Member member, Authentication user) {
 		userMapper.insertPlus(member,user);	}
 	
-	/**すでにあるパスワードを取得する*/
-	@Override
-	public List<Authentication> IsPasswordTaken(String password) {
-		
-		return userMapper.selectPassWord(password);
-	}
-	
 	/**既にある電話番号を取得する*/
 	public List<Authentication> IsTELTaken(String TEL){
 		return userMapper.selectTEL(TEL);

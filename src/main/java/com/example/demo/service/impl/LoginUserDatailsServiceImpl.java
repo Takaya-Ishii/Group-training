@@ -58,7 +58,7 @@ import lombok.RequiredArgsConstructor;
          }
     }
 
-	private Collection<GrantedAuthority> getAuthorityList(Role role) {
+	public static Collection<GrantedAuthority> getAuthorityList(Role role) {
 		// 権限リスト
         List<GrantedAuthority> authorities = new ArrayList<>();
         // ロール名に対応したロールを付与
