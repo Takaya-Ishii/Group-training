@@ -44,25 +44,48 @@
 						
 						<div class="centerform">
 							<label class="labelname">想定時間</label>
-							<input type="text" class="Msizeinput" th:field="*{est_time}">
+							<input type="text" class="Msizeinput" th:field="*{est_time}"
+								th:classappend="${#fields.hasErrors('est_time')} ? 'error-border' : ''">
+							
+							<p class="errormessage" th:if="${#fields.hasErrors('est_time')}"
+								th:errors="*{est_time}" style="color: red;">
+								エラーがあれば表示
+							</p>
 						</div>
 						
 						<div class="centerform">
 							<label class="labelname">使用教材</label>
-							<input type="text" class="Msizeinput" th:field="*{text_book}">
+							<input type="text" class="Msizeinput" th:field="*{text_book}"
+								th:classappend="${#fields.hasErrors('text_book')} ? 'error-border' : ''">
+							
+							<p class="errormessage" th:if="${#fields.hasErrors('text_book')}"
+								th:errors="*{text_book}" style="color: red;">
+								エラーがあれば表示
+							</p>
 						</div>
 						
 						<div class="centerform">
 							<label class="labelname">説明</label>
-							<textarea type="text" class="descinput" rows="5" cols="30" th:field="*{description}">
+							<textarea type="text" class="descinput" rows="5" cols="30" th:field="*{description}"
+								th:classappend="${#fields.hasErrors('description')} ? 'error-border' : ''">
 							</textarea>
+							
+							<p class="errormessage" th:if="${#fields.hasErrors('description')}"
+								th:errors="*{description}" style="color: red;">
+								エラーがあれば表示
+							</p>
 						</div>
 						
 						<div class="centerform">
 							<label class="labelname">課題</label>
-							<textarea type="text" class="issueinput" rows="5" cols="30" th:field="*{assignment}">
-								
+							<textarea type="text" class="issueinput" rows="5" cols="30" th:field="*{assignment}"
+								th:classappend="${#fields.hasErrors('assignment')} ? 'error-border' : ''">
 							</textarea>
+							
+							<p class="errormessage" th:if="${#fields.hasErrors('assignment')}"
+								th:errors="*{assignment}" style="color: red;">
+								エラーがあれば表示
+							</p>
 						</div>
 						
 						<div class="inputbtnR">
