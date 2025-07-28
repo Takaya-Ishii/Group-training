@@ -166,7 +166,7 @@ public class UserController {
 		if(bindingResult.hasErrors()) {
 			System.out.println(bindingResult);
 			//フラッシュメッセージ
-			model.addAttribute("errorMessage","エラーが発生しました。");
+			model.addAttribute("errorMessage","入力に誤りがあります。");
 			//全てのグループの名前とグループIDをuserに入れる
 			model.addAttribute("user",userServiceImpl.selectAllGroup());
 			//全てのロール名と、ロールIDをitemにいれる
