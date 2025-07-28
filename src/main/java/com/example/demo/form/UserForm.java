@@ -7,6 +7,7 @@ import com.example.demo.entity.Group;
 import com.example.demo.entity.Role;
 import com.example.demo.validation.EditValidation;
 import com.example.demo.validation.InsertValidation;
+import com.example.demo.validator.PasswordByte;
 
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
@@ -39,8 +40,8 @@ public class UserForm {
 		//ユーザーのパスワード
 	@NotBlank(message ="パスワードは必須項目です",groups = {InsertValidation.class})
 	@NotBlank(message ="パスワードは必須項目です",groups = {EditValidation.class})
-	@Size(min=0,max = 72,message = "最大文字数を超過しています。",groups = {InsertValidation.class})
-	@Size(min=0,max = 72,message = "最大文字数を超過しています。",groups = {EditValidation.class})
+	@PasswordByte( max = 72,message="最大文字数を超過しています",groups = {InsertValidation.class})
+	@PasswordByte( max = 72,message="最大文字数を超過しています",groups = {EditValidation.class})
 		private String password;
 	
 	//ユーザーのパスワード確認用
