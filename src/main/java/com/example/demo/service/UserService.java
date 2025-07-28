@@ -26,6 +26,9 @@ public interface UserService {
 	/**全ロール名を取得する*/
 	List<Role> selectAllRole();
 	
+	/**同じユーザー名がないか確認*/
+	List<Authentication> IsIDTaken(String username);
+	
 	/**IDを新規登録する*/
 	void registrationUser(Authentication user);
 	

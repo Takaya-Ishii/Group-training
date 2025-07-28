@@ -82,5 +82,9 @@ public class UserServiceImpl implements UserService {
 		userMapper.delete(username);
 	}
 	
+	/**同じユーザー名がいるかチェック*/
+	public List<Authentication> IsIDTaken(String username){
+		return userMapper.selectAllID(username);
+	}
 
 }

@@ -32,6 +32,9 @@ public interface UserMapper {
 	//「ユーザーデータ」をメンバーテーブルに登録する
 	void insertPlus(Member member, Authentication user);
 	
+	//「ユーザーID」に被りがないかを確かめる
+	List<Authentication> selectAllID(String username);
+	
 	//TELで一致するものがあるか
 	List<Authentication> selectTEL(String TEL);
 	

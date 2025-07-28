@@ -127,6 +127,13 @@ ON R.role_ID = P.role_ID
 where P.username = #{username};
 </select>
 
+<!-- 全てのユーザーIDを取得 -->
+<select id="selectAllID" resultType = "com.example.demo.entity.Authentication">
+SELECT username 
+from profile_table
+WHERE username = #{username}
+
+</select>
 
 <!-- 全ての電話番号を取得 -->
 <select id="selectTEL" resultType ="com.example.demo.entity.Authentication">

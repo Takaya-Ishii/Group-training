@@ -96,8 +96,9 @@ public class UserController {
 	/**新たな「ユーザー」を新規登録する*/
 	@Transactional
 	@PostMapping("/User/registration")
-	public String registrationUser(@RequestParam String password ,String TEL,@Validated ({InsertValidation.class})@ModelAttribute UserForm form,BindingResult bindingResult,RedirectAttributes attributes,Model model) {
+	public String registrationUser(@RequestParam String username ,String TEL,@Validated ({InsertValidation.class})@ModelAttribute UserForm form,BindingResult bindingResult,RedirectAttributes attributes,Model model) {
 		List<Authentication> TELexist = userServiceImpl.IsTELTaken(TEL);
+		List<Authentication> IDexist = userServiceImpl.IsIDTaken(username);
 		System.out.println(bindingResult);
 		//===ここからが、バリデーションチェックです===
 		// 入力に問題があるか ifで検査
@@ -108,6 +109,13 @@ public class UserController {
 			model.addAttribute("item",userServiceImpl.selectAllRole());
 			model.addAttribute("errorMessage","入力内容に誤りがあります。");
 			//入力画面を表示します
+			return "/admin/User/save";
+		}
+		if(IDexist.isEmpty() == false) {
+			model.addAttribute("user",userServiceImpl.selectAllGroup());
+			model.addAttribute("item",userServiceImpl.selectAllRole());
+			model.addAttribute("ID","このユーザーIDは現在利用できません");
+			model.addAttribute("errorMessage","入力内容に誤りがあります。");
 			return "/admin/User/save";
 		}
 		if(TELexist .isEmpty()== false) {

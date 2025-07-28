@@ -22,6 +22,7 @@
 					<label class="labelname">ユーザーID ※</label>
 					<input class="Msizeinput" type="text" th:field="*{username}"placeholder="example@co.jp">
 					<span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color:red"></span>
+					<span class="error"th:text="${ID}" style="color:red"></span>
 				</div>
 			<div class="centerform">
 					<label class="labelname">ユーザー名 ※</label>
