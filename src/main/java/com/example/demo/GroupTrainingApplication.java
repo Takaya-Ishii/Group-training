@@ -43,7 +43,7 @@ public class GroupTrainingApplication {
 		user.setGender("男性");
 		user.setAffiriation("アプリ");
 		user.setDepartOfOrigin(null);
-		user.setRole_ID(1);
+		user.setRole_ID(26);
 		
 		//登録データ更新
 		/**System.out.println("===更新確認===");
