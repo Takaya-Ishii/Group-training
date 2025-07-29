@@ -51,8 +51,8 @@ public class UserForm {
 		//ユーザーの電話番号
 	@NotBlank(message = "電話番号は必須項目です。",groups = {InsertValidation.class})
 	@NotBlank(message = "電話番号は必須項目です。",groups = {EditValidation.class})
-	@Pattern(regexp = "^\\d{3}\\d{4}\\d{4}", message = "入力に誤りがあります。",groups = {InsertValidation.class})
-	@Pattern(regexp = "^\\d{3}\\d{4}\\d{4}", message = "入力に誤りがあります。",groups = {EditValidation.class})
+	@Pattern(regexp = "^\\d{3}\\d{4}\\d{4}", message = "入力に誤りがあります。半角数字のみ適応されます",groups = {InsertValidation.class})
+	@Pattern(regexp = "^\\d{3}\\d{4}\\d{4}", message = "入力に誤りがあります。半角数字のみ適応されます",groups = {EditValidation.class})
 		private String TEL;
 	
 		//ユーザーの住所
