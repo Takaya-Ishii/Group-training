@@ -66,8 +66,8 @@
 					<label class="labelname2">性別 ※</label><br>
 					<form class="centerselect2">
 						<input class="celinp2" type="radio" th:field="*{gender}" value="男性"> 男性
-						<input type="radio" name="gender" th:field="*{gender}"value="女性"> 女性
-						<input type="radio" name="gender" th:field="*{gender}"value="不明"> 不明
+						<input type="radio" name="gender" value="女性"> 女性
+						<input type="radio" name="gender" value="不明"> 不明
 					<br><span class="error1" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" style="color:red"></span>
 					</form>
 				</div>
@@ -75,8 +75,8 @@
 					<label class="labelname3">所属 ※</label><br>
 					<div class="centerselect3">
 					<input class="celinp3" type="radio" th:field="*{affiriation}" value="未定"> 未定
-					<input type="radio" th:field="affiriation" value="アプリ"> アプリ
-					<input type="radio" th:field="affiriation" value="インフラ"> インフラ
+					<input type="radio" name="affiriation"value="アプリ"> アプリ
+					<input type="radio" name="affiriation"value="インフラ"> インフラ
 				<br><span class="error2" th:if="${#fields.hasErrors('affiriation')}" th:errors="*{affiriation}" style="color:red"></span>
 					</div>
 			</div>
