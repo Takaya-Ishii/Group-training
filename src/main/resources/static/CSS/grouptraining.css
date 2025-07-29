@@ -785,6 +785,10 @@ button,
 	height: 200px;
 }
 
+.error-border{
+	border: solid 1px red;
+}
+
 /*　受講研修登録　*/
 
 .tablecheckbox {

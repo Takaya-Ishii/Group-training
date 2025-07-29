@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/layout}">
+<head>
+	<meta charset="UTF-8">
+	<link th:href="@{/CSS/grouptraining.css}" rel="stylesheet">
+	<title>研修一覧</title>
+</head>
+<body>
+	
+	<div layout:fragment="content">
+		<main>
+			<h2>研修一覧</h2>
+			<!--削除したらここにメッセージを表示する-->
+			<!--表示するメッセージごとに色を分ける-->
+			<p class="message" th:if="${errorMessage}"
+				th:text="${errorMessage}" style="background-color: rgb(255, 212, 212);">
+				エラーメッセージ
+			</p>
+			
+			<p class="message" th:if="${message}"
+				th:text="${message}" style="background-color: rgb(193,254,228 );">
+				新規登録・更新・削除メッセージ
+			</p>
+			<div class="serchcont">
+				<form action="/admin/Training/serch" method="get">
+					<label for="get-value">研修名</label>
+					
+					<!--検索したキーワードを残しておく-->
+					<input type="text" name="tra_name" th:value="${tra_name}">
+					<button type="submit" class="serchbtn">検索</button>
+				</form>
+			</div>
+			
+			<div class="maincont">
+				<table class="table" border="1">
+					<thead>
+						<tr>
+							<th>研修ID</th>
+							<th class="研修名">研修名</th>
+							<th>想定時間</th>
+							<th>詳細</th>
+						</tr>
+					</thead>
+		
+					<tbody>
+						<tr th:each="Tra : ${tra_list}">
+							<td th:text="${Tra.tra_id}"></td>
+							<td th:text="${Tra.tra_name}"></td>
+							<td th:text="${Tra.est_time} + 時間"></td>
+							<td>
+								<a class="maru" th:href="@{/admin/Training/{tra_id}(tra_id=${Tra.tra_id})}">
+									●
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<form class="tablebtnR" th:action="@{/admin/Training/save}">
+					<button class="NewRegisterbtn" type="submit">新規登録</button>
+				</form>
+			</div>
+		</main>
+	</div>
+</body>
+</html>
