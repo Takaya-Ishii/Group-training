@@ -7,6 +7,7 @@ import com.example.demo.validator.PasswordByte;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
+//パスワードをハッシュ化して、登録する際にバイト数で文字数制限するためのアノテーション
 public class PasswordByteImpl implements ConstraintValidator<PasswordByte,String>{
 	/**文字エンコーディング*/
 	private String encording;

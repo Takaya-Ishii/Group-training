@@ -11,7 +11,7 @@ import com.example.demo.validator.impl.PasswordByteImpl;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
-
+//パスワードをハッシュ化する際に、バイト数で文字数制限するためのアノテーション
 @Documented
 @Constraint(validatedBy = PasswordByteImpl.class)
 @Target({ElementType.FIELD})

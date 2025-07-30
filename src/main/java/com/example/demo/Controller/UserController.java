@@ -31,9 +31,8 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/admin")
 @RequiredArgsConstructor
 public class UserController {
+	
 	/**DI*/
-	
-	
 	private final UserServiceImpl userServiceImpl;
 	private final AuthenticationMapper authenticationMapper;
 	
@@ -111,6 +110,7 @@ public class UserController {
 			//入力画面を表示します
 			return "/admin/User/save";
 		}
+		//ユーザーIDが既に使われているか確認
 		if(IDexist.isEmpty() == false) {
 			model.addAttribute("user",userServiceImpl.selectAllGroup());
 			model.addAttribute("item",userServiceImpl.selectAllRole());
@@ -118,6 +118,7 @@ public class UserController {
 			model.addAttribute("errorMessage","入力内容に誤りがあります。");
 			return "/admin/User/save";
 		}
+		//電話番号が既に使われているか確認
 		if(TELexist .isEmpty()== false) {
 			model.addAttribute("NotuseNumber","この番号はすでに使われています。");
 			model.addAttribute("user",userServiceImpl.selectAllGroup());
