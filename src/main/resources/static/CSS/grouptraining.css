@@ -752,6 +752,13 @@ button,
 	height: 40px;
 }
 
+.day {
+	min-width: 100px;
+}
+
+.memo {
+	padding: 0 5px;
+}
 
 .ユーザー一覧 {
 	max-width: 200px;
