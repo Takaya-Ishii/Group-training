@@ -1,0 +1,90 @@
+package com.example.demo.service.impl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.example.demo.entity.Authentication;
+import com.example.demo.entity.Group;
+import com.example.demo.entity.Member;
+import com.example.demo.entity.Role;
+import com.example.demo.repository.UserMapper;
+import com.example.demo.service.UserService;
+
+import lombok.RequiredArgsConstructor;
+
+/**ユーザー機能実装サービス*/
+
+@Service
+@Transactional
+@RequiredArgsConstructor
+public class UserServiceImpl implements UserService {
+	/**DI*/
+	private final UserMapper userMapper;
+	/**ユーザーを一覧表示*/
+	@Override
+	public List<Authentication> displayAllUser() {
+		 
+		return userMapper.selectAll();
+	}
+	/**指定されたidの情報を検索する*/
+	@Override
+	public List<Authentication> displaySearchedUser(String username,String account_name) {
+		 //TODO 自動生成されたメソッド・スタブ
+		return userMapper.selectByBox(username,account_name);
+	}
+	
+	/**全グループ名を取得する*/
+	public List<Group> selectAllGroup(){
+		return userMapper.findAllGroup();
+	}
+	
+	/**全ロール名を取得する*/
+	public List<Role> selectAllRole(){
+		return userMapper.findAllRole();
+	}
+	/**ユーザーの詳細表示
+	 * @return */
+	@Override
+	public Authentication displayUserDetail(String username) {
+		return userMapper.selectdetailById(username);
+	}
+	/**IDを新規登録する*/
+	@Override
+	public void registrationUser(Authentication user) {
+		 //TODO 自動生成されたメソッド・スタブ
+		userMapper.insert(user);
+	}
+	public void registrationMember(Member member, Authentication user) {
+		userMapper.insertPlus(member,user);	}
+	
+	/**既にある電話番号を取得する*/
+	public List<Authentication> IsTELTaken(String TEL){
+		return userMapper.selectTEL(TEL);
+	}
+	
+	/**指定されたIDの情報を編集する*/
+	@Override
+	public void updateUser(Authentication user) {
+		 //TODO 自動生成されたメソッド・スタブ
+		userMapper.update(user);
+	}
+	
+	public void updateMember(Member member, Authentication user) {
+		userMapper.updateMember(member,user);
+	}
+	
+	/**指定されたIDの情報を削除する*/
+	@Override
+	public void deleteUser(String username) {
+		 //TODO 自動生成されたメソッド・スタブ
+		userMapper.delete(username);
+	}
+	
+	/**同じユーザー名がいるかチェック*/
+	public List<Authentication> IsIDTaken(String username){
+		return userMapper.selectAllID(username);
+	}
+
+}

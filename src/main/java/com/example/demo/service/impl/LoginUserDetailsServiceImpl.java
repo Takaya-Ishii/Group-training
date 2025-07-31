@@ -1,15 +1,14 @@
- package com.example.demo.service.impl;
- import java.util.ArrayList;
+package com.example.demo.service.impl;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsPasswordService;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Authentication;
@@ -21,15 +20,17 @@ import lombok.RequiredArgsConstructor;
  /**
  * カスタム認証サービス
  */
- @Service
+ 
+  @Service
  @RequiredArgsConstructor
- public class LoginUserDetailsServiceImpl implements UserDetailsService, UserDetailsPasswordService{
+public class LoginUserDetailsServiceImpl implements UserDetailsService{
+
 	 
 	 /** DI */
 	 private final AuthenticationMapper authenticationMapper;
 	 
-    @Override
-    public UserDetails loadUserByUsername(String username) 
+   @Override
+   public UserDetails loadUserByUsername(String username) 
       throws UsernameNotFoundException {
     	
     	// username(ユーザID)からパスワードとロールIDを取得
@@ -56,7 +57,7 @@ import lombok.RequiredArgsConstructor;
          }
     }
 
-	private Collection<GrantedAuthority> getAuthorityList(Role role) {
+	public static Collection<GrantedAuthority> getAuthorityList(Role role) {
 		// 権限リスト
         List<GrantedAuthority> authorities = new ArrayList<>();
         // ロール名に対応したロールを付与
@@ -67,27 +68,5 @@ import lombok.RequiredArgsConstructor;
         }
         return authorities;
     }
-	
-	@Override
-    public UserDetails updatePassword(UserDetails user, String newPassword) {
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodedPassword = passwordEncoder.encode(newPassword);
-		authenticationMapper.updatePassword(user.getUsername(), encodedPassword);
-		
-	    LoginUser loginUser = (LoginUser) user;
 
-	    return new LoginUser(
-	        loginUser.getUsername(),
-	        encodedPassword,
-	        loginUser.getAuthorities(),
-	        loginUser.getAccount_name(),
-	        loginUser.getAddress(),
-	        loginUser.getGender(),
-	        loginUser.getTEL(),
-	        loginUser.getAffiriation(),
-	        loginUser.getDepartOfOrigin(),
-	        loginUser.getRole_ID()
-	    );
-    }
-	}
- 
+}

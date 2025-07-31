@@ -42,6 +42,6 @@
 	</select>
 	<!-- 重複をtrueかfalseで返す -->
 	<select id="existsById" resultType="boolean">
-		SELECT COUNT(*) > 0 FROM trainfo_table WHERE tra_id = #{tra_id}
+		SELECT COUNT(*) FROM trainfo_table WHERE tra_id = #{tra_id} LIMIT 1
 	</select>
 </mapper>

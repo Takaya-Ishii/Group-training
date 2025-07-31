@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
  * 研修管理：コントローラー
  */
 @Controller
-@RequestMapping("/")//←を変えるときは最初に出力するページの設定を変える
+@RequestMapping("/")
 @RequiredArgsConstructor
 
 public class TrainingController {
@@ -38,7 +38,7 @@ public class TrainingController {
 	@GetMapping("/admin/Training")
 	public String displayAllTraining(Model model) {
 		model.addAttribute("tra_list", traService.selectAllTra());
-		return "trainingList";
+		return "admin/training/trainingList";
 	}
 	
 	/*
@@ -58,7 +58,7 @@ public class TrainingController {
 			model.addAttribute("tra_list", traService.selectAllTra());
 			}
 		
-		return "trainingList";
+		return "admin/training/trainingList";
 	}
 	 
 	/*
@@ -68,7 +68,7 @@ public class TrainingController {
 	public String displayTrainingDetail(@PathVariable("tra_id") String tra_id, Model model) {
 
 		model.addAttribute("tra_detail", traService.selectByIdTra(tra_id));
-		return "trainingDetail";
+		return "admin/training/trainingDetail";
 	}
 	
 	/*
@@ -77,7 +77,7 @@ public class TrainingController {
 	@GetMapping("/admin/Training/save")
 	public String displaySaveTraining(@ModelAttribute("form") TraForm form, Model model) {
 		
-		return "trainingNew";
+		return "admin/training/trainingNew";
 	}
 	
 	/*
@@ -94,7 +94,7 @@ public class TrainingController {
 			if(bindingResult.hasErrors()) {
 				attributes.addFlashAttribute("form", form);
 				model.addAttribute("errorMessage", "入力項目に誤りがあります。メッセージを確認し、再度入力をしてください。");
-				return "trainingNew";
+				return "admin/training/trainingNew";
 			}
 			
 			Trainfo tra_mana = TraHelper.convertTra(form);
@@ -106,9 +106,10 @@ public class TrainingController {
 			
 			attributes.addFlashAttribute("form", form);
 			model.addAttribute("errorMessage", "入力項目に誤りがあります。メッセージを確認し、再度入力をしてください。");
+			model.addAttribute("IdErrorMessage", "既に登録されている研修IDです");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			return "trainingNew";
+			return "admin/training/trainingNew";
 		}
 	}
 	
@@ -120,7 +121,7 @@ public class TrainingController {
 			@ModelAttribute TraForm form, BindingResult bindingResult) {
 		
 		model.addAttribute("form", traService.selectByIdTra(tra_id));
-		return "trainingEdit";
+		return "admin/training/trainingEdit";
 	}
 	
 	/*
@@ -135,7 +136,7 @@ public class TrainingController {
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("form", form);
 			model.addAttribute("errorMessage", "入力項目に誤りがあります。メッセージを確認し、再度入力をしてください。");
-			return "trainingEdit";
+			return "admin/training/trainingEdit";
 		}
 		 
 		Trainfo tra_mana = TraHelper.convertTra(form);
