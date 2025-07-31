@@ -7,8 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.entity.LoginUser;
 
@@ -20,7 +20,7 @@ import com.example.demo.entity.LoginUser;
 @RequestMapping("/error")
 public class CustomErrorController implements ErrorController{
 
-	@GetMapping("")
+	@RequestMapping(value = "", method = {RequestMethod.GET, RequestMethod.POST})
     public String handleError(HttpServletResponse response, Model model, @AuthenticationPrincipal LoginUser loginUser)
     {
 		//受講者がエラー画面に飛んだ際に、受講研修一覧に戻れるように
@@ -35,7 +35,9 @@ public class CustomErrorController implements ErrorController{
         else if (response.getStatus() == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
         	return "/error/500";
         }
-        
+        else if(response.getStatus() == HttpStatus.BAD_REQUEST.value()) {
+        	return "/error/400";
+        }
         return "";
     }
  

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/layout}">
+<head>
+	<meta charset="UTF-8">
+	<link th:href="@{/CSS/modalStyle.css}" rel="stylesheet">
+	<link th:href="@{/CSS/grouptraining.css}" rel="stylesheet">
+	<title>研修詳細</title>
+</head>
+<body>
+	<header th:replace="~{layout :: header}"></header>
+	
+	<div layout:fragment="content">
+		<main>
+			<h2>研修詳細</h2>
+			<div class="vercontainer">
+				<table class="vertable" border="1" th:object="${tra_detail}">
+					<tr>
+						<th>研修ID</th>
+						<td th:text="*{tra_id}"></td>
+					</tr>
+					<tr>
+						<th>研修名</th>
+						<td th:text="*{tra_name}"></td>
+					</tr>
+					<tr>
+						<th>想定時間</th>
+						<td th:text="*{est_time} + 時間"></td>
+					</tr>
+					<tr>
+						<th>使用教材</th>
+						<td th:text="*{text_book}"></td>
+					</tr>
+					<tr>
+						<th class="vtableheight2">説明</th>
+						<td th:text="*{description}"></td>
+					</tr>
+					<tr>
+						<th class="vtableheight2">課題</th>
+						<td th:text="*{assignment}"></td>
+					</tr>
+				</table>
+			</div>
+			
+			<!--モーダル呼び出し-->
+			<div class="tablebtnR2">
+				<button class="deletebtn" type="submit" id="open">削除</button>
+				<form th:action="@{/admin/Training/edit/{tra_id}(tra_id=${tra_id})}" method="get">
+					<button class="revisionbtn">修正</button>
+				</form>
+			</div>
+			<form th:action="@{/admin/Training}" method="get">
+				<button class="returnbtn" type="submit">研修一覧に戻る</button>
+			</form>
+		</main>
+	
+		<!--モーダルのレイアウト-->
+		<div id="mask" class="hidden"></div>
+		<section id="modal" class="hidden">
+			<div id="modal-content">
+				
+				<!--モーダルのボディ-->
+				<div id="modal-body">
+					<label>本当に削除してよろしいですか？</label>
+				</div>
+				
+				<!--フッター-->
+				<div class="modal-footer">
+					<button id="close" class="cancelbtn" onclick="deleteModal">キャンセル</button>
+					<form th:action="@{/admin/Training/delete/{tra_id}(tra_id=${tra_id})}" method="post">
+						<button class="deletebtn" type="submit">削除</butto>
+					</form>
+				</div>
+			</div>
+		</section>
+		
+		<script th:src="@{/js/modal.js}"></script>
+	</div>
+</body>
+</html>

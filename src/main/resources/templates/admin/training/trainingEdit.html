@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/layout}">
+<head>
+	<meta charset="UTF-8">
+	<link th:href="@{/CSS/grouptraining.css}" rel="stylesheet">
+	<title>研修編集</title>
+</head>
+<body>
+	<header th:replace="~{layout :: header}"></header>
+	
+	<div layout:fragment="content">
+		<main>
+			<div class="container">
+				<h2>研修編集</h2>
+				
+				<p class="message" th:if="${errorMessage}"
+					th:text="${errorMessage}" style="background-color: rgb(255, 212, 212);">
+					エラーメッセージ
+				</p>
+				
+				<div>
+					<form class="logcenter" th:action="@{/admin/Training/update/{tra_ID}}"
+						 th:object="${form}" method="post">
+						 
+						<div class="centerform">
+							<label class="labelname">研修ID</label>
+							<input type="text" class="Msizeinput" th:field="*{tra_id}"  readonly
+							 style="background-color: lightgray;">
+						</div>
+						
+						<div class="centerform">
+							<label class="labelname">研修名</label>
+							<input type="text" class="Msizeinput" th:field="*{tra_name}"
+								th:classappend="${#fields.hasErrors('tra_name')} ? 'error-border' : ''">
+							
+							<!--研修名のバリデーションチェック-->
+							<p class="errormessage" th:if="${#fields.hasErrors('tra_name')}"
+								th:errors="*{tra_name}" style="color: red;">
+								エラーがあれば表示
+							</p>
+						</div>
+						
+						<div class="centerform">
+							<label class="labelname">想定時間</label>
+							<input type="text" class="Msizeinput" th:field="*{est_time}"
+								th:classappend="${#fields.hasErrors('est_time')} ? 'error-border' : ''">
+							
+							<p class="errormessage" th:if="${#fields.hasErrors('est_time')}"
+								th:errors="*{est_time}" style="color: red;">
+								エラーがあれば表示
+							</p>
+						</div>
+						
+						<div class="centerform">
+							<label class="labelname">使用教材</label>
+							<input type="text" class="Msizeinput" th:field="*{text_book}"
+								th:classappend="${#fields.hasErrors('text_book')} ? 'error-border' : ''">
+							
+							<p class="errormessage" th:if="${#fields.hasErrors('text_book')}"
+								th:errors="*{text_book}" style="color: red;">
+								エラーがあれば表示
+							</p>
+						</div>
+						
+						<div class="centerform">
+							<label class="labelname">説明</label>
+							<textarea type="text" class="descinput" rows="5" cols="30" th:field="*{description}"
+								th:classappend="${#fields.hasErrors('description')} ? 'error-border' : ''">
+							</textarea>
+							
+							<p class="errormessage" th:if="${#fields.hasErrors('description')}"
+								th:errors="*{description}" style="color: red;">
+								エラーがあれば表示
+							</p>
+						</div>
+						
+						<div class="centerform">
+							<label class="labelname">課題</label>
+							<textarea type="text" class="issueinput" rows="5" cols="30" th:field="*{assignment}"
+								th:classappend="${#fields.hasErrors('assignment')} ? 'error-border' : ''">
+							</textarea>
+							
+							<p class="errormessage" th:if="${#fields.hasErrors('assignment')}"
+								th:errors="*{assignment}" style="color: red;">
+								エラーがあれば表示
+							</p>
+						</div>
+						
+						<div class="inputbtnR">
+							<button class="updatebtn" type="submit">更新</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+			<form class="returnbtnL" th:action="@{/admin/Training}">
+				<button class="returnbtn">研修一覧に戻る</button>
+			</form>
+		</main>
+	</div>
+</body>
+</html>

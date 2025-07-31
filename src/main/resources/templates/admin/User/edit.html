@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../css/grouptraining.css">
+    <title>ユーザー編集</title>
+</head>
+<body>
+	<header th:replace="~{layout :: header}"></header>
+	<div layout:fragment="content">
+	<main>
+<h2>ユーザー編集</h2>
+
+<!--Flashメッセージの表示-->
+<p class="message" th:if="${message}" th:text="${message}" style="color:blue; background-color: rgb(193,254,228);">完了メッセージ</p>
+			
+			
+<p class="message" th:if="${errorMessage}" th:text="${errorMessage}" style="color:red; background-color: rgb(255, 212, 212);">エラーメッセージ</p>
+
+
+<!--本文-->
+<form th:action="@{/admin/User/update}"th:object="${userForm}" method="post">
+	<div>
+	
+	<div class="centerform">
+					<label class="labelname">ユーザーID </label>
+					<input class="Msizeinput" th:field="*{username}" value="${username}" readonly style="background-color: lightgray;">
+				</div>
+				<div class="centerform">
+					<label class="labelname">ユーザー名 ※</label>
+					<input class="Msizeinput" type="text" th:field="*{account_name}"placeholder="黒須 パワ男">
+					<span class="error" th:if="${#fields.hasErrors('account_name')}" th:errors="*{account_name}" style="color:red"></span>
+				</div>
+        
+	<div class="centerform">
+					<label class="labelname">新しいパスワード ※</label>
+					<input class="Msizeinput" type="password"  th:value ="${password}"th:field="*{password}" />
+					<span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red"></span>
+					<span class="error"th:text="${NotusePassword}" style="color:red"></span>
+				</div>
+			
+				<div class="centerform">
+					<label class="labelname">新しいパスワード (確認) ※</label>
+					<input class="Msizeinput" type="password" th:field="*{confirmPassword}">
+					<span class="error" th:if="${#fields.hasErrors('samePassword')}" th:errors="*{samePassword}" style="color:red;">
+						相関項目チェックのエラー
+					</span>
+				</div>
+				<div class="centerform">
+					<label class="labelname">電話番号 ※</label>
+					<input class="Msizeinput" type="text" th:field="*{TEL}" placeholder="08012345678" maxlength="11">
+					<span th:if="${#fields.hasErrors('TEL')}" th:errors="*{TEL}" style="color:red"></span>
+					<span class="error"th:text="${NotuseNumeber}" style="color:red"></span>
+				</div>
+					<div class="centerform">
+					<label class="labelname">住所 </label>
+					<input class="Msizeinput" type="text" th:field="*{address}" maxlength="50">
+					<span class="error" th:if="${#fields.hasErrors('address')}" th:errors="*{address}" style="color:red"></span>
+				</div>
+				<div class="centerformradio2">
+					<label class="labelname2">性別 ※</label><br>
+					<form class="centerselect2">
+						<input class="celinp2" type="radio" th:field="*{gender}" value="男性"> 男性
+						<input type="radio" name="gender" th:field="*{gender}"value="女性"> 女性
+						<input type="radio" name="gender" th:field="*{gender}"value="不明"> 不明
+						<br><span class="error1" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" style="color:red"></span>
+					</form>
+				</div>
+				
+				<div class="centerformradio3">
+					<label class="labelname3">所属 ※</label><br>
+					<div class="centerselect3">
+						<input class="celinp3" type="radio" th:field="*{affiriation}" value="未定"> 未定
+						<input type="radio" name="affiriation" th:field="*{affiriation}"value="アプリ"> アプリ
+						<input type="radio" name="affiriation" th:field="*{affiriation}"value="インフラ"> インフラ
+						<br><span class="error2" th:if="${#fields.hasErrors('affiriation')}" th:errors="*{affiriation}" style="color:red"></span>
+					</div>
+				</div>
+				
+				<div class="centerform">
+					<label class="labelname">グループ ※</label>
+					<select class="Msizeselect" th:field="*{group_ID}">
+						<option value = "">-- 選択してください --</option>
+						<option th:each = "item:${user}" th:value="${item.group_ID}" th:text="${item.group_name}"></option>
+					</select>
+					<span class="error" th:if="${#fields.hasErrors('group_ID')}" th:errors="*{group_ID}" style="color:red"></span>
+				</div>
+				
+				<div class="centerform">
+					<label class="labelname">出身学部 </label>
+					<input class="Msizeinput" type="text" th:field="*{departOfOrigin}">
+					<span class="error" th:if="${#fields.hasErrors('departOfOrigin')}" th:errors="*{departOfOrigin}" style="color:red"></span>
+				</div>
+				
+				<div class="centerformradio3">
+					<label class="labelname3">ロール ※</label>
+					<div class="centerselect3">
+					<input type= "radio" th:field="*{role_ID}" th:each = "Role:${item}" th:value="${Role.role_ID}" th:text="${Role.role_name}"></input>
+					<br><span type= "radio" class="error3" th:if="${#fields.hasErrors('role_ID')}" th:errors="*{role_ID}" style="color:red"></span>
+					</div>
+	</div>
+				
+				<div class="logbtnR">
+					<button class="updatebtn" type="submit">更新</button>
+				</div>
+				
+				<div class="returnbtnL">
+					<a th:href="@{/admin/User}"><button class="alluserreturnbtn" type="button">ユーザー一覧に戻る</button></a>
+				</div>
+				
+			</form>
+		</main>
+	</div>
+</body>
+</html>	

@@ -13,7 +13,7 @@ public class Member {
 	/* グループID */
 	private int group_ID;
 	/* ユーザID */
-	private int username;
+	private String username;
 	/* メイン講師かどうか */
 	private Boolean isTeacher;
 }

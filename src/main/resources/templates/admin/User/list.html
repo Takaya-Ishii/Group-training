@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/layout}">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="../css/grouptraining.css">
+	<title>ユーザー一覧</title>
+</head>
+	<body>
+		<header th:replace="~{layout :: header}"></header>
+	
+	<div layout:fragment="content">
+		<main>
+			<h2>ユーザー一覧</h2>
+		
+			<!-- メッセージ -->
+			<div class="message" th:if="${message}" th:text="${message}"style="color:blue; background-color: rgb(193,254,228);"></div>
+			<div class="message" th:if="${errorMessage}" th:text="${errorMessage}"style="color:red; background-color: rgb(255, 212, 212);"></div>
+			
+			<!-- 検索フォーム -->
+			<form class="serchcont" method="post" th:action="@{/admin/User}">
+				ユーザーID: <input type="text" name="username" th:value="${param.username}" />
+				ユーザー名: <input type="text" name="account_name" th:value="${param.account_name}" />
+				<button class="serchbtn" type="submit">検索</button>
+			</form>
+			<!-- ユーザー一覧 -->
+			<table class="table5" border="1">
+				<thead>
+					<tr>
+						<th class="ユーザーID">ユーザーID</th>
+						<th>ユーザー名</th>
+						<th>ロール</th>
+						<th>詳細</th>	
+						<th>トーク</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="user : ${user}">
+						<td th:text="${user.username}"></td>
+						<td th:text="${user.account_name}"></td>
+						<td th:text="${user.Role.role_name}"></td>
+						<td>
+							<a th:href="@{/admin/User/{username}(username = ${user.username})}">●</a>
+						</td>
+						<td>
+							<a th:href="@{|/User/${user.username}/talk|}">
+								<img th:src="@{/img/talk_picture.png}" alt="トーク">
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- 新規登録 -->
+			<div class="tablebtnR">
+				<a th:href="@{/admin/User/save}">
+					<button class="NewRegisterbtn">新規登録</button>
+				</a>
+			</div>
+		</main>
+	</div>
+	</body>
+</html>

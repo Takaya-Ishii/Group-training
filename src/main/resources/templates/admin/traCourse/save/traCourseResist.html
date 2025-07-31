@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/grouptraining.css}">
+<title>受講研修登録</title>
+</head>
+<body>
+<header th:replace="~{layout :: header}"></header>
+<div layout:fragment="content">
+	<main>
+		
+		<h2>受講研修登録</h2>
+		<h3>受講者名：<span th:text="${traUser.account_name}">ユーザー名</span></h3>
+	
+		<p class="message" th:if="${errorMessage}" th:text="${errorMessage}" style="color: red; background-color: rgb(255, 212, 212)">
+			エラーメッセージ
+		</p>
+	
+		<p th:if="${message}" th:text="${message}"
+			class="registmessage">
+			完了メッセージ
+		</p>
+	
+
+		<form th:action="@{/admin/traCourse/registration}" method = "post">
+			<input type="hidden"  th:field="${traUser.username}">
+			<table class="table" border="1">
+				<thead>
+					<tr>
+						<th></th>
+						<th>研修名</th>
+						<th>目標期日</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="tForm,itemStat : ${tForms.saveList}" th:object="${tForms.saveList}">
+						<input type="hidden"  th:field="${tForms.saveList[__${itemStat.index}__].tracourse_id}">
+						<input type="hidden"  th:field="${tForms.saveList[__${itemStat.index}__].tra_id}">
+						<input type="hidden"  th:field="${tForms.saveList[__${itemStat.index}__].trainfo.tra_name}">						
+						<td>
+							<input type="checkbox" name="checkBoo" th:checked="${tForms.saveList[__${itemStat.index}__].istakecourse}" th:field="${tForms.saveList[__${itemStat.index}__].istakecourse}">
+						</td>
+						<td th:text="${tForms.saveList[__${itemStat.index}__].trainfo.tra_name}">
+							<input type="hidden" th:field="${tForms.saveList[__${itemStat.index}__].trainfo.tra_name}">
+						</td>	
+						<td>
+							<input type="date" value="YYYY-MM-DD" th:field="${tForms.saveList[__${itemStat.index}__].target_date}">
+						</td>	
+					</tr>
+				</tbody>
+							
+			</table>
+			<div class="tablebtnR">
+				<button class="addlessonbtn" type="submit">受講研修登録</button>
+			</div>
+		</form>
+		<form class="returnbtnL" th:action="@{/participant/traCourse/{uName}(uName=${traUser.username})}">
+			<button class="Allreturnbtn" type="submit">受講研修一覧に戻る</button>
+		</form>
+	</main>
+</div>
+</body>
+</html>

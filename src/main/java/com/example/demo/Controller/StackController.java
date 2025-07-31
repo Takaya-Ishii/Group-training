@@ -32,20 +32,7 @@ public class StackController {
 	AuthenticationMapper authenticationMapper;
 
     private final StackService stackService;
-    
-    
-	/**
-	 * 受講研修詳細画面を表示【動作確認用】！！受講研修管理のコントローラを入れる際に削除すること！！
-	 */
-	@GetMapping("/detail/{traCourse_ID}")
-	public String displayCourseDetail(@PathVariable Integer traCourse_ID, RedirectAttributes attributes, 
-			@ModelAttribute StackForm stackForm, @AuthenticationPrincipal LoginUser loginUser, Model model) {
-		stackForm.setTraCourseID(traCourse_ID);
-		model.addAttribute("group", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
-		return "participant/traCourse/tracoursedetail";
-	}
-	
-	
+ 	
 	/**
 	 * 学習履歴登録の画面を表示
 	 */
