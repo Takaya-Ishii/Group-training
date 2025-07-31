@@ -23,13 +23,12 @@ public class LoginController {
 	 // 所持ロールによって遷移先を判別
 	 @GetMapping("/default")
 	    public String defaultAfterLogin(Model model,  @AuthenticationPrincipal LoginUser loginUser) {
-		 model.addAttribute("LoginUser", loginUser);   
 		 if (loginUser.getAuthorities().stream()
 	                .anyMatch(auth -> auth.getAuthority().equals("ROLE_講師"))) {
 	            return "redirect:admin/User";
 	        } else if (loginUser.getAuthorities().stream()
 	                .anyMatch(auth -> auth.getAuthority().equals("ROLE_受講者"))) {
-	            return "redirect:participant/traCourse";
+	            return "redirect:participant/traCourse/" + loginUser.getUsername();
 	        }
 	        return "redirect:/";
 	    }
