@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/layout}">
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="../../css/grouptraining.css">
 	<title>ユーザー新規登録</title>
 </head>
-<body>
+<div>
+	<header th:replace="~{layout :: header}"></header>
+	<div layout:fragment="content">
 	<main>
 <h2>ユーザー新規登録</h2>
 			
@@ -111,5 +115,6 @@
 				</div>
 			</form>
 		</main>
+	</div>
 	</body>
 </html>
