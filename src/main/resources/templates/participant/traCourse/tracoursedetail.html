@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/layout}">
+<head>
+	<title>受講研修詳細画面</title>
+</head>
+<body>
+	<div layout:fragment="header"></div>
+	<div layout:fragment="content">
+	<h2>受講研修詳細画面</h2>
+
+		<a th:href="@{/participant/traCourse/stack/edit/{id}/{no}(id=${stackForm.traCourseID}, no=${stackForm.stackNo})}">
+			<button type="button">修正</button>
+		</a>
+		<a th:href="@{/participant/traCourse/stack/save/{id}(id=${stackForm.traCourseID})}">
+				<button type="button">学習履歴登録</button>
+		</a>
+	</div>
+</body>
+</html>
