@@ -1,5 +1,96 @@
 @charset "UTF-8";
 
+/** ヘッダー */
+
+header{
+	background-color:  rgb(223, 240, 254);
+}
+
+body{
+	margin: auto;
+}
+
+header ul{
+	display: flex;
+	justify-content: space-between;
+	padding-left: 0;
+	margin-top: 0;
+}
+
+header ul h1{
+	padding-right: 25%;
+	padding-left: 10px;
+}
+
+header ul li{
+	display: table-cell;
+}
+
+header ul li button{
+	display: block;
+	border: none;
+	padding: 25px 15px 25px;
+	background: transparent;
+	color: rgb(0, 64, 128);
+	font-size: large;
+	margin-top: 0;
+}
+
+header ul li#account_name{
+	color: rgb(0, 64, 128);
+}
+
+header ul li button:hover{
+	background-color:cornflowerblue
+}
+
+header ul li img{
+	float: left;
+	padding-top: 20px;
+	padding-right: 10px;
+}
+
+#account_name{
+	font-size: medium;
+	color: rgb(0, 64, 128);
+	line-height: 75px;
+}
+
+.ellipsis{
+	width: 200px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 75.6px;
+}
+
+#notBelong{
+	display: block;
+	line-height: 75px;
+	text-decoration: none;
+	color: rgb(0, 64, 128);
+	font-size: large;
+}
+
+#logout{
+	background-image: url(../image/ログアウト.png);
+	background-repeat: no-repeat;
+	background-position: 20px 20px;
+	background-color: rgb(176, 217, 254);
+}
+
+header #logout button{
+	padding: 25px 15px 25px 60px;
+	height: 75px;
+	font-size: medium;
+}
+
+header #logout button:hover{
+	background-image: url(../image/ログアウト.png);
+	background-repeat: no-repeat;
+	background-position: 20px 20px;
+	background-color:cornflowerblue
+}
 
 
 /*-- 共通CSS --*/
@@ -166,7 +257,6 @@ input[type="date"] { /* 日付入力欄のサイズ変更 */
 	padding: 0 0 0 80px;
 }
 
-
 /*　テーブル設定（縦、横）　*/
 
 table {
@@ -230,6 +320,7 @@ td {
 tr:nth-child(2n+1) td {
   background-color: rgb(223, 240, 254);
 }
+
 
 
 .table5 { /* ユーザー一覧でのみ使用の5列のテーブル */
@@ -668,6 +759,13 @@ button,
 	height: 40px;
 }
 
+.day {
+	min-width: 100px;
+}
+
+.memo {
+	padding: 0 5px;
+}
 
 /*　学習履歴登録　*/
 
@@ -773,7 +871,7 @@ button,
 .descinput,
 .issueinput { /* 説明、課題の入力欄 */
 	padding: 4px 10px;
-	font-size: 1em;
+	font-size: 1.15em;
 	width: 60%;
 }
 
@@ -802,114 +900,3 @@ button,
 .目標期日 {
 	width: 250px;
 }
-
-
-/*　週刊報告一覧　*/
-
-/*　報告確認　*/
-
-/*　週間報告　*/
-
-/*　グループ一覧　*/
-
-/*　グループメンバー一覧　*/
-
-/*　グループ新規登録　*/
-
-/*　グループ編集　*/
-
-/*　グループ詳細　*/
-
-/*　トーク画面　*/
-
-
-header{
-background-color:  rgb(223, 240, 254);
-}
-
-body{
-	margin: auto;
-}
-
-header ul{
-display: flex;
-justify-content: space-between;
-padding-left: 0;
-margin-top: 0;
-}
-
-header ul h1{
-padding-right: 25%;
-padding-left: 10px;
-}
-
-header ul li{
-display: table-cell;
-}
-
-header ul li button{
-display: block;
-border: none;
-padding: 25px 15px 25px;
-background: transparent;
-color: rgb(0, 64, 128);
-font-size: large;
-margin-top: 0;
-}
-
-header ul li#account_name{
-	color: rgb(0, 64, 128);
-}
-
-header ul li button:hover{
-background-color:cornflowerblue
-}
-
-header ul li img{
-	float: left;
-	padding-top: 20px;
-	padding-right: 10px;
-}
-
-#account_name{
-	font-size: medium;
-	color: rgb(0, 64, 128);
-	line-height: 75px;
-}
-
-.ellipsis{
-	width: 200px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	height: 75.6px;
-}
-
-#notBelong{
-	display: block;
-	line-height: 75px;
-	text-decoration: none;
-	color: rgb(0, 64, 128);
-	font-size: large;
-}
-
-#logout{
-	background-image: url(../image/ログアウト.png);
-	background-repeat: no-repeat;
-	background-position: 20px 20px;
-	background-color: rgb(176, 217, 254);
-}
-
-header #logout button{
-	padding: 25px 15px 25px 60px;
-	height: 75px;
-	font-size: medium;
-}
-
-header #logout button:hover{
-	background-image: url(../image/ログアウト.png);
-	background-repeat: no-repeat;
-	background-position: 20px 20px;
-	background-color:cornflowerblue
-}
-
