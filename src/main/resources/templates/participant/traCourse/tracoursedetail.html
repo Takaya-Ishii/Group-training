@@ -11,7 +11,7 @@
 	
 	<body>
 		<header th:replace="~{layout :: header}"></header>
-		<di layout:fragment="content">
+		<div layout:fragment="content">
 			<main>
 				<h2><span th:text="${traCourse.trainfo.tra_name}"></h2>
 				<h3>受講者名:<span th:text="${traUser.account_name}"></span></h3>
