@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/layout}">
 	<head>
 	    <meta charset="UTF-8">
 	   <link rel="stylesheet" href="../../css/grouptraining.css">
 	    <link rel="stylesheet" th:href="@{/css/modalStyle.css}">
 	    <title>ユーザー詳細</title>
 	</head>
+	
 	<body>
-		<main>
+		<header th:replace="~{layout :: header}"></header>
+	<div layout:fragment="content">
+		<divmain>
 			<h2>ユーザー詳細</h2>
 			
 			<table class="vertable" border="1">
@@ -27,7 +32,7 @@
 			</table>
 			
 			<div class="tablebtnR">
-				<a th:href="@{/participant/traCourse}">
+				<a th:href="@{/admin/participant/traCourse}">
 					<button class="viewlesson" type="button">受講研修一覧を見る</button>
 				</a>
 				
@@ -67,7 +72,7 @@
 			</section>
 	
 			<script th:src="@{/js/modal.js}"></script>
-			
 		</main>
+		</div>
 	</body>
 </html>
