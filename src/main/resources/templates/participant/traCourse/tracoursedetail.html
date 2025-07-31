@@ -48,13 +48,13 @@
 						<th>修正</th>
 					</tr>
 					<tr th:each="item:${traTpm}">
-						<td th:text="${item.study_day}"></td>
+						<td class="day" th:text="${item.study_day}"></td>
 						<td th:if="${item.study_time !=null && item.study_time != 0.0 } " th:text="|${item.study_time}時間|"></td>
 						<td th:if="${item.study_time == null || item.study_time == 0.0}" th:text="'-'"></td>							
-						<td th:text="${item.memo}"></td>		
+						<td class="memo" th:text="${item.memo}"></td>		
 						<td th:text="|${item.progress}％|"></td>								
-						<td><a class="maru" th:href="@{/participant/traCourse/stack/edit/{traCourse_ID}/{stack_No}(traCourse_ID=${traCourse.tracourse_id},stack_No=${item.stack_No})}">●</a>		 
-					</td>
+						<td><a class="maru" th:href="@{/participant/traCourse/stack/edit/{traCourse_ID}/{stack_No}(traCourse_ID=${traCourse.tracourse_id},stack_No=${item.stack_No})}">●</a></td>
+					</tr>
 				</table>
 				<form class="tablebtnR" th:action="@{/participant/traCourse/stack/save/{traCourse_ID}(traCourse_ID=${traCourse.tracourse_id})}">
 					<button class="addlessonbtn" type="submit">学習履歴登録</button>
