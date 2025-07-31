@@ -41,6 +41,7 @@ public class StackController {
 			@AuthenticationPrincipal LoginUser loginUser, Model model) {
 		stackForm.setTraCourseID(traCourse_ID);
 		model.addAttribute("group", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
+		model.addAttribute("username", loginUser.getUsername());
 		Trainfo traName = stackService.findTra_name(traCourse_ID);
 		if (traName != null) {
 			model.addAttribute("traName", traName);
@@ -57,7 +58,8 @@ public class StackController {
 	public String registrationStack(@Validated StackForm stackForm,
 			BindingResult bindingResult, @PathVariable Integer traCourse_ID,
 			RedirectAttributes attributes, @AuthenticationPrincipal LoginUser loginUser, Model model) {
-		model.addAttribute("group", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
+		//model.addAttribute("group", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
+		//model.addAttribute("username", loginUser.getUsername());
 		//バリデーションチェック
 		//入力チェックNG：学習履歴登録の画面を表示
 		if (bindingResult.hasErrors()) {
@@ -84,6 +86,8 @@ public class StackController {
 		TraTpm target = stackService.findStack(traCourse_ID, stack_No);
 		Trainfo traName = stackService.findTra_name(traCourse_ID);
 		model.addAttribute("group", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
+		model.addAttribute("username", loginUser.getUsername());
+		model.addAttribute("group", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
 		if (target != null) {
 			
 			//対象データがある場合はFormへの変換
@@ -109,6 +113,7 @@ public class StackController {
 			@Validated StackForm stackForm, BindingResult bindingResult,
 			RedirectAttributes attributes, @AuthenticationPrincipal LoginUser loginUser, Model model) {
 		model.addAttribute("group", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
+		model.addAttribute("username", loginUser.getUsername());
 		//バリデーションチェック
 		//入力チェックNG：学習履歴登録の画面を表示
 		if (bindingResult.hasErrors()) {
@@ -134,6 +139,7 @@ public class StackController {
 	public String deleteStack(@PathVariable Integer traCourse_ID, @PathVariable Integer stack_No,
 			RedirectAttributes attributes, @AuthenticationPrincipal LoginUser loginUser, Model model) {
 		TraTpm traCourseID = stackService.findTraCourse_ID(traCourse_ID);
+		model.addAttribute("username", loginUser.getUsername());
 		model.addAttribute("group", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
 		//削除処理
 		stackService.deleteStack(traCourse_ID, stack_No);

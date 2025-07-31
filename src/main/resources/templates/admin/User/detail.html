@@ -32,9 +32,9 @@
 			</table>
 			
 			<div class="tablebtnR">
-				<a th:href="@{/participant/traCourse/{username}(username = ${user.username})}">
-					<button class="viewlesson" type="button">受講研修一覧を見る</button>
-				</a>
+				<form th:action="@{/participant/traCourse/{username}(username=${user.username})}" method="get">
+					<button class="viewlesson" type="submit">受講研修一覧を見る</button>
+				</form>
 				
 				<button class="deletebtn"id="open" onclick="showModal">削除</button>
 				

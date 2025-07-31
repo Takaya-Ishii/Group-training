@@ -14,8 +14,10 @@ public interface AuthenticationMapper {
 	  Authentication selectByUsername(String username);
 	  // ロールIDからロール名とロールIDを含んだRole型を取得
 	  Role selectByRoleId(int role_ID);
+	  
+	  // ユーザーIDで特定して対象のパスワードを変更
+	  void updatePassword(@Param("username") String username, @Param("password") String encodedPassword);
+
 	  // ユーザー名からグループ名を取得
 	  Group selectGroupByUsername(String username);
-	// ユーザーIDで特定して対象のパスワードを変更
-		  void updatePassword(@Param("username") String username, @Param("password") String encodedPassword);
 }
