@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	
+
+<mapper	namespace="com.example.demo.repository.TraCourseMapper">	
+	<!-- 受講研修一覧を取得するためのresultMap -->
+	<resultMap type="com.example.demo.entity.TraCourse" id="traCourse">
+		<id property="tracourse_id" column="tracourse_id"/>
+		<result property="tra_id" column="tra_id"/>
+		<result property="istakecourse" column="istakecourse"/>
+		<result property="status_id" column = "status_id"/>
+		<result property="username" column = "username"/>
+		<result property="latestprogress" column="latestprogress"/>
+		<result property="target_date" column="target_date"/>
+		<association property="trainfo"
+			javaType="com.example.demo.entity.Trainfo">
+				<id property="tra_id" column="tra_id"/>
+				<id property="tra_name" column="tra_name"/>	
+				<id property="est_time" column="est_time"/>
+				<id property="text_book" column="text_book"/>	
+				<id property="assignment" column="assignment"/>	
+				<id property="description" column="description"/>	
+		</association>
+		<association property="status"
+			javaType="com.example.demo.entity.Status">
+				<id property="status_id" column="status_id"/>
+				<id property="status" column="status"/>
+		</association>	
+		
+	</resultMap>
+
+	<!-- ユーザーIDを条件に受講研修一覧を取得 -->
+	<select id="selectTCourses" resultMap="traCourse">
+		select 
+			tracourse_id,
+			tc.tra_id,
+			istakecourse,
+			tc.status_id,
+			target_date,
+			tra_name,
+			status
+		from tracourse_table tc
+		inner join trainfo_table info on tc.tra_id = info.tra_id
+		inner join status_table st on tc.status_id = st.status_id
+		where tc.username= #{userName}
+		and istakecourse = true
+		order by tracourse_id; 
+	</select>	
+	<!-- 受講研修に紐づくユーザーの情報を取得 -->
+
+	<select id="selectTraCoUser" resultType="com.example.demo.entity.User">
+		 select 
+		  username,
+		  account_name
+		from profile_table
+		where username = #{userName};
+	</select>
+	
+	<!-- 受講研修登録用に研修一覧を取得 -->
+	<select id="selectTraCouForSave" resultMap="traCourse">
+		select 
+			tracourse_id,
+			info.tra_id,
+			istakecourse,
+			target_date,
+			info.tra_name,
+			tc.username
+		from 
+		trainfo_table info
+		left join 
+		(Select * from tracourse_table where username= #{userName}) tc
+		on tc.tra_id = info.tra_id
+		order by tracourse_id; 
+	</select>	
+	
+	<!-- 受講研修新規登録処理 -->
+	<insert id="insertNewTracourse">
+		INSERT INTO tracourse_table(
+		tra_id, username, istakecourse, latestprogress, status_id, target_date)
+		VALUES (#{tra_id}, #{username},  #{istakecourse}, 0,1, #{target_date});
+	</insert>
+	<!--受講研修更新処理 -->
+	<update id="updateTraCourse">
+		UPDATE tracourse_table
+		SET  istakecourse=#{istakecourse}, target_date=#{target_date}
+		WHERE tracourse_id = #{tracourse_id};
+	</update>
+	
+	
+	<select id="selectCourseDetail" resultMap="traCourse">
+		SELECT a.tracourse_id,
+			a.tra_id, 
+			a.username, 
+			a.istakecourse, 
+			a.latestprogress, 
+			a.status_id, 
+			a.target_date, 
+			b.tra_ID,
+			b.tra_name,
+			b.est_time,
+			b.text_book,
+			b.assignment,
+			b.description,
+			c.status
+		FROM tracourse_table as a
+		join traInfo_table as b
+			on a.tra_ID = b.tra_ID
+		join status_table as c
+			on a.status_id = c.status_id
+		WHERE a.tracourse_id = #{tracourse_id}
+	</select>
+	
+	<select id="selectCourseLog" resultType="com.example.demo.entity.TraTpm">
+		SELECT 
+			stack_no,
+			traCourse_id,
+			memo,
+			study_day,
+			study_time,
+			progress,
+			status_id
+		FROM TPM_table
+		WHERE tracourse_id = #{tracourse_id}
+		order by study_day desc ,stack_no desc;
+	</select>
+	
+	<!--受講研修詳細のステータス変更機能表示用-->
+	<select id="selectStatusAll" resultType="com.example.demo.entity.Status">
+		SELECT 
+			status_id,
+			status
+		FROM status_table
+		WHERE status_id != 99<!-- ステータス：研修対象外を除く -->
+		order by status_id;
+	</select>
+	
+	<!--受講研修ステータス更新処理 -->
+	<update id="updateTraCoStatus">
+		UPDATE tracourse_table
+			SET  status_id= #{status_id}
+		WHERE tracourse_id =#{tracourse_id};
+	</update>
+	
+	<!-- 受講研修新規登録処理 -->
+	<insert id="insertTpmStatus">
+		INSERT INTO tpm_table(
+		tracourse_id, study_day, progress, status_id,memo)
+		VALUES (#{tracourse_id}, CURRENT_DATE,#{latestprogress} , #{status_id},((select status from status_table where status_id = #{status_id} ) || 'に変更'));
+	</insert>
+	
+</mapper>

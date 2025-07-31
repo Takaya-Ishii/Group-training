@@ -4,20 +4,53 @@
       layout:decorate="~{layout/layout}">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/grouptraining.css}">
 <title>受講研修一覧</title>
 </head>
 <body>
 <header th:replace="~{layout :: header}"></header>
 <div layout:fragment="content">
-	あなたは受講者です。これは受講研修一覧画面の予定です。
-	<div sec:authentication="principal.username">ユーザーID</div>
-	<div sec:authentication="principal.account_name">ユーザー名</div>
-	<div sec:authentication="principal.TEL">電話番号</div>
-	<div sec:authentication="principal.address">住所</div>
-	<div sec:authentication="principal.gender">性別</div>
-	<div sec:authentication="principal.affiriation">所属</div>
-	<div sec:authentication="principal.departOfOrigin">出身学部</div>
-	<div sec:authentication="principal.role_ID">ロールID</div>
+	<main>
+		
+		<h2>受講研修一覧</h2>
+		<h3>受講者名：<span th:text="${traUser.account_name}">ユーザー名</span></h3>
+		<!--メッセージエリア-->
+		<p class="message" th:if="${errorMessage}" th:text="${errorMessage}" style="color: red; background-color: rgb(255, 212, 212)">
+			エラーメッセージ
+		</p>
+		  <!-- ここにフラッシュメッセージが入るのでクラス「registmessage」を指定してください -->
+		<div th:if="${messages}" class="registmessage lh08">
+			<p th:each="message:${messages}" th:text="${message}">
+				完了メッセージ
+			</p>
+		</div>
+		<!--メッセージエリア ここまで-->
+
+		
+		<table class="table" border="1">
+			<thead>
+				<tr>
+					<th>受講研修名</th>
+					<th>目標期日</th>
+					<th>ステータス</th>
+					<th>詳細</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="traCourse : ${traCoList}">
+					<td th:text="${traCourse.trainfo.tra_name}"></td>
+					<td th:text="${#temporals.format(traCourse.target_date,'yyyy/MM/dd')}"></td>	
+					<td th:text="${traCourse.status.status}"></td>	
+					<td><a class="maru"  th:href="@{/participant/traCourse/detail/{traCourse_ID}(traCourse_ID=${traCourse.tracourse_id})}">●</a></td>
+				</tr>
+			</tbody>
+						
+		</table>
+		
+		<form class="tablebtnR" sec:authorize="hasAuthority('ROLE_講師')" th:action="@{/admin/traCourse/save/{uName}(uName=${traUser.username})}">
+			<button class="addlessonbtn" type="submit">受講研修登録</button>
+		</form>
+	</main>	
 </div>
 </body>
 </html>
