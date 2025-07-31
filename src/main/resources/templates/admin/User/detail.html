@@ -31,12 +31,12 @@
 				
 			</table>
 			
-			<div class="tablebtnR">
+			<div class="tablebtnR button3RFlex">
 				<form th:action="@{/participant/traCourse/{username}(username=${user.username})}" method="get">
-					<button class="viewlesson" type="submit">受講研修一覧を見る</button>
+					<button class="viewlesson mr5" type="submit">受講研修一覧を見る</button>
 				</form>
 				
-				<button class="deletebtn"id="open" onclick="showModal">削除</button>
+				<button class="deletebtn mr5"id="open" onclick="showModal">削除</button>
 				
 				<a th:href="@{/admin/User/edit/{username}(username = ${user.username})}">
 					<button class="revisionbtn" type="button">修正</button>
@@ -52,7 +52,7 @@
 			
 			<!-- モーダルのレイアウト -->
 			
-			<div id="mask" class="hidden"></div>
+			<div id="mask" class="hidden">
 			<section id="modal" class="hidden">
 				<div id="modal-content">
 			
@@ -70,9 +70,9 @@
 					</div>
 				</div>
 			</section>
-	
+			</div>
 			<script th:src="@{/js/modal.js}"></script>
 		</main>
-		</div>
+		
 	</body>
 </html>

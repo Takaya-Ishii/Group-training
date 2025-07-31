@@ -777,6 +777,14 @@ button,
 	max-width: 200px;
 }
 
+.button3RFlex{
+	display: flex;
+	justify-content: flex-end;
+}
+
+.mr5{
+	margin-right: 5px;
+}
 
 /*　研修詳細　*/
 
