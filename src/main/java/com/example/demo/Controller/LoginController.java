@@ -18,7 +18,7 @@ public class LoginController {
 	
 	@Autowired
 	AuthenticationMapper authenticationMapper;
-	
+
 	// ログイン画面の表示
 	 @GetMapping("/login")
 	    public String displayLogin(@ModelAttribute LoginForm form) {
@@ -33,17 +33,17 @@ public class LoginController {
 	            return "redirect:admin/User";
 	        } else if (loginUser.getAuthorities().stream()
 	                .anyMatch(auth -> auth.getAuthority().equals("ROLE_受講者"))) {
-	            return "redirect:participant/traCourse/" + loginUser.getUsername();
-	            }
+	            return "redirect:participant/traCourse";
+	        }
 	        return "redirect:/";
 	    }
 	 
-	 // 以下テスト用(受講者が講師専用画面に遷移できるか、講師が受講者の画面も表示できるか)
+	/* // 以下テスト用(受講者が講師専用画面に遷移できるか、講師が受講者の画面も表示できるか)
 	 @GetMapping("/admin/User")
 	 public String displayAllUser(Model model, @AuthenticationPrincipal LoginUser loginUser) {
 		 model.addAttribute("group", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
 		 return "admin/User";
-	 }
+	 }*/
 	 
 	 // それぞれコントローラーと機能が競合したら削除する
 	 @GetMapping("/participant/traCourse/{username}")

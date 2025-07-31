@@ -1,9 +1,9 @@
 package com.example.demo.validator.impl;
 
+import com.example.demo.validator.StudyTimeCheck;
+
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-
-import com.example.demo.validator.StudyTimeCheck;
 
 public class StudyTimeCheckImpl implements ConstraintValidator<StudyTimeCheck, Double> {
 

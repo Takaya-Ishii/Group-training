@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 
 @SpringBootApplication
 @RequiredArgsConstructor
+
 public class GroupTrainingApplication {
 
 	public static void main(String[] args) {
