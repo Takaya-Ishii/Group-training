@@ -44,7 +44,7 @@ public class TrainingController {
 	/*
 	 *  研修名から研修の一覧を検索する
 	 */
-	@GetMapping("/admin/Training/serch")
+	@PostMapping("/admin/Training")
 	public String displaySerchedTraining(@RequestParam(value = "tra_name", required = false) 
 			String tra_name, Model model,
 			RedirectAttributes attributes) {
