@@ -21,6 +21,7 @@ import com.example.demo.entity.TraTpm;
 import com.example.demo.entity.User;
 import com.example.demo.form.TraCourseSaveListForm;
 import com.example.demo.helper.TraCourseHelper;
+import com.example.demo.repository.AuthenticationMapper;
 import com.example.demo.service.TraCourseService;
 
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,8 @@ public class TraCourseController {
 	
 	/**DI*/
 	private final TraCourseService tService;
+	private final AuthenticationMapper authenticationMapper;
+	
 	
 	/**
 	 * 受講研修一覧画面を表示します
@@ -42,6 +45,8 @@ public class TraCourseController {
 		 User traUser =  tService.findTraCoUser(uName);
 		 model.addAttribute("traCoList",traCoList);
 		 model.addAttribute("traUser", traUser);
+		 model.addAttribute("group", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
+		 model.addAttribute("username", loginUser.getUsername());
 		 return "participant/traCourse";
 	 }
 	
@@ -56,6 +61,8 @@ public class TraCourseController {
 		User traUser =  tService.findTraCoUser(uName);
 		model.addAttribute("tForms", tForms);
 		model.addAttribute("traUser", traUser);
+		model.addAttribute("group", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
+		model.addAttribute("username", loginUser.getUsername());
 		return "admin/traCourse/save/traCourseResist";
 	}
 	
@@ -110,6 +117,8 @@ public class TraCourseController {
 		model.addAttribute("traTpm", traTpm);
 		model.addAttribute("statusAll", statusAll);
 		model.addAttribute("traUser", traUser);
+		model.addAttribute("group", authenticationMapper.selectGroupByUsername(loginUser.getUsername()));
+		model.addAttribute("username", loginUser.getUsername());
 		System.out.println(tService.findTraCourseTpm(traCourse_ID));
 		return "participant/traCourse/tracoursedetail";
 	}

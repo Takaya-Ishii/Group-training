@@ -28,7 +28,7 @@ import com.example.demo.validation.InsertValidation;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("")
 @RequiredArgsConstructor
 public class UserController {
 	
@@ -37,14 +37,14 @@ public class UserController {
 	private final AuthenticationMapper authenticationMapper;
 	
 	/**「ユーザー」の一覧を表示する*/
-	@GetMapping("/User")
+	@GetMapping("/admin/User")
 	public String displayAllUser(Model model) {
 		model.addAttribute("user",userServiceImpl.displayAllUser());
 		return "admin/User/list";
 	}
 	
 	/**検索された「ユーザー」のID,名前,ロールを一覧表示する*/
-	@PostMapping("/User")
+	@PostMapping("/admin/User")
     public String displaySearchedUser(@RequestParam String username,@RequestParam String account_name,Model model,RedirectAttributes attributes) {
 		//usernameに対応する「username」の情報を取得する
 		List<Authentication> User= userServiceImpl.displaySearchedUser(username,account_name);
@@ -62,7 +62,7 @@ public class UserController {
 	}
 	
 	/**指定された「ユーザー」の詳細を表示する*/
-	@GetMapping("/User/{username}")
+	@GetMapping("/admin/User/{username}")
 	public String displayUserDetail(@PathVariable String username,Model model,RedirectAttributes attributes) {
 		//usernameに対応する詳細なデータを取得
 		Authentication User = userServiceImpl.displayUserDetail(username);
@@ -81,7 +81,7 @@ public class UserController {
 	}
 	
 	/**新規登録画面を表示する*/
-	@GetMapping("/User/save")
+	@GetMapping("/admin/User/save")
 	public String displaySaveUser(@ModelAttribute UserForm form, Model model) {
 		//全てのグループの名前とグループIDをuserに入れる
 		model.addAttribute("user",userServiceImpl.selectAllGroup());
@@ -94,7 +94,7 @@ public class UserController {
 	
 	/**新たな「ユーザー」を新規登録する*/
 	@Transactional
-	@PostMapping("/User/registration")
+	@PostMapping("/admin/User/registration")
 	public String registrationUser(@RequestParam String username ,String TEL,@Validated ({InsertValidation.class})@ModelAttribute UserForm form,BindingResult bindingResult,RedirectAttributes attributes,Model model) {
 		List<Authentication> TELexist = userServiceImpl.IsTELTaken(TEL);
 		List<Authentication> IDexist = userServiceImpl.IsIDTaken(username);
@@ -142,7 +142,7 @@ public class UserController {
 	}
 	
 	/**編集画面を表示する*/
-	@GetMapping("/User/edit/{username}")
+	@GetMapping("/admin/User/edit/{username}")
 	public String displayEditUser(@PathVariable String username,@ModelAttribute UserForm form, Model model) {
 		//ユーザーIDに対応するデータを取得
 		Authentication User = userServiceImpl.displayUserDetail(username);
@@ -160,7 +160,7 @@ public class UserController {
 	
 	/**指定されたIDの情報を編集する*/
 	@Transactional
-	@PostMapping("/User/update")
+	@PostMapping("/admin/User/update")
 	public String updateUser(@RequestParam String password,String TEL,@Validated ({EditValidation.class})UserForm form,BindingResult bindingResult,RedirectAttributes attributes,Model model) {
 		//ここからバリデーションチェックです
 		//入力に問題あるか ifで検査
@@ -190,7 +190,7 @@ public class UserController {
 	
 	//IDで指定されたユーザー情報を削除する
 	@Transactional
-	@GetMapping("/User/delete/{username}")
+	@GetMapping("/admin/User/delete/{username}")
 	public String deleteUser(@PathVariable String username,Model model,RedirectAttributes attributes) {
 		//削除処理
 		userServiceImpl.deleteUser(username);
